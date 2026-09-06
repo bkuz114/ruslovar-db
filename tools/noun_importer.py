@@ -700,7 +700,7 @@ def entry_exists(cursor, root_word) -> Optional[int]:
     return result["code"] if result else None
 
 
-def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> bool:
+def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> int:
     """Delete an existing custom entry and all its declension rows.
 
     Deletes in reverse dependency order: plural declensions first, then
@@ -712,8 +712,10 @@ def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> bool:
         root_word (str): The singular nominative form of the entry.
 
     Returns:
-        bool: True if an entry was found and deleted, False otherwise.
+        int: The number of rows deleted. Returns 0 if no entry was found.
     """
+    rows_deleted = 0
+
     # Locate the root row for this entry
     cursor.execute(
         """
@@ -725,7 +727,7 @@ def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> bool:
     )
     root_result = cursor.fetchone()
     if not root_result:
-        return False
+        return 0
 
     root_code = root_result["code"]
 
@@ -747,25 +749,29 @@ def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> bool:
             "DELETE FROM nouns_morf WHERE code_parent = %s",
             (plural_root_code,),
         )
+        rows_deleted += cursor.rowcount
         # Delete the nominative plural row itself
         cursor.execute(
             "DELETE FROM nouns_morf WHERE code = %s",
             (plural_root_code,),
         )
+        rows_deleted += cursor.rowcount
 
     # Delete singular declensions (children of root)
     cursor.execute(
         "DELETE FROM nouns_morf WHERE code_parent = %s",
         (root_code,),
     )
+    rows_deleted += cursor.rowcount
 
     # Delete the root row itself
     cursor.execute(
         "DELETE FROM nouns_morf WHERE code = %s",
         (root_code,),
     )
+    rows_deleted += cursor.rowcount
 
-    return True
+    return rows_deleted
 
 
 def verify_entry(
@@ -1198,6 +1204,156 @@ def print_file_header(path: Path, color_enabled: bool) -> None:
     print_formatted("")
 
 
+def confirm_delete(entries_to_delete: list[dict], color_enabled: bool) -> bool:
+    """Prompt the user to confirm deletion of entries.
+
+    Displays the list of entries that will be deleted, then prompts
+    for confirmation. The user must type DELETE (case-sensitive) to
+    proceed.
+
+    Args:
+        entries_to_delete (list[dict]): List of dicts with 'word' and
+            'root_code' keys for each entry to be deleted.
+        color_enabled (bool): Whether to apply ANSI color codes.
+
+    Returns:
+        bool: True if the user confirmed, False otherwise.
+    """
+    noun = "entry" if len(entries_to_delete) == 1 else "entries"
+    print_formatted(
+        f"\nYou are about to delete {len(entries_to_delete)} {noun} from nouns_morf:\n",
+        color_enabled=color_enabled,
+    )
+
+    for e in entries_to_delete:
+        print_formatted(
+            f"  = {e['word']} (code={e['root_code']})",
+            "skipped",
+            color_enabled,
+        )
+
+    print_formatted(
+        "\nThis action CANNOT be undone. Type 'DELETE' to confirm: ",
+        "error",
+        color_enabled,
+    )
+
+    response = input()
+    return response == "DELETE"
+
+
+def delete_file(
+    import_file: ImportFile,
+    config: dict,
+    color_enabled: bool = False,
+) -> dict:
+    """Delete entries from a JSON file if they exist in the database.
+
+    Reads the validated entries, checks for existence, prompts for
+    confirmation, then deletes matching entries in a single transaction.
+
+    Args:
+        import_file (ImportFile): The parsed and validated file.
+        config (dict): MySQL connection settings.
+        color_enabled (bool): Whether to apply ANSI color codes.
+
+    Returns:
+        dict: Summary of what was deleted and skipped.
+
+    Raises:
+        pymysql.MySQLError: If any database operation fails.
+    """
+    connection = get_connection(config)
+    entries_to_delete = []
+    skipped = []
+
+    try:
+        with connection.cursor() as cursor:
+            # Determine which entries exist and can be deleted
+            for entry in import_file.entries:
+                if entry.indeclinable:
+                    root_word = entry.word
+                else:
+                    root_word = entry.singular["nominative"]
+
+                existing_code = entry_exists(cursor, root_word)
+                if existing_code is not None:
+                    entries_to_delete.append(
+                        {
+                            "entry": entry,
+                            "root_code": existing_code,
+                            "root_word": root_word,
+                        }
+                    )
+                else:
+                    skipped.append(entry)
+
+            # If nothing to delete, return early
+            if not entries_to_delete:
+                return {
+                    "path": import_file.path,
+                    "category": import_file.category,
+                    "summaries": [],
+                    "total_rows": 0,
+                    "skipped": skipped,
+                }
+
+            # Prompt for confirmation before deleting
+            confirmation_list = [
+                {"word": e["entry"].word, "root_code": e["root_code"]}
+                for e in entries_to_delete
+            ]
+            if not confirm_delete(confirmation_list, color_enabled):
+                print_formatted(
+                    "\nDeletion cancelled. No entries were deleted.",
+                    "notice",
+                    color_enabled,
+                )
+                return {
+                    "path": import_file.path,
+                    "category": import_file.category,
+                    "summaries": [],
+                    "total_rows": 0,
+                    "skipped": [],
+                    "cancelled": True,
+                }
+
+            # Delete each entry
+            summaries = []
+            total_rows = 0
+            for e in entries_to_delete:
+                rows_deleted = delete_entry(cursor, e["root_word"])
+                total_rows += rows_deleted
+                summaries.append(
+                    {
+                        "word": e["entry"].word,
+                        "root_code": e["root_code"],
+                        "rows_deleted": rows_deleted,
+                    }
+                )
+                print_formatted(
+                    f"  ~ {e['entry'].word} (code={e['root_code']}): deleted {rows_deleted} rows",
+                    "deleted",
+                    color_enabled,
+                )
+
+        connection.commit()
+        return {
+            "path": import_file.path,
+            "category": import_file.category,
+            "summaries": summaries,
+            "total_rows": total_rows,
+            "skipped": skipped,
+        }
+
+    except Exception:
+        connection.rollback()
+        raise
+
+    finally:
+        connection.close()
+
+
 def print_summary(
     result: dict, validate_only: bool = False, color_enabled: bool = False
 ) -> None:
@@ -1255,6 +1411,48 @@ def print_summary(
             color_enabled,
         )
     print_formatted("")
+
+
+def print_delete_summary(result: dict, color_enabled: bool = False) -> None:
+    """Print a summary of a delete operation.
+
+    Args:
+        result (dict): The result dict from delete_file().
+        color_enabled (bool): Whether to apply ANSI color codes.
+    """
+    if result.get("cancelled", False):
+        return
+
+    if not result["summaries"]:
+        noun = "entry" if len(result["skipped"]) == 1 else "entries"
+        print_formatted(
+            f"\nNothing to delete. {len(result['skipped'])} {noun} not found.",
+            "notice",
+            color_enabled,
+        )
+        return
+
+    noun = "entry" if len(result["summaries"]) == 1 else "entries"
+    print_formatted(
+        f"\nDeleted '{result['category']}' — {len(result['summaries'])} {noun}, {result['total_rows']} rows",
+        color_enabled=color_enabled,
+    )
+
+    for s in result["summaries"]:
+        print_formatted(
+            f"  ~ {s['word']} (code={s['root_code']}): deleted {s['rows_deleted']} rows",
+            "deleted",
+            color_enabled,
+        )
+
+    if result["skipped"]:
+        skipped_noun = "entry" if len(result["skipped"]) == 1 else "entries"
+        skipped_words = ", ".join(e.word for e in result["skipped"])
+        print_formatted(
+            f"  Skipped {len(result['skipped'])} {skipped_noun} (not found): {skipped_words}",
+            "skipped",
+            color_enabled,
+        )
 
 
 def build_validation_summary(import_file: ImportFile) -> dict:
@@ -1318,6 +1516,11 @@ def main() -> None:
         "--no-recursive",
         action="store_true",
         help="When processing a directory, do not include JSON files in subdirectories (only JSON files in that directory)",
+    )
+    parser.add_argument(
+        "--delete",
+        action="store_true",
+        help="Delete entries from the database if they exist. Prompts for confirmation.",
     )
     parser.add_argument(
         "--config",
@@ -1392,7 +1595,14 @@ def main() -> None:
             import_file = ImportFile.from_file(json_file)
             print_file_header(json_file, color_enabled)
 
-            if args.validate:
+            if args.delete:
+                result = delete_file(
+                    import_file,
+                    config,
+                    color_enabled=color_enabled,
+                )
+                print_delete_summary(result, color_enabled=color_enabled)
+            elif args.validate:
                 result = build_validation_summary(import_file)
                 print_summary(result, validate_only=True, color_enabled=color_enabled)
             else:
