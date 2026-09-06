@@ -194,6 +194,7 @@ class NounEntry:
         animacy (int): 1 for animate, 0 for inanimate.
         singular (dict): Singular case forms keyed by English case name.
         plural (Optional[dict]): Plural case forms if present, else None.
+        indeclinable (bool): True if the noun has no declensions (root only).
     """
 
     word: str
@@ -201,6 +202,7 @@ class NounEntry:
     animacy: int
     singular: dict
     plural: Optional[dict] = None
+    indeclinable: bool = False
 
     @classmethod
     def from_dict(cls, data: dict, index: int) -> "NounEntry":
@@ -235,21 +237,42 @@ class NounEntry:
                 f"Entry {index} ('{word}'): 'animacy' must be 0 or 1, got '{animacy}'"
             )
 
-        # Validate singular declension block
-        singular = cls._validate_declension_block(
-            data, index, word, "singular", ALL_SINGULAR_KEYS, REQUIRED_SINGULAR_KEYS
-        )
+        # Validate indeclinable flag
+        indeclinable = data.get("indeclinable", False)
+        if not isinstance(indeclinable, bool):
+            raise ValueError(
+                f"Entry {index} ('{word}'): 'indeclinable' must be a boolean"
+            )
 
-        # Validate plural declension block if present
-        plural = cls._validate_declension_block(
-            data,
-            index,
-            word,
-            "plural",
-            ALL_PLURAL_KEYS,
-            REQUIRED_PLURAL_KEYS,
-            optional=True,
-        )
+        if indeclinable:
+            # Indeclinable entries have no declension rows. They mirror the
+            # original DB format: root row only, no children, wcase = NULL.
+            if data.get("singular") not in (None, {}):
+                raise ValueError(
+                    f"Entry {index} ('{word}'): indeclinable entries must not have 'singular' cases"
+                )
+            if data.get("plural") is not None:
+                raise ValueError(
+                    f"Entry {index} ('{word}'): indeclinable entries must not have 'plural'"
+                )
+            singular = {}
+            plural = None
+        else:
+            # Validate singular declension block
+            singular = cls._validate_declension_block(
+                data, index, word, "singular", ALL_SINGULAR_KEYS, REQUIRED_SINGULAR_KEYS
+            )
+
+            # Validate plural declension block if present
+            plural = cls._validate_declension_block(
+                data,
+                index,
+                word,
+                "plural",
+                ALL_PLURAL_KEYS,
+                REQUIRED_PLURAL_KEYS,
+                optional=True,
+            )
 
         return cls(
             word=word.strip(),
@@ -257,6 +280,7 @@ class NounEntry:
             animacy=animacy,
             singular=singular,
             plural=plural if plural else None,
+            indeclinable=indeclinable,
         )
 
     @staticmethod
@@ -329,6 +353,8 @@ class NounEntry:
 
     def row_count(self) -> int:
         """Return the total number of DB rows this entry will produce."""
+        if self.indeclinable:
+            return 1
         singular_rows = 1 + len(self.singular)  # root + singular declensions
         if self.plural:
             plural_rows = 1 + len(self.plural)  # nom plural + plural declensions
@@ -499,27 +525,47 @@ def insert_entry(
     code = start_code
     rows_inserted = 0
 
+    # Insert root row
+    # Indeclinable entries store wcase = NULL (mirrors original DB format).
+    # Declinable entries store the singular nominative as the root word.
+    if entry.indeclinable:
+        root_word = entry.word
+        root_wcase = None
+    else:
+        root_word = entry.singular["nominative"]
+        root_wcase = "им"
+
     # Insert root row (nominative singular, plural=0, code_parent=0)
     # The DB word column gets the singular nominative form, since the root
     # row IS the nominative singular.
     cursor.execute(
         """
         INSERT INTO nouns_morf (word, code, code_parent, plural, gender, wcase, soul, is_custom, created_at, category)
-        VALUES (%s, %s, 0, 0, %s, 'им', %s, 1, %s, %s)
+        VALUES (%s, %s, 0, 0, %s, %s, %s, 1, %s, %s)
         """,
         (
-            entry.singular["nominative"],
+            root_word,
             code,
             entry.gender,
+            root_wcase,
             entry.animacy,
             created_at,
             category,
         ),
     )
     rows_inserted += 1
-
     root_code = code
     code += 1
+
+    if entry.indeclinable:
+        # Indeclinable entries have no declension rows.
+        summary = {
+            "word": entry.word,
+            "root_code": root_code,
+            "singular_rows": 1,
+            "plural_rows": 0,
+        }
+        return code, summary
 
     # Insert singular declensions (children of root, plural=0, wcase != 'им')
 
@@ -723,6 +769,10 @@ def verify_entry(
         root_code (int): The code value of the entry's root row.
         entry (NounEntry): The noun entry to verify.
     """
+    if entry.indeclinable:
+        _verify_indeclinable(cursor, root_code, entry)
+        return
+
     # Collect all rows for this entry (root + children + grandchildren)
     rows = _fetch_entry_rows(cursor, root_code)
 
@@ -887,6 +937,37 @@ def _verify_field(entry_word: str, field_name: str, expected, actual) -> None:
         )
 
 
+def _verify_indeclinable(
+    cursor: pymysql.cursors.Cursor, root_code: int, entry: NounEntry
+) -> None:
+    """Verify an indeclinable entry has exactly one row with wcase = NULL.
+
+    Indeclinable entries mirror the original DB format: root row only,
+    no children, and wcase is NULL rather than 'им'.
+
+    Args:
+        cursor (pymysql.cursors.Cursor): Active cursor within a transaction.
+        root_code (int): The code value of the entry's root row.
+        entry (NounEntry): The indeclinable entry to verify.
+    """
+    cursor.execute(
+        "SELECT word, code_parent, plural, wcase FROM nouns_morf WHERE code = %s",
+        (root_code,),
+    )
+    rows = cursor.fetchall()
+
+    if len(rows) != 1:
+        raise ValueError(
+            f"'{entry.word}': indeclinable entry should have exactly 1 row, found {len(rows)}"
+        )
+
+    row = rows[0]
+    _verify_field(entry.word, "word", entry.word, row["word"])
+    _verify_field(entry.word, "parent code", 0, row["code_parent"])
+    _verify_field(entry.word, "plural flag", 0, row["plural"])
+    _verify_field(entry.word, "wcase", "NULL", row["wcase"])
+
+
 def query_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> list[dict]:
     """Query all rows for an entry by its root word.
 
@@ -949,6 +1030,7 @@ def print_entry(rows: list[dict], word: str) -> None:
 
     for row in rows:
         gender = row["gender"] if row["gender"] is not None else "NULL"
+        wcase = row["wcase"] if row["wcase"] is not None else "NULL"
         created = (
             row["created_at"].strftime("%Y-%m-%d %H:%M:%S")
             if row["created_at"]
@@ -961,7 +1043,7 @@ def print_entry(rows: list[dict], word: str) -> None:
             f"{row['code_parent']:<7} "
             f"{row['plural']:<3} "
             f"{gender:<6} "
-            f"{row['wcase']:<5} "
+            f"{wcase:<5} "
             f"{row['soul']:<4} "
             f"{row['is_custom']:<6} "
             f"{row['category'] if row['category'] else 'NULL':<12} "
@@ -1020,9 +1102,13 @@ def process_file(
             created_at = cursor.fetchone()["now"]
 
             for entry in import_file.entries:
-                # The root row's word column stores the singular nominative,
-                # which is what identifies an entry across runs.
-                root_word = entry.singular["nominative"]
+                # The root row's word column stores the singular nominative
+                # for declinable entries, or the entry's word for
+                # indeclinable entries. Either way, it identifies the entry.
+                if entry.indeclinable:
+                    root_word = entry.word
+                else:
+                    root_word = entry.singular["nominative"]
 
                 # check if the entry already exists
                 # (if so, entry_exists returns its code)
@@ -1117,11 +1203,16 @@ def print_summary(
     )
 
     for s in inserted_summaries:
-        plural_part = (
-            f", {s['plural_rows']} plural" if s["plural_rows"] > 0 else ", 0 plural"
-        )
+        if s["singular_rows"] == 1 and s["plural_rows"] == 0:
+            case_part = "indeclinable"
+        else:
+            plural_part = (
+                f", {s['plural_rows']} plural" if s["plural_rows"] > 0 else ", 0 plural"
+            )
+            case_part = f"{s['singular_rows']} singular{plural_part}"
+
         print_formatted(
-            f"  + {s['word']} (code={s['root_code']}): {s['singular_rows']} singular{plural_part}",
+            f"  + {s['word']} (code={s['root_code']}): {case_part}",
             "added",
             color_enabled,
         )
@@ -1169,14 +1260,21 @@ def build_validation_summary(import_file: ImportFile) -> dict:
     next_code = 1  # placeholder if no DB access
 
     for entry in import_file.entries:
+        if entry.indeclinable:
+            singular_rows = 1
+            plural_rows = 0
+        else:
+            singular_rows = 1 + len(entry.singular)
+            plural_rows = (1 + len(entry.plural)) if entry.plural else 0
+
         summary = {
             "word": entry.word,
             "root_code": next_code,
-            "singular_rows": 1 + len(entry.singular),
-            "plural_rows": (1 + len(entry.plural)) if entry.plural else 0,
+            "singular_rows": singular_rows,
+            "plural_rows": plural_rows,
         }
         summaries.append(summary)
-        next_code += summary["singular_rows"] + summary["plural_rows"]
+        next_code += singular_rows + plural_rows
 
     return {
         "path": import_file.path,
