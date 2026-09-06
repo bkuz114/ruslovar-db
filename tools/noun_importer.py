@@ -715,6 +715,31 @@ def verify_entry(
         entry (NounEntry): The noun entry to verify.
     """
     # Collect all rows for this entry (root + children + grandchildren)
+    rows = _fetch_entry_rows(cursor, root_code)
+
+    # Build map of (plural, wcase) -> row for easy lookup
+    row_map = {(row["plural"], row["wcase"]): row for row in rows}
+
+    # Verify root row (nominative singular, plural=0, code_parent=0)
+    _verify_root(row_map, entry, root_code)
+    _verify_singular(row_map, entry, root_code)
+    _verify_plural(row_map, entry, root_code)
+
+
+def _fetch_entry_rows(cursor: pymysql.cursors.Cursor, root_code: int) -> list[dict]:
+    """Fetch all rows for an entry (root, children, grandchildren).
+
+    Uses the same query pattern as insert_entry() and query_entry():
+    root by code, direct children by code_parent, grandchildren via
+    subquery on the nominative plural's code.
+
+    Args:
+        cursor (pymysql.cursors.Cursor): Active cursor within a transaction.
+        root_code (int): The code value of the entry's root row.
+
+    Returns:
+        list[dict]: The fetched rows.
+    """
     cursor.execute(
         """
         SELECT word, code, code_parent, plural, wcase
@@ -727,32 +752,39 @@ def verify_entry(
         """,
         (root_code, root_code, root_code),
     )
-    rows = cursor.fetchall()
+    return cursor.fetchall()
 
-    # Build map of (plural, wcase) -> row for easy lookup
-    row_map = {(row["plural"], row["wcase"]): row for row in rows}
 
-    # Verify root row (nominative singular, plural=0, code_parent=0)
+def _verify_root(row_map: dict, entry: NounEntry, root_code: int) -> None:
+    """Verify the root row (nominative singular, plural=0, code_parent=0).
+
+    Args:
+        row_map (dict): Mapping of (plural, wcase) to row data.
+        entry (NounEntry): The noun entry being verified.
+        root_code (int): The expected code value of the root row.
+    """
+    # The root row is keyed by (plural=0, wcase='им') in the row map.
+    # It must contain the singular nominative form and have no parent.
     root = row_map.get((0, "им"))
     if root is None:
         raise ValueError(f"'{entry.word}': root row (nominative singular) missing")
-    if root["word"] != entry.singular["nominative"]:
-        raise ValueError(
-            f"'{entry.word}': root word mismatch. "
-            f"Expected '{entry.singular['nominative']}', found '{root['word']}'"
-        )
-    if root["code"] != root_code:
-        raise ValueError(
-            f"'{entry.word}': root code mismatch. "
-            f"Expected {root_code}, found {root['code']}"
-        )
-    if root["code_parent"] != 0:
-        raise ValueError(
-            f"'{entry.word}': root parent code mismatch. "
-            f"Expected 0, found {root['code_parent']}"
-        )
 
-    # Verify singular declensions (children of root, plural=0)
+    _verify_field(entry.word, "root word", entry.singular["nominative"], root["word"])
+    _verify_field(entry.word, "root code", root_code, root["code"])
+    _verify_field(entry.word, "root parent code", 0, root["code_parent"])
+
+
+def _verify_singular(row_map: dict, entry: NounEntry, root_code: int) -> None:
+    """Verify singular declensions (children of root, plural=0).
+
+    Args:
+        row_map (dict): Mapping of (plural, wcase) to row data.
+        entry (NounEntry): The noun entry being verified.
+        root_code (int): The expected parent code for singular rows.
+    """
+    # Iterate over the full case list. Skip 'им' because it is the root
+    # row (already verified in _verify_root). Skip optional cases not
+    # provided in the entry.
     for wcase, case_key in SINGULAR_CASES:
         if wcase == "им":
             continue  # root row already verified
@@ -762,56 +794,88 @@ def verify_entry(
         row = row_map.get((0, wcase))
         if row is None:
             raise ValueError(f"'{entry.word}': singular {wcase} row missing")
-        if row["word"] != entry.singular[case_key]:
-            raise ValueError(
-                f"'{entry.word}': singular {wcase} word mismatch. "
-                f"Expected '{entry.singular[case_key]}', found '{row['word']}'"
-            )
-        if row["code_parent"] != root_code:
-            raise ValueError(
-                f"'{entry.word}': singular {wcase} parent code mismatch. "
-                f"Expected {root_code}, found {row['code_parent']}"
-            )
 
-    # Verify plural rows if the entry has plural data
-    if entry.plural:
-        # Nominative plural (child of root, plural=1, wcase='им')
-        nom_plural = row_map.get((1, "им"))
-        if nom_plural is None:
-            raise ValueError(f"'{entry.word}': nominative plural row missing")
-        if nom_plural["word"] != entry.plural["nominative"]:
-            raise ValueError(
-                f"'{entry.word}': nominative plural word mismatch. "
-                f"Expected '{entry.plural['nominative']}', found '{nom_plural['word']}'"
-            )
-        if nom_plural["code_parent"] != root_code:
-            raise ValueError(
-                f"'{entry.word}': nominative plural parent code mismatch. "
-                f"Expected {root_code}, found {nom_plural['code_parent']}"
-            )
+        _verify_field(
+            entry.word, f"singular {wcase} word", entry.singular[case_key], row["word"]
+        )
+        _verify_field(
+            entry.word, f"singular {wcase} parent code", root_code, row["code_parent"]
+        )
 
-        plural_root_code = nom_plural["code"]
 
-        # Remaining plural declensions (children of nominative plural)
-        for wcase, case_key in PLURAL_CASES:
-            if case_key == "nominative":
-                continue  # already verified as plural root
-            if case_key not in entry.plural:
-                continue  # optional case not provided
+def _verify_plural(row_map: dict, entry: NounEntry, root_code: int) -> None:
+    """Verify plural rows (nominative plural + its children).
 
-            row = row_map.get((1, wcase))
-            if row is None:
-                raise ValueError(f"'{entry.word}': plural {wcase} row missing")
-            if row["word"] != entry.plural[case_key]:
-                raise ValueError(
-                    f"'{entry.word}': plural {wcase} word mismatch. "
-                    f"Expected '{entry.plural[case_key]}', found '{row['word']}'"
-                )
-            if row["code_parent"] != plural_root_code:
-                raise ValueError(
-                    f"'{entry.word}': plural {wcase} parent code mismatch. "
-                    f"Expected {plural_root_code}, found {row['code_parent']}"
-                )
+    Args:
+        row_map (dict): Mapping of (plural, wcase) to row data.
+        entry (NounEntry): The noun entry being verified.
+        root_code (int): The expected parent code of the nominative plural.
+    """
+    # If the entry has no plural data, there is nothing to verify.
+    if not entry.plural:
+        return
+
+    # Nominative plural is the parent of all other plural declensions.
+    # It is keyed by (plural=1, wcase='им') in the row map.
+    nom_plural = row_map.get((1, "им"))
+    if nom_plural is None:
+        raise ValueError(f"'{entry.word}': nominative plural row missing")
+
+    _verify_field(
+        entry.word,
+        "nominative plural word",
+        entry.plural["nominative"],
+        nom_plural["word"],
+    )
+    _verify_field(
+        entry.word,
+        "nominative plural parent code",
+        root_code,
+        nom_plural["code_parent"],
+    )
+
+    # Capture the nominative plural's code so we can verify that the
+    # remaining plural declensions point to it as their parent.
+    plural_root_code = nom_plural["code"]
+
+    # Remaining plural declensions (children of nominative plural)
+    for wcase, case_key in PLURAL_CASES:
+        if case_key == "nominative":
+            continue  # already verified as plural root
+        if case_key not in entry.plural:
+            continue  # optional case not provided
+
+        row = row_map.get((1, wcase))
+        if row is None:
+            raise ValueError(f"'{entry.word}': plural {wcase} row missing")
+
+        _verify_field(
+            entry.word, f"plural {wcase} word", entry.plural[case_key], row["word"]
+        )
+        _verify_field(
+            entry.word,
+            f"plural {wcase} parent code",
+            plural_root_code,
+            row["code_parent"],
+        )
+
+
+def _verify_field(entry_word: str, field_name: str, expected, actual) -> None:
+    """Compare expected vs actual field value, raising with context on mismatch.
+
+    Args:
+        entry_word (str): The entry's display word, for error context.
+        field_name (str): Human-readable description of the field.
+        expected: The value that was expected.
+        actual: The value found in the database.
+    """
+    # Single point of failure for all verification checks. Keeping the
+    # error format here ensures consistent, actionable messages.
+    if expected != actual:
+        raise ValueError(
+            f"'{entry_word}': {field_name} mismatch. "
+            f"Expected {expected}, found {actual}"
+        )
 
 
 def query_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> list[dict]:
