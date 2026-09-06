@@ -236,87 +236,96 @@ class NounEntry:
             )
 
         # Validate singular declension block
-        singular = data.get("singular")
-        if not isinstance(singular, dict):
-            raise ValueError(f"Entry {index} ('{word}'): 'singular' must be an object")
-
-        # Reject unknown case keys (typo detection)
-        unknown_singular = set(singular.keys()) - ALL_SINGULAR_KEYS
-        if unknown_singular:
-            raise ValueError(
-                f"Entry {index} ('{word}'): unknown singular case(s): {sorted(unknown_singular)}. "
-                f"Valid cases: {sorted(ALL_SINGULAR_KEYS)}"
-            )
-
-        missing = REQUIRED_SINGULAR_KEYS - set(singular.keys())
-        if missing:
-            raise ValueError(
-                f"Entry {index} ('{word}'): singular is missing required cases: {sorted(missing)}"
-            )
-
-        for case_key in REQUIRED_SINGULAR_KEYS | (
-            OPTIONAL_SINGULAR_KEYS & set(singular.keys())
-        ):
-            if (
-                not isinstance(singular[case_key], str)
-                or not singular[case_key].strip()
-            ):
-                raise ValueError(
-                    f"Entry {index} ('{word}'): singular.{case_key} must be a non-empty string"
-                )
+        singular = cls._validate_declension_block(
+            data, index, word, "singular", ALL_SINGULAR_KEYS, REQUIRED_SINGULAR_KEYS
+        )
 
         # Validate plural declension block if present
-        plural = data.get("plural")
-        if plural is not None:
-            if not isinstance(plural, dict):
-                raise ValueError(
-                    f"Entry {index} ('{word}'): 'plural' must be an object or omitted"
-                )
-
-            # Reject unknown case keys (typo detection)
-            unknown_plural = set(plural.keys()) - ALL_PLURAL_KEYS
-            if unknown_plural:
-                raise ValueError(
-                    f"Entry {index} ('{word}'): unknown plural case(s): {sorted(unknown_plural)}. "
-                    f"Valid cases: {sorted(ALL_PLURAL_KEYS)}"
-                )
-
-            missing_plural = REQUIRED_PLURAL_KEYS - set(plural.keys())
-            if missing_plural:
-                raise ValueError(
-                    f"Entry {index} ('{word}'): plural is missing required cases: {sorted(missing_plural)}"
-                )
-
-            for case_key in REQUIRED_PLURAL_KEYS | (
-                OPTIONAL_PLURAL_KEYS & set(plural.keys())
-            ):
-                if (
-                    not isinstance(plural[case_key], str)
-                    or not plural[case_key].strip()
-                ):
-                    raise ValueError(
-                        f"Entry {index} ('{word}'): plural.{case_key} must be a non-empty string"
-                    )
+        plural = cls._validate_declension_block(
+            data,
+            index,
+            word,
+            "plural",
+            ALL_PLURAL_KEYS,
+            REQUIRED_PLURAL_KEYS,
+            optional=True,
+        )
 
         return cls(
             word=word.strip(),
             gender=gender,
             animacy=animacy,
-            singular={
-                k: singular[k]
-                for k in REQUIRED_SINGULAR_KEYS
-                | (OPTIONAL_SINGULAR_KEYS & set(singular.keys()))
-            },
-            plural=(
-                {
-                    k: plural[k]
-                    for k in REQUIRED_PLURAL_KEYS
-                    | (OPTIONAL_PLURAL_KEYS & set(plural.keys()))
-                }
-                if plural
-                else None
-            ),
+            singular=singular,
+            plural=plural if plural else None,
         )
+
+    @staticmethod
+    def _validate_declension_block(
+        data: dict,
+        index: int,
+        word: str,
+        block_name: str,
+        all_keys: set,
+        required_keys: set,
+        optional: bool = False,
+    ) -> dict:
+        """Validate a declension block (singular or plural) and return clean dict.
+
+        Args:
+            data (dict): The raw entry dictionary.
+            index (int): Entry position, for error messages.
+            word (str): The entry's display word.
+            block_name (str): 'singular' or 'plural', used in error messages.
+            all_keys (set): All valid case keys for this block.
+            required_keys (set): Required case keys for this block.
+            optional (bool): If True, the block may be absent (returns empty dict).
+
+        Returns:
+            dict: The validated case forms (empty dict if optional and absent).
+
+        Raises:
+            ValueError: If the block is invalid.
+        """
+        block = data.get(block_name)
+
+        if block is None:
+            if optional:
+                return {}
+            raise ValueError(
+                f"Entry {index} ('{word}'): '{block_name}' must be an object"
+            )
+
+        if not isinstance(block, dict):
+            raise ValueError(
+                f"Entry {index} ('{word}'): '{block_name}' must be an object"
+            )
+
+        # Reject unknown case keys (typo detection)
+        unknown = set(block.keys()) - all_keys
+        if unknown:
+            raise ValueError(
+                f"Entry {index} ('{word}'): unknown {block_name} case(s): {sorted(unknown)}. "
+                f"Valid cases: {sorted(all_keys)}"
+            )
+
+        # Check required cases are present
+        missing = required_keys - set(block.keys())
+        if missing:
+            raise ValueError(
+                f"Entry {index} ('{word}'): {block_name} is missing required cases: {sorted(missing)}"
+            )
+
+        # Validate each case value is a non-empty string
+        for case_key in block:
+            if not isinstance(block[case_key], str) or not block[case_key].strip():
+                raise ValueError(
+                    f"Entry {index} ('{word}'): {block_name}.{case_key} must be a non-empty string"
+                )
+
+        # Build clean dict with whitespace stripped from each form
+        clean_block = {case_key: block[case_key].strip() for case_key in block}
+
+        return clean_block
 
     def row_count(self) -> int:
         """Return the total number of DB rows this entry will produce."""
