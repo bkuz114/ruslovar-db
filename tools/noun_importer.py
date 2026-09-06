@@ -1020,7 +1020,7 @@ def print_file_header(path: Path, color_enabled: bool) -> None:
         color_enabled (bool): Whether to apply ANSI color codes.
     """
     print()
-    print_formatted(f"─── {path.name} ───", "notice", color_enabled)
+    print_formatted(f"─── {path.as_posix()} ───", "notice", color_enabled)
     print()
 
 
