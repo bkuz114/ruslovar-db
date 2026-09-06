@@ -1,0 +1,810 @@
+{
+  "category": "name",
+  "entries": [
+    {
+      "word": "Александра",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Александра",
+        "genitive": "Александры",
+        "dative": "Александре",
+        "accusative": "Александру",
+        "instrumental": "Александрой",
+        "prepositional": "Александре",
+        "vocative": "Александр"
+      },
+      "plural": {
+        "nominative": "Александры",
+        "genitive": "Александр",
+        "dative": "Александрам",
+        "accusative": "Александр",
+        "instrumental": "Александрами",
+        "prepositional": "Александрах"
+      }
+    },
+    {
+      "word": "Алёна",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Алёна",
+        "genitive": "Алёны",
+        "dative": "Алёне",
+        "accusative": "Алёну",
+        "instrumental": "Алёной",
+        "prepositional": "Алёне",
+        "vocative": "Алён"
+      },
+      "plural": {
+        "nominative": "Алёны",
+        "genitive": "Алён",
+        "dative": "Алёнам",
+        "accusative": "Алён",
+        "instrumental": "Алёнами",
+        "prepositional": "Алёнах"
+      }
+    },
+    {
+      "word": "Алена",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Алена",
+        "genitive": "Алены",
+        "dative": "Алене",
+        "accusative": "Алену",
+        "instrumental": "Аленой",
+        "prepositional": "Алене",
+        "vocative": "Ален"
+      },
+      "plural": {
+        "nominative": "Алены",
+        "genitive": "Ален",
+        "dative": "Аленам",
+        "accusative": "Ален",
+        "instrumental": "Аленами",
+        "prepositional": "Аленах"
+      }
+    },
+    {
+      "word": "Алина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Алина",
+        "genitive": "Алины",
+        "dative": "Алине",
+        "accusative": "Алину",
+        "instrumental": "Алиной",
+        "prepositional": "Алине",
+        "vocative": "Алин"
+      },
+      "plural": {
+        "nominative": "Алины",
+        "genitive": "Алин",
+        "dative": "Алинам",
+        "accusative": "Алин",
+        "instrumental": "Алинами",
+        "prepositional": "Алинах"
+      }
+    },
+    {
+      "word": "Анастасия",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Анастасия",
+        "genitive": "Анастасии",
+        "dative": "Анастасии",
+        "accusative": "Анастасию",
+        "instrumental": "Анастасией",
+        "prepositional": "Анастасии",
+        "vocative": "Анастаси"
+      },
+      "plural": {
+        "nominative": "Анастасии",
+        "genitive": "Анастасий",
+        "dative": "Анастасиям",
+        "accusative": "Анастасий",
+        "instrumental": "Анастасиями",
+        "prepositional": "Анастасиях"
+      }
+    },
+    {
+      "word": "Анна",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Анна",
+        "genitive": "Анны",
+        "dative": "Анне",
+        "accusative": "Анну",
+        "instrumental": "Анной",
+        "prepositional": "Анне",
+        "vocative": "Анн"
+      },
+      "plural": {
+        "nominative": "Анны",
+        "genitive": "Анн",
+        "dative": "Аннам",
+        "accusative": "Анн",
+        "instrumental": "Аннами",
+        "prepositional": "Аннах"
+      }
+    },
+    {
+      "word": "Валентина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Валентина",
+        "genitive": "Валентины",
+        "dative": "Валентине",
+        "accusative": "Валентину",
+        "instrumental": "Валентиной",
+        "prepositional": "Валентине",
+        "vocative": "Валентин"
+      },
+      "plural": {
+        "nominative": "Валентины",
+        "genitive": "Валентин",
+        "dative": "Валентинам",
+        "accusative": "Валентин",
+        "instrumental": "Валентинами",
+        "prepositional": "Валентинах"
+      }
+    },
+    {
+      "word": "Валерия",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Валерия",
+        "genitive": "Валерии",
+        "dative": "Валерии",
+        "accusative": "Валерию",
+        "instrumental": "Валерией",
+        "prepositional": "Валерии",
+        "vocative": "Валери"
+      },
+      "plural": {
+        "nominative": "Валерии",
+        "genitive": "Валерий",
+        "dative": "Валериям",
+        "accusative": "Валерий",
+        "instrumental": "Валериями",
+        "prepositional": "Валериях"
+      }
+    },
+    {
+      "word": "Варвара",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Варвара",
+        "genitive": "Варвары",
+        "dative": "Варваре",
+        "accusative": "Варвару",
+        "instrumental": "Варварой",
+        "prepositional": "Варваре",
+        "vocative": "Варвар"
+      },
+      "plural": {
+        "nominative": "Варвары",
+        "genitive": "Варвар",
+        "dative": "Варварам",
+        "accusative": "Варвар",
+        "instrumental": "Варварами",
+        "prepositional": "Варварах"
+      }
+    },
+    {
+      "word": "Вера",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Вера",
+        "genitive": "Веры",
+        "dative": "Вере",
+        "accusative": "Веру",
+        "instrumental": "Верой",
+        "prepositional": "Вере",
+        "vocative": "Вер"
+      },
+      "plural": {
+        "nominative": "Веры",
+        "genitive": "Вер",
+        "dative": "Верам",
+        "accusative": "Вер",
+        "instrumental": "Верами",
+        "prepositional": "Верах"
+      }
+    },
+    {
+      "word": "Виктория",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Виктория",
+        "genitive": "Виктории",
+        "dative": "Виктории",
+        "accusative": "Викторию",
+        "instrumental": "Викторией",
+        "prepositional": "Виктории",
+        "vocative": "Виктори"
+      },
+      "plural": {
+        "nominative": "Виктории",
+        "genitive": "Викторий",
+        "dative": "Викториям",
+        "accusative": "Викторий",
+        "instrumental": "Викториями",
+        "prepositional": "Викториях"
+      }
+    },
+    {
+      "word": "Галина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Галина",
+        "genitive": "Галины",
+        "dative": "Галине",
+        "accusative": "Галину",
+        "instrumental": "Галиной",
+        "prepositional": "Галине",
+        "vocative": "Галин"
+      },
+      "plural": {
+        "nominative": "Галины",
+        "genitive": "Галин",
+        "dative": "Галинам",
+        "accusative": "Галин",
+        "instrumental": "Галинами",
+        "prepositional": "Галинах"
+      }
+    },
+    {
+      "word": "Дарья",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Дарья",
+        "genitive": "Дарьи",
+        "dative": "Дарье",
+        "accusative": "Дарью",
+        "instrumental": "Дарьей",
+        "prepositional": "Дарье",
+        "vocative": "Дарь"
+      },
+      "plural": {
+        "nominative": "Дарьи",
+        "genitive": "Дарий",
+        "dative": "Дарьям",
+        "accusative": "Дарий",
+        "instrumental": "Дарьями",
+        "prepositional": "Дарьях"
+      }
+    },
+    {
+      "word": "Евгения",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Евгения",
+        "genitive": "Евгении",
+        "dative": "Евгении",
+        "accusative": "Евгению",
+        "instrumental": "Евгенией",
+        "prepositional": "Евгении",
+        "vocative": "Евгени"
+      },
+      "plural": {
+        "nominative": "Евгении",
+        "genitive": "Евгений",
+        "dative": "Евгениям",
+        "accusative": "Евгений",
+        "instrumental": "Евгениями",
+        "prepositional": "Евгениях"
+      }
+    },
+    {
+      "word": "Екатерина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Екатерина",
+        "genitive": "Екатерины",
+        "dative": "Екатерине",
+        "accusative": "Екатерину",
+        "instrumental": "Екатериной",
+        "prepositional": "Екатерине",
+        "vocative": "Екатерин"
+      },
+      "plural": {
+        "nominative": "Екатерины",
+        "genitive": "Екатерин",
+        "dative": "Екатеринам",
+        "accusative": "Екатерин",
+        "instrumental": "Екатеринами",
+        "prepositional": "Екатеринах"
+      }
+    },
+    {
+      "word": "Елена",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Елена",
+        "genitive": "Елены",
+        "dative": "Елене",
+        "accusative": "Елену",
+        "instrumental": "Еленой",
+        "prepositional": "Елене",
+        "vocative": "Елен"
+      },
+      "plural": {
+        "nominative": "Елены",
+        "genitive": "Елен",
+        "dative": "Еленам",
+        "accusative": "Елен",
+        "instrumental": "Еленами",
+        "prepositional": "Еленах"
+      }
+    },
+    {
+      "word": "Ирина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ирина",
+        "genitive": "Ирины",
+        "dative": "Ирине",
+        "accusative": "Ирину",
+        "instrumental": "Ириной",
+        "prepositional": "Ирине",
+        "vocative": "Ирин"
+      },
+      "plural": {
+        "nominative": "Ирины",
+        "genitive": "Ирин",
+        "dative": "Иринам",
+        "accusative": "Ирин",
+        "instrumental": "Иринами",
+        "prepositional": "Иринах"
+      }
+    },
+    {
+      "word": "Ксения",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ксения",
+        "genitive": "Ксении",
+        "dative": "Ксении",
+        "accusative": "Ксению",
+        "instrumental": "Ксенией",
+        "prepositional": "Ксении",
+        "vocative": "Ксени"
+      },
+      "plural": {
+        "nominative": "Ксении",
+        "genitive": "Ксений",
+        "dative": "Ксениям",
+        "accusative": "Ксений",
+        "instrumental": "Ксениями",
+        "prepositional": "Ксениях"
+      }
+    },
+    {
+      "word": "Лариса",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Лариса",
+        "genitive": "Ларисы",
+        "dative": "Ларисе",
+        "accusative": "Ларису",
+        "instrumental": "Ларисой",
+        "prepositional": "Ларисе",
+        "vocative": "Ларис"
+      },
+      "plural": {
+        "nominative": "Ларисы",
+        "genitive": "Ларис",
+        "dative": "Ларисам",
+        "accusative": "Ларис",
+        "instrumental": "Ларисами",
+        "prepositional": "Ларисах"
+      }
+    },
+    {
+      "word": "Любовь",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Любовь",
+        "genitive": "Любови",
+        "dative": "Любови",
+        "accusative": "Любовь",
+        "instrumental": "Любовью",
+        "prepositional": "Любови",
+        "vocative": "Любовь"
+      },
+      "plural": {
+        "nominative": "Любови",
+        "genitive": "Любовей",
+        "dative": "Любовям",
+        "accusative": "Любовей",
+        "instrumental": "Любовями",
+        "prepositional": "Любовях"
+      }
+    },
+    {
+      "word": "Людмила",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Людмила",
+        "genitive": "Людмилы",
+        "dative": "Людмиле",
+        "accusative": "Людмилу",
+        "instrumental": "Людмилой",
+        "prepositional": "Людмиле",
+        "vocative": "Людмил"
+      },
+      "plural": {
+        "nominative": "Людмилы",
+        "genitive": "Людмил",
+        "dative": "Людмилам",
+        "accusative": "Людмил",
+        "instrumental": "Людмилами",
+        "prepositional": "Людмилах"
+      }
+    },
+    {
+      "word": "Маргарита",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Маргарита",
+        "genitive": "Маргариты",
+        "dative": "Маргарите",
+        "accusative": "Маргариту",
+        "instrumental": "Маргаритой",
+        "prepositional": "Маргарите",
+        "vocative": "Маргарит"
+      },
+      "plural": {
+        "nominative": "Маргариты",
+        "genitive": "Маргарит",
+        "dative": "Маргаритам",
+        "accusative": "Маргарит",
+        "instrumental": "Маргаритами",
+        "prepositional": "Маргаритах"
+      }
+    },
+    {
+      "word": "Мария",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Мария",
+        "genitive": "Марии",
+        "dative": "Марии",
+        "accusative": "Марию",
+        "instrumental": "Марией",
+        "prepositional": "Марии",
+        "vocative": "Мари"
+      },
+      "plural": {
+        "nominative": "Марии",
+        "genitive": "Марий",
+        "dative": "Мариям",
+        "accusative": "Марий",
+        "instrumental": "Мариями",
+        "prepositional": "Мариях"
+      }
+    },
+    {
+      "word": "Марина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Марина",
+        "genitive": "Марины",
+        "dative": "Марине",
+        "accusative": "Марину",
+        "instrumental": "Мариной",
+        "prepositional": "Марине",
+        "vocative": "Марин"
+      },
+      "plural": {
+        "nominative": "Марины",
+        "genitive": "Марин",
+        "dative": "Маринам",
+        "accusative": "Марин",
+        "instrumental": "Маринами",
+        "prepositional": "Маринах"
+      }
+    },
+    {
+      "word": "Надежда",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Надежда",
+        "genitive": "Надежды",
+        "dative": "Надежде",
+        "accusative": "Надежду",
+        "instrumental": "Надеждой",
+        "prepositional": "Надежде",
+        "vocative": "Надежд"
+      },
+      "plural": {
+        "nominative": "Надежды",
+        "genitive": "Надежд",
+        "dative": "Надеждам",
+        "accusative": "Надежд",
+        "instrumental": "Надеждами",
+        "prepositional": "Надеждах"
+      }
+    },
+    {
+      "word": "Наталья",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Наталья",
+        "genitive": "Натальи",
+        "dative": "Наталье",
+        "accusative": "Наталью",
+        "instrumental": "Натальей",
+        "prepositional": "Наталье",
+        "vocative": "Наталь"
+      },
+      "plural": {
+        "nominative": "Натальи",
+        "genitive": "Наталий",
+        "dative": "Натальям",
+        "accusative": "Наталий",
+        "instrumental": "Натальями",
+        "prepositional": "Натальях"
+      }
+    },
+    {
+      "word": "Нина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нина",
+        "genitive": "Нины",
+        "dative": "Нине",
+        "accusative": "Нину",
+        "instrumental": "Ниной",
+        "prepositional": "Нине",
+        "vocative": "Нин"
+      },
+      "plural": {
+        "nominative": "Нины",
+        "genitive": "Нин",
+        "dative": "Нинам",
+        "accusative": "Нин",
+        "instrumental": "Нинами",
+        "prepositional": "Нинах"
+      }
+    },
+    {
+      "word": "Ольга",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ольга",
+        "genitive": "Ольги",
+        "dative": "Ольге",
+        "accusative": "Ольгу",
+        "instrumental": "Ольгой",
+        "prepositional": "Ольге",
+        "vocative": "Ольг"
+      },
+      "plural": {
+        "nominative": "Ольги",
+        "genitive": "Ольг",
+        "dative": "Ольгам",
+        "accusative": "Ольг",
+        "instrumental": "Ольгами",
+        "prepositional": "Ольгах"
+      }
+    },
+    {
+      "word": "Полина",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Полина",
+        "genitive": "Полины",
+        "dative": "Полине",
+        "accusative": "Полину",
+        "instrumental": "Полиной",
+        "prepositional": "Полине",
+        "vocative": "Полин"
+      },
+      "plural": {
+        "nominative": "Полины",
+        "genitive": "Полин",
+        "dative": "Полинам",
+        "accusative": "Полин",
+        "instrumental": "Полинами",
+        "prepositional": "Полинах"
+      }
+    },
+    {
+      "word": "Светлана",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Светлана",
+        "genitive": "Светланы",
+        "dative": "Светлане",
+        "accusative": "Светлану",
+        "instrumental": "Светланой",
+        "prepositional": "Светлане",
+        "vocative": "Светлан"
+      },
+      "plural": {
+        "nominative": "Светланы",
+        "genitive": "Светлан",
+        "dative": "Светланам",
+        "accusative": "Светлан",
+        "instrumental": "Светланами",
+        "prepositional": "Светланах"
+      }
+    },
+    {
+      "word": "Софья",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Софья",
+        "genitive": "Софьи",
+        "dative": "Софье",
+        "accusative": "Софью",
+        "instrumental": "Софьей",
+        "prepositional": "Софье",
+        "vocative": "Софь"
+      },
+      "plural": {
+        "nominative": "Софьи",
+        "genitive": "Софий",
+        "dative": "Софьям",
+        "accusative": "Софий",
+        "instrumental": "Софьями",
+        "prepositional": "Софьях"
+      }
+    },
+    {
+      "word": "Тамара",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тамара",
+        "genitive": "Тамары",
+        "dative": "Тамаре",
+        "accusative": "Тамару",
+        "instrumental": "Тамарой",
+        "prepositional": "Тамаре",
+        "vocative": "Тамар"
+      },
+      "plural": {
+        "nominative": "Тамары",
+        "genitive": "Тамар",
+        "dative": "Тамарам",
+        "accusative": "Тамар",
+        "instrumental": "Тамарами",
+        "prepositional": "Тамарах"
+      }
+    },
+    {
+      "word": "Татьяна",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Татьяна",
+        "genitive": "Татьяны",
+        "dative": "Татьяне",
+        "accusative": "Татьяну",
+        "instrumental": "Татьяной",
+        "prepositional": "Татьяне",
+        "vocative": "Татьян"
+      },
+      "plural": {
+        "nominative": "Татьяны",
+        "genitive": "Татьян",
+        "dative": "Татьянам",
+        "accusative": "Татьян",
+        "instrumental": "Татьянами",
+        "prepositional": "Татьянах"
+      }
+    },
+    {
+      "word": "Ульяна",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ульяна",
+        "genitive": "Ульяны",
+        "dative": "Ульяне",
+        "accusative": "Ульяну",
+        "instrumental": "Ульяной",
+        "prepositional": "Ульяне",
+        "vocative": "Ульян"
+      },
+      "plural": {
+        "nominative": "Ульяны",
+        "genitive": "Ульян",
+        "dative": "Ульянам",
+        "accusative": "Ульян",
+        "instrumental": "Ульянами",
+        "prepositional": "Ульянах"
+      }
+    },
+    {
+      "word": "Юлия",
+      "gender": "жен",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Юлия",
+        "genitive": "Юлии",
+        "dative": "Юлии",
+        "accusative": "Юлию",
+        "instrumental": "Юлией",
+        "prepositional": "Юлии",
+        "vocative": "Юли"
+      },
+      "plural": {
+        "nominative": "Юлии",
+        "genitive": "Юлий",
+        "dative": "Юлиям",
+        "accusative": "Юлий",
+        "instrumental": "Юлиями",
+        "prepositional": "Юлиях"
+      }
+    }
+  ]
+}
