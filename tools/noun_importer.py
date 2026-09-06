@@ -163,9 +163,12 @@ def format_action(text: str, action: str, color_enabled: bool) -> str:
 
 
 def print_formatted(
-    text: str, action: str = "plain", color_enabled: bool = False
+    text: str,
+    action: str = "plain",
+    color_enabled: bool = False,
+    file=None,
 ) -> None:
-    """Format and print an action label, flushing stdout.
+    """Format and print an action label, flushing stdout (or stderr for errors).
 
     Combines format_action() with print() and flush=True to ensure
     output appears immediately even when stdout is buffered.
@@ -176,11 +179,17 @@ def print_formatted(
             'error', 'notice', or 'plain'.
         color_enabled (bool): Whether to apply ANSI color codes.
             Defaults to False.
+        file: Optional file-like object to write to. If None and
+            action is 'error', writes to sys.stderr. Otherwise
+            writes to sys.stdout.
 
     Raises:
         ValueError: If the action is not recognized.
     """
-    print(format_action(text, action, color_enabled), flush=True)
+    if file is None:
+        file = sys.stderr if action == "error" else sys.stdout
+
+    print(format_action(text, action, color_enabled), flush=True, file=file)
 
 
 # ---------------------------------------------------------------------------
