@@ -1024,22 +1024,24 @@ def query_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> list[dict]:
     return cursor.fetchall()
 
 
-def print_entry(rows: list[dict], word: str) -> None:
+def print_entry(rows: list[dict], word: str, color_enabled: bool = False) -> None:
     """Print entry rows in a readable table format.
 
     Args:
         rows (list[dict]): The rows to print.
         word (str): The entry's display word, for the header.
+        color_enabled (bool): Whether to apply ANSI color codes.
+            Defaults to False.
     """
     if not rows:
-        print(f"No rows found for '{word}'")
+        print_formatted(f"No rows found for '{word}'")
         return
 
-    print(f"─── {word} ─────────────────────────────")
-    print(
+    print_formatted(f"─── {word} ─────────────────────────────")
+    print_formatted(
         f"{'IID':<5} {'word':<15} {'code':<7} {'parent':<7} {'pl':<3} {'gender':<6} {'case':<5} {'soul':<4} {'custom':<6} {'category':<12} {'created_at'}"
     )
-    print("-" * 100)
+    print_formatted("-" * 100)
 
     for row in rows:
         gender = row["gender"] if row["gender"] is not None else "NULL"
@@ -1049,7 +1051,7 @@ def print_entry(rows: list[dict], word: str) -> None:
             if row["created_at"]
             else "NULL"
         )
-        print(
+        print_formatted(
             f"{row['IID']:<5} "
             f"{row['word']:<15} "
             f"{row['code']:<7} "
@@ -1063,7 +1065,7 @@ def print_entry(rows: list[dict], word: str) -> None:
             f"{created}"
         )
 
-    print(f"\n{len(rows)} rows total")
+    print_formatted(f"\n{len(rows)} rows total")
 
 
 # ---------------------------------------------------------------------------
@@ -1191,9 +1193,9 @@ def print_file_header(path: Path, color_enabled: bool) -> None:
         path (Path): The file being processed.
         color_enabled (bool): Whether to apply ANSI color codes.
     """
-    print()
+    print_formatted("")
     print_formatted(f"─── {path.as_posix()} ───", "notice", color_enabled)
-    print()
+    print_formatted("")
 
 
 def print_summary(
@@ -1211,7 +1213,7 @@ def print_summary(
     skipped_summaries = [s for s in result["summaries"] if s.get("skipped", False)]
 
     inserted_noun = "entry" if len(inserted_summaries) == 1 else "entries"
-    print(
+    print_formatted(
         f"\n{verb} '{result['category']}' — {len(inserted_summaries)} {inserted_noun}, {result['total_rows']} rows"
     )
 
@@ -1252,7 +1254,7 @@ def print_summary(
             "notice",
             color_enabled,
         )
-    print("")
+    print_formatted("")
 
 
 def build_validation_summary(import_file: ImportFile) -> dict:
@@ -1346,6 +1348,14 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    # Determine whether to use ANSI colors
+    if args.color == "always":
+        color_enabled = True
+    elif args.color == "never":
+        color_enabled = False
+    else:  # auto
+        color_enabled = sys.stdout.isatty()
+
     # Resolve input path(s)
     if args.path.is_dir():
         if args.no_recursive:
@@ -1356,21 +1366,15 @@ def main() -> None:
             json_files = sorted(args.path.rglob("*.json"))
 
         if not json_files:
-            print(f"No .json files found in {args.path}", file=sys.stderr)
+            print_formatted(
+                f"No .json files found in {args.path}", "error", color_enabled
+            )
             sys.exit(1)
     elif args.path.is_file():
         json_files = [args.path]
     else:
-        print(f"Path not found: {args.path}", file=sys.stderr)
+        print_formatted(f"Path not found: {args.path}", "error", color_enabled)
         sys.exit(1)
-
-    # Determine whether to use ANSI colors
-    if args.color == "always":
-        color_enabled = True
-    elif args.color == "never":
-        color_enabled = False
-    else:  # auto
-        color_enabled = sys.stdout.isatty()
 
     # Load config (only needed for actual import, not validate)
     config = None
@@ -1378,7 +1382,7 @@ def main() -> None:
         try:
             config = load_config(args.config)
         except (FileNotFoundError, configparser.Error) as e:
-            print(f"Config error: {e}", file=sys.stderr)
+            print_formatted(f"Config error: {e}", "error", color_enabled)
             sys.exit(1)
 
     # Process each file
@@ -1408,18 +1412,26 @@ def main() -> None:
                                 if s.get("skipped", False):
                                     continue
                                 rows = query_entry(cursor, s["word"])
-                                print_entry(rows, s["word"])
+                                print_entry(
+                                    rows, s["word"], color_enabled=color_enabled
+                                )
                     finally:
                         connection.close()
 
         except (ValueError, json.JSONDecodeError) as e:
-            print(f"Validation error in {json_file}: {e}", file=sys.stderr)
+            print_formatted(
+                f"Validation error in {json_file}: {e}", "error", color_enabled
+            )
             exit_code = 1
         except pymysql.MySQLError as e:
-            print(f"Database error importing {json_file}: {e}", file=sys.stderr)
+            print_formatted(
+                f"Database error importing {json_file}: {e}", "error", color_enabled
+            )
             exit_code = 1
         except Exception as e:
-            print(f"Unexpected error processing {json_file}: {e}", file=sys.stderr)
+            print_formatted(
+                f"Unexpected error processing {json_file}: {e}", "error", color_enabled
+            )
             exit_code = 1
 
     sys.exit(exit_code)
