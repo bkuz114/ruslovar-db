@@ -132,7 +132,7 @@ def format_action(text: str, action: str, color_enabled: bool) -> str:
     Args:
         text (str): The text to format.
         action (str): One of 'added', 'skipped', 'updated', 'deleted',
-            'error', 'notice'.
+            'error', 'notice', or 'plain'
         color_enabled (bool): Whether to apply ANSI color codes.
 
     Returns:
@@ -148,6 +148,7 @@ def format_action(text: str, action: str, color_enabled: bool) -> str:
         "deleted": ANSI_DELETED,
         "error": ANSI_ERROR,
         "notice": ANSI_NOTICE,
+        "plain": "",
     }
 
     if action not in color_map:
@@ -161,7 +162,9 @@ def format_action(text: str, action: str, color_enabled: bool) -> str:
     return f"{color_map[action]}{text}{ANSI_RESET}"
 
 
-def print_formatted(text: str, action: str, color_enabled: bool) -> None:
+def print_formatted(
+    text: str, action: str = "plain", color_enabled: bool = False
+) -> None:
     """Format and print an action label, flushing stdout.
 
     Combines format_action() with print() and flush=True to ensure
@@ -170,8 +173,9 @@ def print_formatted(text: str, action: str, color_enabled: bool) -> None:
     Args:
         text (str): The text to format and print.
         action (str): One of 'added', 'skipped', 'updated', 'deleted',
-            'error', 'notice'.
+            'error', 'notice', or 'plain'.
         color_enabled (bool): Whether to apply ANSI color codes.
+            Defaults to False.
 
     Raises:
         ValueError: If the action is not recognized.
