@@ -794,7 +794,7 @@ def insert_entry(
     category: str,
     start_code: int,
     created_at: datetime,
-) -> int:
+) -> tuple[int, int]:
     """Insert a single noun entry and return the next available code.
 
     Handles both declinable and indeclinable entries. For declinable
@@ -810,7 +810,9 @@ def insert_entry(
         created_at (datetime): Shared timestamp for all rows.
 
     Returns:
-        int: The next available code after this entry's rows.
+        tupe[int, int]:
+        (The next available code after this entry's rows,
+         code assigned to root row of the new entry)
     """
     code = start_code
 
@@ -846,7 +848,7 @@ def insert_entry(
 
     if entry.indeclinable:
         verify_entry(cursor, root_code, entry)
-        return code
+        return (code, root_code)
 
     # Insert singular declensions (children of root, plural=0).
     # Skip nominative — it is already the root row.
@@ -922,7 +924,7 @@ def insert_entry(
             code += 1
 
     verify_entry(cursor, root_code, entry)
-    return code
+    return (code, root_code)
 
 
 def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> int:
@@ -1322,12 +1324,12 @@ def add_file_entries(import_file: ImportFile, config: dict) -> FileResult:
                 print_entry_result(entry_result)
                 continue
 
-            next_code = insert_entry(
+            next_code, new_root_code = insert_entry(
                 cursor, entry, import_file.category, next_code, created_at
             )
             entry_result = EntryResult(
                 word=entry.word,
-                root_code=next_code - entry.row_count(),
+                root_code=new_root_code,
                 status="added",
                 rows_affected=entry.row_count(),
             )
@@ -1366,14 +1368,14 @@ def update_file_entries(import_file: ImportFile, config: dict) -> FileResult:
             if existing_code is not None:
                 delete_entry(cursor, root_word)
 
-            next_code = insert_entry(
+            next_code, new_root_code = insert_entry(
                 cursor, entry, import_file.category, next_code, created_at
             )
 
             status = "updated" if existing_code is not None else "added"
             entry_result = EntryResult(
                 word=entry.word,
-                root_code=next_code - entry.row_count(),
+                root_code=new_root_code,
                 status=status,
                 rows_affected=entry.row_count(),
             )
