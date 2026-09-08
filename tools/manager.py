@@ -794,7 +794,7 @@ def insert_entry(
     category: str,
     start_code: int,
     created_at: datetime,
-) -> tuple[int, int]:
+) -> int:
     """Insert a single noun entry and return the next available code.
 
     Handles both declinable and indeclinable entries. For declinable
@@ -810,9 +810,7 @@ def insert_entry(
         created_at (datetime): Shared timestamp for all rows.
 
     Returns:
-        tupe[int, int]:
-        (The next available code after this entry's rows,
-         code assigned to root row of the new entry)
+        int: code assigned to root row of the new entry
     """
     code = start_code
 
@@ -843,12 +841,12 @@ def insert_entry(
             category,
         ),
     )
-    root_code = code
+    root_code = code  # the root row's code is the first code assigned
     code += 1
 
     if entry.indeclinable:
         verify_entry(cursor, root_code, entry)
-        return (code, root_code)
+        return root_code
 
     # Insert singular declensions (children of root, plural=0).
     # Skip nominative — it is already the root row.
@@ -924,7 +922,7 @@ def insert_entry(
             code += 1
 
     verify_entry(cursor, root_code, entry)
-    return (code, root_code)
+    return root_code
 
 
 def delete_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> int:
@@ -1306,7 +1304,6 @@ def add_file_entries(import_file: ImportFile, config: dict) -> FileResult:
     )
 
     with db_transaction(config) as cursor:
-        next_code = get_next_code(cursor)
         created_at = get_created_at(cursor)
 
         for entry in import_file.entries:
@@ -1324,7 +1321,10 @@ def add_file_entries(import_file: ImportFile, config: dict) -> FileResult:
                 print_entry_result(entry_result)
                 continue
 
-            next_code, new_root_code = insert_entry(
+            # get next available db code to insert an entry into
+            next_code = get_next_code(cursor)
+            # - new_root_code: code for root of new entry (should just be next_code)
+            new_root_code = insert_entry(
                 cursor, entry, import_file.category, next_code, created_at
             )
             entry_result = EntryResult(
@@ -1358,7 +1358,6 @@ def update_file_entries(import_file: ImportFile, config: dict) -> FileResult:
     )
 
     with db_transaction(config) as cursor:
-        next_code = get_next_code(cursor)
         created_at = get_created_at(cursor)
 
         for entry in import_file.entries:
@@ -1368,7 +1367,10 @@ def update_file_entries(import_file: ImportFile, config: dict) -> FileResult:
             if existing_code is not None:
                 delete_entry(cursor, root_word)
 
-            next_code, new_root_code = insert_entry(
+            # get next available db code to insert an entry into
+            next_code = get_next_code(cursor)
+            # - new_root_code: code for root of new entry (should just be next_code)
+            new_root_code = insert_entry(
                 cursor, entry, import_file.category, next_code, created_at
             )
 
