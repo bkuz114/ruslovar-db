@@ -1,0 +1,1063 @@
+{
+  "category": "отчество",
+  "entries": [
+    {
+      "word": "Александрович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Александрович",
+        "genitive": "Александровича",
+        "dative": "Александровичу",
+        "accusative": "Александровича",
+        "instrumental": "Александровичем",
+        "prepositional": "Александровиче",
+        "vocative": "Александровиче"
+      },
+      "plural": {
+        "nominative": "Александровичи",
+        "genitive": "Александровичей",
+        "dative": "Александровичам",
+        "accusative": "Александровичей",
+        "instrumental": "Александровичами",
+        "prepositional": "Александровичах"
+      }
+    },
+    {
+      "word": "Алексеевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Алексеевич",
+        "genitive": "Алексеевича",
+        "dative": "Алексеевичу",
+        "accusative": "Алексеевича",
+        "instrumental": "Алексеевичем",
+        "prepositional": "Алексеевиче",
+        "vocative": "Алексеевиче"
+      },
+      "plural": {
+        "nominative": "Алексеевичи",
+        "genitive": "Алексеевичей",
+        "dative": "Алексеевичам",
+        "accusative": "Алексеевичей",
+        "instrumental": "Алексеевичами",
+        "prepositional": "Алексеевичах"
+      }
+    },
+    {
+      "word": "Андреевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Андреевич",
+        "genitive": "Андреевича",
+        "dative": "Андреевичу",
+        "accusative": "Андреевича",
+        "instrumental": "Андреевичем",
+        "prepositional": "Андреевиче",
+        "vocative": "Андреевиче"
+      },
+      "plural": {
+        "nominative": "Андреевичи",
+        "genitive": "Андреевичей",
+        "dative": "Андреевичам",
+        "accusative": "Андреевичей",
+        "instrumental": "Андреевичами",
+        "prepositional": "Андреевичах"
+      }
+    },
+    {
+      "word": "Артёмович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Артёмович",
+        "genitive": "Артёмовича",
+        "dative": "Артёмовичу",
+        "accusative": "Артёмовича",
+        "instrumental": "Артёмовичем",
+        "prepositional": "Артёмовиче",
+        "vocative": "Артёмовиче"
+      },
+      "plural": {
+        "nominative": "Артёмовичи",
+        "genitive": "Артёмовичей",
+        "dative": "Артёмовичам",
+        "accusative": "Артёмовичей",
+        "instrumental": "Артёмовичами",
+        "prepositional": "Артёмовичах"
+      }
+    },
+    {
+      "word": "Артемович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Артемович",
+        "genitive": "Артемовича",
+        "dative": "Артемовичу",
+        "accusative": "Артемовича",
+        "instrumental": "Артемовичем",
+        "prepositional": "Артемовиче",
+        "vocative": "Артемовиче"
+      },
+      "plural": {
+        "nominative": "Артемовичи",
+        "genitive": "Артемовичей",
+        "dative": "Артемовичам",
+        "accusative": "Артемовичей",
+        "instrumental": "Артемовичами",
+        "prepositional": "Артемовичах"
+      }
+    },
+    {
+      "word": "Борисович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Борисович",
+        "genitive": "Борисовича",
+        "dative": "Борисовичу",
+        "accusative": "Борисовича",
+        "instrumental": "Борисовичем",
+        "prepositional": "Борисовиче",
+        "vocative": "Борисовиче"
+      },
+      "plural": {
+        "nominative": "Борисовичи",
+        "genitive": "Борисовичей",
+        "dative": "Борисовичам",
+        "accusative": "Борисовичей",
+        "instrumental": "Борисовичами",
+        "prepositional": "Борисовичах"
+      }
+    },
+    {
+      "word": "Вадимович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Вадимович",
+        "genitive": "Вадимовича",
+        "dative": "Вадимовичу",
+        "accusative": "Вадимовича",
+        "instrumental": "Вадимовичем",
+        "prepositional": "Вадимовиче",
+        "vocative": "Вадимовиче"
+      },
+      "plural": {
+        "nominative": "Вадимовичи",
+        "genitive": "Вадимовичей",
+        "dative": "Вадимовичам",
+        "accusative": "Вадимовичей",
+        "instrumental": "Вадимовичами",
+        "prepositional": "Вадимовичах"
+      }
+    },
+    {
+      "word": "Васильевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Васильевич",
+        "genitive": "Васильевича",
+        "dative": "Васильевичу",
+        "accusative": "Васильевича",
+        "instrumental": "Васильевичем",
+        "prepositional": "Васильевиче",
+        "vocative": "Васильевиче"
+      },
+      "plural": {
+        "nominative": "Васильевичи",
+        "genitive": "Васильевичей",
+        "dative": "Васильевичам",
+        "accusative": "Васильевичей",
+        "instrumental": "Васильевичами",
+        "prepositional": "Васильевичах"
+      }
+    },
+    {
+      "word": "Викторович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Викторович",
+        "genitive": "Викторовича",
+        "dative": "Викторовичу",
+        "accusative": "Викторовича",
+        "instrumental": "Викторовичем",
+        "prepositional": "Викторовиче",
+        "vocative": "Викторовиче"
+      },
+      "plural": {
+        "nominative": "Викторовичи",
+        "genitive": "Викторовичей",
+        "dative": "Викторовичам",
+        "accusative": "Викторовичей",
+        "instrumental": "Викторовичами",
+        "prepositional": "Викторовичах"
+      }
+    },
+    {
+      "word": "Владимирович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Владимирович",
+        "genitive": "Владимировича",
+        "dative": "Владимировичу",
+        "accusative": "Владимировича",
+        "instrumental": "Владимировичем",
+        "prepositional": "Владимировиче",
+        "vocative": "Владимировиче"
+      },
+      "plural": {
+        "nominative": "Владимировичи",
+        "genitive": "Владимировичей",
+        "dative": "Владимировичам",
+        "accusative": "Владимировичей",
+        "instrumental": "Владимировичами",
+        "prepositional": "Владимировичах"
+      }
+    },
+    {
+      "word": "Геннадьевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Геннадьевич",
+        "genitive": "Геннадьевича",
+        "dative": "Геннадьевичу",
+        "accusative": "Геннадьевича",
+        "instrumental": "Геннадьевичем",
+        "prepositional": "Геннадьевиче",
+        "vocative": "Геннадьевиче"
+      },
+      "plural": {
+        "nominative": "Геннадьевичи",
+        "genitive": "Геннадьевичей",
+        "dative": "Геннадьевичам",
+        "accusative": "Геннадьевичей",
+        "instrumental": "Геннадьевичами",
+        "prepositional": "Геннадьевичах"
+      }
+    },
+    {
+      "word": "Григорьевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Григорьевич",
+        "genitive": "Григорьевича",
+        "dative": "Григорьевичу",
+        "accusative": "Григорьевича",
+        "instrumental": "Григорьевичем",
+        "prepositional": "Григорьевиче",
+        "vocative": "Григорьевиче"
+      },
+      "plural": {
+        "nominative": "Григорьевичи",
+        "genitive": "Григорьевичей",
+        "dative": "Григорьевичам",
+        "accusative": "Григорьевичей",
+        "instrumental": "Григорьевичами",
+        "prepositional": "Григорьевичах"
+      }
+    },
+    {
+      "word": "Данилович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Данилович",
+        "genitive": "Даниловича",
+        "dative": "Даниловичу",
+        "accusative": "Даниловича",
+        "instrumental": "Даниловичем",
+        "prepositional": "Даниловиче",
+        "vocative": "Даниловиче"
+      },
+      "plural": {
+        "nominative": "Даниловичи",
+        "genitive": "Даниловичей",
+        "dative": "Даниловичам",
+        "accusative": "Даниловичей",
+        "instrumental": "Даниловичами",
+        "prepositional": "Даниловичах"
+      }
+    },
+    {
+      "word": "Денисович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Денисович",
+        "genitive": "Денисовича",
+        "dative": "Денисовичу",
+        "accusative": "Денисовича",
+        "instrumental": "Денисовичем",
+        "prepositional": "Денисовиче",
+        "vocative": "Денисовиче"
+      },
+      "plural": {
+        "nominative": "Денисовичи",
+        "genitive": "Денисовичей",
+        "dative": "Денисовичам",
+        "accusative": "Денисовичей",
+        "instrumental": "Денисовичами",
+        "prepositional": "Денисовичах"
+      }
+    },
+    {
+      "word": "Дмитриевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Дмитриевич",
+        "genitive": "Дмитриевича",
+        "dative": "Дмитриевичу",
+        "accusative": "Дмитриевича",
+        "instrumental": "Дмитриевичем",
+        "prepositional": "Дмитриевиче",
+        "vocative": "Дмитриевиче"
+      },
+      "plural": {
+        "nominative": "Дмитриевичи",
+        "genitive": "Дмитриевичей",
+        "dative": "Дмитриевичам",
+        "accusative": "Дмитриевичей",
+        "instrumental": "Дмитриевичами",
+        "prepositional": "Дмитриевичах"
+      }
+    },
+    {
+      "word": "Евгеньевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Евгеньевич",
+        "genitive": "Евгеньевича",
+        "dative": "Евгеньевичу",
+        "accusative": "Евгеньевича",
+        "instrumental": "Евгеньевичем",
+        "prepositional": "Евгеньевиче",
+        "vocative": "Евгеньевиче"
+      },
+      "plural": {
+        "nominative": "Евгеньевичи",
+        "genitive": "Евгеньевичей",
+        "dative": "Евгеньевичам",
+        "accusative": "Евгеньевичей",
+        "instrumental": "Евгеньевичами",
+        "prepositional": "Евгеньевичах"
+      }
+    },
+    {
+      "word": "Егорович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Егорович",
+        "genitive": "Егоровича",
+        "dative": "Егоровичу",
+        "accusative": "Егоровича",
+        "instrumental": "Егоровичем",
+        "prepositional": "Егоровиче",
+        "vocative": "Егоровиче"
+      },
+      "plural": {
+        "nominative": "Егоровичи",
+        "genitive": "Егоровичей",
+        "dative": "Егоровичам",
+        "accusative": "Егоровичей",
+        "instrumental": "Егоровичами",
+        "prepositional": "Егоровичах"
+      }
+    },
+    {
+      "word": "Захарович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Захарович",
+        "genitive": "Захаровича",
+        "dative": "Захаровичу",
+        "accusative": "Захаровича",
+        "instrumental": "Захаровичем",
+        "prepositional": "Захаровиче",
+        "vocative": "Захаровиче"
+      },
+      "plural": {
+        "nominative": "Захаровичи",
+        "genitive": "Захаровичей",
+        "dative": "Захаровичам",
+        "accusative": "Захаровичей",
+        "instrumental": "Захаровичами",
+        "prepositional": "Захаровичах"
+      }
+    },
+    {
+      "word": "Иванович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Иванович",
+        "genitive": "Ивановича",
+        "dative": "Ивановичу",
+        "accusative": "Ивановича",
+        "instrumental": "Ивановичем",
+        "prepositional": "Ивановиче",
+        "vocative": "Ивановиче"
+      },
+      "plural": {
+        "nominative": "Ивановичи",
+        "genitive": "Ивановичей",
+        "dative": "Ивановичам",
+        "accusative": "Ивановичей",
+        "instrumental": "Ивановичами",
+        "prepositional": "Ивановичах"
+      }
+    },
+    {
+      "word": "Игоревич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Игоревич",
+        "genitive": "Игоревича",
+        "dative": "Игоревичу",
+        "accusative": "Игоревича",
+        "instrumental": "Игоревичем",
+        "prepositional": "Игоревиче",
+        "vocative": "Игоревиче"
+      },
+      "plural": {
+        "nominative": "Игоревичи",
+        "genitive": "Игоревичей",
+        "dative": "Игоревичам",
+        "accusative": "Игоревичей",
+        "instrumental": "Игоревичами",
+        "prepositional": "Игоревичах"
+      }
+    },
+    {
+      "word": "Ильич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ильич",
+        "genitive": "Ильича",
+        "dative": "Ильичу",
+        "accusative": "Ильича",
+        "instrumental": "Ильичом",
+        "prepositional": "Ильиче",
+        "vocative": "Ильиче"
+      },
+      "plural": {
+        "nominative": "Ильичи",
+        "genitive": "Ильичей",
+        "dative": "Ильичам",
+        "accusative": "Ильичей",
+        "instrumental": "Ильичами",
+        "prepositional": "Ильичах"
+      }
+    },
+    {
+      "word": "Кириллович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кириллович",
+        "genitive": "Кирилловича",
+        "dative": "Кирилловичу",
+        "accusative": "Кирилловича",
+        "instrumental": "Кирилловичем",
+        "prepositional": "Кирилловиче",
+        "vocative": "Кирилловиче"
+      },
+      "plural": {
+        "nominative": "Кирилловичи",
+        "genitive": "Кирилловичей",
+        "dative": "Кирилловичам",
+        "accusative": "Кирилловичей",
+        "instrumental": "Кирилловичами",
+        "prepositional": "Кирилловичах"
+      }
+    },
+    {
+      "word": "Константинович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Константинович",
+        "genitive": "Константиновича",
+        "dative": "Константиновичу",
+        "accusative": "Константиновича",
+        "instrumental": "Константиновичем",
+        "prepositional": "Константиновиче",
+        "vocative": "Константиновиче"
+      },
+      "plural": {
+        "nominative": "Константиновичи",
+        "genitive": "Константиновичей",
+        "dative": "Константиновичам",
+        "accusative": "Константиновичей",
+        "instrumental": "Константиновичами",
+        "prepositional": "Константиновичах"
+      }
+    },
+    {
+      "word": "Кузьмич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кузьмич",
+        "genitive": "Кузьмича",
+        "dative": "Кузьмичу",
+        "accusative": "Кузьмича",
+        "instrumental": "Кузьмичом",
+        "prepositional": "Кузьмиче",
+        "vocative": "Кузьмиче"
+      },
+      "plural": {
+        "nominative": "Кузьмичи",
+        "genitive": "Кузьмичей",
+        "dative": "Кузьмичам",
+        "accusative": "Кузьмичей",
+        "instrumental": "Кузьмичами",
+        "prepositional": "Кузьмичах"
+      }
+    },
+    {
+      "word": "Львович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Львович",
+        "genitive": "Львовича",
+        "dative": "Львовичу",
+        "accusative": "Львовича",
+        "instrumental": "Львовичем",
+        "prepositional": "Львовиче",
+        "vocative": "Львовиче"
+      },
+      "plural": {
+        "nominative": "Львовичи",
+        "genitive": "Львовичей",
+        "dative": "Львовичам",
+        "accusative": "Львовичей",
+        "instrumental": "Львовичами",
+        "prepositional": "Львовичах"
+      }
+    },
+    {
+      "word": "Лукич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Лукич",
+        "genitive": "Лукича",
+        "dative": "Лукичу",
+        "accusative": "Лукича",
+        "instrumental": "Лукичом",
+        "prepositional": "Лукиче",
+        "vocative": "Лукиче"
+      },
+      "plural": {
+        "nominative": "Лукичи",
+        "genitive": "Лукичей",
+        "dative": "Лукичам",
+        "accusative": "Лукичей",
+        "instrumental": "Лукичами",
+        "prepositional": "Лукичах"
+      }
+    },
+    {
+      "word": "Максимович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Максимович",
+        "genitive": "Максимовича",
+        "dative": "Максимовичу",
+        "accusative": "Максимовича",
+        "instrumental": "Максимовичем",
+        "prepositional": "Максимовиче",
+        "vocative": "Максимовиче"
+      },
+      "plural": {
+        "nominative": "Максимовичи",
+        "genitive": "Максимовичей",
+        "dative": "Максимовичам",
+        "accusative": "Максимовичей",
+        "instrumental": "Максимовичами",
+        "prepositional": "Максимовичах"
+      }
+    },
+    {
+      "word": "Матвеевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Матвеевич",
+        "genitive": "Матвеевича",
+        "dative": "Матвеевичу",
+        "accusative": "Матвеевича",
+        "instrumental": "Матвеевичем",
+        "prepositional": "Матвеевиче",
+        "vocative": "Матвеевиче"
+      },
+      "plural": {
+        "nominative": "Матвеевичи",
+        "genitive": "Матвеевичей",
+        "dative": "Матвеевичам",
+        "accusative": "Матвеевичей",
+        "instrumental": "Матвеевичами",
+        "prepositional": "Матвеевичах"
+      }
+    },
+    {
+      "word": "Михайлович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Михайлович",
+        "genitive": "Михайловича",
+        "dative": "Михайловичу",
+        "accusative": "Михайловича",
+        "instrumental": "Михайловичем",
+        "prepositional": "Михайловиче",
+        "vocative": "Михайловиче"
+      },
+      "plural": {
+        "nominative": "Михайловичи",
+        "genitive": "Михайловичей",
+        "dative": "Михайловичам",
+        "accusative": "Михайловичей",
+        "instrumental": "Михайловичами",
+        "prepositional": "Михайловичах"
+      }
+    },
+    {
+      "word": "Никитич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Никитич",
+        "genitive": "Никитича",
+        "dative": "Никитичу",
+        "accusative": "Никитича",
+        "instrumental": "Никитичом",
+        "prepositional": "Никитиче",
+        "vocative": "Никитиче"
+      },
+      "plural": {
+        "nominative": "Никитичи",
+        "genitive": "Никитичей",
+        "dative": "Никитичам",
+        "accusative": "Никитичей",
+        "instrumental": "Никитичами",
+        "prepositional": "Никитичах"
+      }
+    },
+    {
+      "word": "Николаевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Николаевич",
+        "genitive": "Николаевича",
+        "dative": "Николаевичу",
+        "accusative": "Николаевича",
+        "instrumental": "Николаевичем",
+        "prepositional": "Николаевиче",
+        "vocative": "Николаевиче"
+      },
+      "plural": {
+        "nominative": "Николаевичи",
+        "genitive": "Николаевичей",
+        "dative": "Николаевичам",
+        "accusative": "Николаевичей",
+        "instrumental": "Николаевичами",
+        "prepositional": "Николаевичах"
+      }
+    },
+    {
+      "word": "Олегович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Олегович",
+        "genitive": "Олеговича",
+        "dative": "Олеговичу",
+        "accusative": "Олеговича",
+        "instrumental": "Олеговичем",
+        "prepositional": "Олеговиче",
+        "vocative": "Олеговиче"
+      },
+      "plural": {
+        "nominative": "Олеговичи",
+        "genitive": "Олеговичей",
+        "dative": "Олеговичам",
+        "accusative": "Олеговичей",
+        "instrumental": "Олеговичами",
+        "prepositional": "Олеговичах"
+      }
+    },
+    {
+      "word": "Павлович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Павлович",
+        "genitive": "Павловича",
+        "dative": "Павловичу",
+        "accusative": "Павловича",
+        "instrumental": "Павловичем",
+        "prepositional": "Павловиче",
+        "vocative": "Павловиче"
+      },
+      "plural": {
+        "nominative": "Павловичи",
+        "genitive": "Павловичей",
+        "dative": "Павловичам",
+        "accusative": "Павловичей",
+        "instrumental": "Павловичами",
+        "prepositional": "Павловичах"
+      }
+    },
+    {
+      "word": "Петрович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Петрович",
+        "genitive": "Петровича",
+        "dative": "Петровичу",
+        "accusative": "Петровича",
+        "instrumental": "Петровичем",
+        "prepositional": "Петровиче",
+        "vocative": "Петровиче"
+      },
+      "plural": {
+        "nominative": "Петровичи",
+        "genitive": "Петровичей",
+        "dative": "Петровичам",
+        "accusative": "Петровичей",
+        "instrumental": "Петровичами",
+        "prepositional": "Петровичах"
+      }
+    },
+    {
+      "word": "Романович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Романович",
+        "genitive": "Романовича",
+        "dative": "Романовичу",
+        "accusative": "Романовича",
+        "instrumental": "Романовичем",
+        "prepositional": "Романовиче",
+        "vocative": "Романовиче"
+      },
+      "plural": {
+        "nominative": "Романовичи",
+        "genitive": "Романовичей",
+        "dative": "Романовичам",
+        "accusative": "Романовичей",
+        "instrumental": "Романовичами",
+        "prepositional": "Романовичах"
+      }
+    },
+    {
+      "word": "Семёнович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Семёнович",
+        "genitive": "Семёновича",
+        "dative": "Семёновичу",
+        "accusative": "Семёновича",
+        "instrumental": "Семёновичем",
+        "prepositional": "Семёновиче",
+        "vocative": "Семёновиче"
+      },
+      "plural": {
+        "nominative": "Семёновичи",
+        "genitive": "Семёновичей",
+        "dative": "Семёновичам",
+        "accusative": "Семёновичей",
+        "instrumental": "Семёновичами",
+        "prepositional": "Семёновичах"
+      }
+    },
+    {
+      "word": "Семенович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Семенович",
+        "genitive": "Семеновича",
+        "dative": "Семеновичу",
+        "accusative": "Семеновича",
+        "instrumental": "Семеновичем",
+        "prepositional": "Семеновиче",
+        "vocative": "Семеновиче"
+      },
+      "plural": {
+        "nominative": "Семеновичи",
+        "genitive": "Семеновичей",
+        "dative": "Семеновичам",
+        "accusative": "Семеновичей",
+        "instrumental": "Семеновичами",
+        "prepositional": "Семеновичах"
+      }
+    },
+    {
+      "word": "Сергеевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Сергеевич",
+        "genitive": "Сергеевича",
+        "dative": "Сергеевичу",
+        "accusative": "Сергеевича",
+        "instrumental": "Сергеевичем",
+        "prepositional": "Сергеевиче",
+        "vocative": "Сергеевиче"
+      },
+      "plural": {
+        "nominative": "Сергеевичи",
+        "genitive": "Сергеевичей",
+        "dative": "Сергеевичам",
+        "accusative": "Сергеевичей",
+        "instrumental": "Сергеевичами",
+        "prepositional": "Сергеевичах"
+      }
+    },
+    {
+      "word": "Степанович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Степанович",
+        "genitive": "Степановича",
+        "dative": "Степановичу",
+        "accusative": "Степановича",
+        "instrumental": "Степановичем",
+        "prepositional": "Степановиче",
+        "vocative": "Степановиче"
+      },
+      "plural": {
+        "nominative": "Степановичи",
+        "genitive": "Степановичей",
+        "dative": "Степановичам",
+        "accusative": "Степановичей",
+        "instrumental": "Степановичами",
+        "prepositional": "Степановичах"
+      }
+    },
+    {
+      "word": "Тимофеевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тимофеевич",
+        "genitive": "Тимофеевича",
+        "dative": "Тимофеевичу",
+        "accusative": "Тимофеевича",
+        "instrumental": "Тимофеевичем",
+        "prepositional": "Тимофеевиче",
+        "vocative": "Тимофеевиче"
+      },
+      "plural": {
+        "nominative": "Тимофеевичи",
+        "genitive": "Тимофеевичей",
+        "dative": "Тимофеевичам",
+        "accusative": "Тимофеевичей",
+        "instrumental": "Тимофеевичами",
+        "prepositional": "Тимофеевичах"
+      }
+    },
+    {
+      "word": "Фёдорович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Фёдорович",
+        "genitive": "Фёдоровича",
+        "dative": "Фёдоровичу",
+        "accusative": "Фёдоровича",
+        "instrumental": "Фёдоровичем",
+        "prepositional": "Фёдоровиче",
+        "vocative": "Фёдоровиче"
+      },
+      "plural": {
+        "nominative": "Фёдоровичи",
+        "genitive": "Фёдоровичей",
+        "dative": "Фёдоровичам",
+        "accusative": "Фёдоровичей",
+        "instrumental": "Фёдоровичами",
+        "prepositional": "Фёдоровичах"
+      }
+    },
+    {
+      "word": "Федорович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Федорович",
+        "genitive": "Федоровича",
+        "dative": "Федоровичу",
+        "accusative": "Федоровича",
+        "instrumental": "Федоровичем",
+        "prepositional": "Федоровиче",
+        "vocative": "Федоровиче"
+      },
+      "plural": {
+        "nominative": "Федоровичи",
+        "genitive": "Федоровичей",
+        "dative": "Федоровичам",
+        "accusative": "Федоровичей",
+        "instrumental": "Федоровичами",
+        "prepositional": "Федоровичах"
+      }
+    },
+    {
+      "word": "Филиппович",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Филиппович",
+        "genitive": "Филипповича",
+        "dative": "Филипповичу",
+        "accusative": "Филипповича",
+        "instrumental": "Филипповичем",
+        "prepositional": "Филипповиче",
+        "vocative": "Филипповиче"
+      },
+      "plural": {
+        "nominative": "Филипповичи",
+        "genitive": "Филипповичей",
+        "dative": "Филипповичам",
+        "accusative": "Филипповичей",
+        "instrumental": "Филипповичами",
+        "prepositional": "Филипповичах"
+      }
+    },
+    {
+      "word": "Фомич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Фомич",
+        "genitive": "Фомича",
+        "dative": "Фомичу",
+        "accusative": "Фомича",
+        "instrumental": "Фомичом",
+        "prepositional": "Фомиче",
+        "vocative": "Фомиче"
+      },
+      "plural": {
+        "nominative": "Фомичи",
+        "genitive": "Фомичей",
+        "dative": "Фомичам",
+        "accusative": "Фомичей",
+        "instrumental": "Фомичами",
+        "prepositional": "Фомичах"
+      }
+    },
+    {
+      "word": "Юрьевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Юрьевич",
+        "genitive": "Юрьевича",
+        "dative": "Юрьевичу",
+        "accusative": "Юрьевича",
+        "instrumental": "Юрьевичем",
+        "prepositional": "Юрьевиче",
+        "vocative": "Юрьевиче"
+      },
+      "plural": {
+        "nominative": "Юрьевичи",
+        "genitive": "Юрьевичей",
+        "dative": "Юрьевичам",
+        "accusative": "Юрьевичей",
+        "instrumental": "Юрьевичами",
+        "prepositional": "Юрьевичах"
+      }
+    },
+    {
+      "word": "Яковлевич",
+      "gender": "муж",
+      "animacy": 1,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Яковлевич",
+        "genitive": "Яковлевича",
+        "dative": "Яковлевичу",
+        "accusative": "Яковлевича",
+        "instrumental": "Яковлевичем",
+        "prepositional": "Яковлевиче",
+        "vocative": "Яковлевиче"
+      },
+      "plural": {
+        "nominative": "Яковлевичи",
+        "genitive": "Яковлевичей",
+        "dative": "Яковлевичам",
+        "accusative": "Яковлевичей",
+        "instrumental": "Яковлевичами",
+        "prepositional": "Яковлевичах"
+      }
+    }
+  ]
+}
