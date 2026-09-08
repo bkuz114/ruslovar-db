@@ -743,26 +743,46 @@ def get_created_at(cursor: pymysql.cursors.Cursor) -> datetime:
     return cursor.fetchone()["now"]
 
 
-def entry_exists(cursor: pymysql.cursors.Cursor, root_word: str) -> Optional[int]:
+def entry_exists(
+    cursor: pymysql.cursors.Cursor,
+    root_word: str,
+    case_insensitive: bool = False,
+) -> Optional[int]:
     """Return the root code if a custom entry exists, else None.
 
-    Uses binary collation for exact match (ё and е are distinct).
+    Uses binary collation for ё/е distinction. If case_insensitive
+    is True, lowercases both the stored value and the lookup word
+    before comparison, so иван matches Иван while Петр and Пётр
+    remain distinct.
 
     Args:
         cursor (pymysql.cursors.Cursor): Active cursor.
         root_word (str): The root row's word column value.
+        case_insensitive (bool): If True, match case-insensitively.
 
     Returns:
         Optional[int]: The root code if found, None otherwise.
     """
+
+    # Case-insensitive lookup lowercases the column value before
+    # comparing. COLLATE is applied to the parameter (not the column)
+    # because the column charset is utf8mb3 and does not support
+    # utf8mb4_bin collation.
+    if case_insensitive:
+        where_clause = "LOWER(word) = %s COLLATE utf8mb4_bin"
+        param = root_word.lower()
+    else:
+        where_clause = "word = %s COLLATE utf8mb4_bin"
+        param = root_word
+
     cursor.execute(
-        """
+        f"""
         SELECT code FROM nouns_morf
-        WHERE word = %s COLLATE utf8mb4_bin
+        WHERE {where_clause}
           AND code_parent = 0
         LIMIT 1
         """,
-        (root_word,),
+        (param,),
     )
     result = cursor.fetchone()
     return result["code"] if result else None
@@ -1101,17 +1121,20 @@ def _verify_field(entry_word, field_name, expected, actual) -> None:
         )
 
 
-def query_entry(cursor: pymysql.cursors.Cursor, root_word: str) -> list[dict]:
+def query_entry(
+    cursor: pymysql.cursors.Cursor, root_word: str, case_insensitive: bool = False
+) -> list[dict]:
     """Query all rows for an entry by its root word.
 
     Args:
         cursor (pymysql.cursors.Cursor): Active cursor.
         root_word (str): The root row's word column value.
+        case_insensitive (bool): If True, match case-insensitively.
 
     Returns:
         list[dict]: All matching rows (empty if not found).
     """
-    root_code = entry_exists(cursor, root_word)
+    root_code = entry_exists(cursor, root_word, case_insensitive)
     if root_code is None:
         return []
 
@@ -1514,7 +1537,9 @@ def show_word(word: str, config: dict) -> None:
         config (dict): MySQL connection settings.
     """
     with db_transaction(config) as cursor:
-        rows = query_entry(cursor, word)
+        # for basic --show operation, allow case insensitive matching
+        # (--show иван should match Иван)
+        rows = query_entry(cursor, word, case_insensitive=True)
 
     if not rows:
         logger.info(f"No rows found for '{word}'")
