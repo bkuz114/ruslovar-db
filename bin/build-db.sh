@@ -55,8 +55,19 @@ DB_PORT="${DB_PORT:-3306}"
 DB_USER="${DB_USER:-root}"
 DB_PASSWORD="${DB_PASSWORD:-password}"
 
-# Name of the temporary build database. Override in CI to "runouns" since
-# there's no local dev database to protect.
+# Name of the temporary build database used during the build process.
+#
+# This database is created and used by the build script ONLY for making
+# the final sql dump.
+#
+# The database name below does NOT appear in the final dump: the export
+# step (export_database) intentionally omits --databases and
+# --add-drop-database (which would otherwise bake it in to the dump)
+# so that users can import the dump into whatever database name they chose.
+# This is vital for this project, as the fullstack, containerized application
+# relies on the database (which will run in a Docker container) being called
+# runouns (it's hardcoded as an env var in compose.yml, in ruslovar-api,
+# for the FastAPI server to consume)
 DB_NAME="${DB_NAME:-runouns_build}"
 
 # -----------------------------------------------------------------------------
@@ -333,13 +344,27 @@ export_database() {
     output_dir="$(dirname "$OUTPUT_FILE")"
     mkdir -p "$output_dir"
 
+    # WARNING: Do not add --databases or --add-drop-database to the
+    # mysqldump invocation. Those flags bake the database name into
+    # the dump, forcing it on anyone who imports it.
+    #
+    # This matters because the full-stack application expects the
+    # database to be named runouns. The compose.yml in ruslovar-api
+    # sets DB_NAME=runouns as an environment variable for the FastAPI
+    # server. If the dump creates a database with any other name, the
+    # server will look for runouns and fail to find its tables.
+    #
+    # Hardcoding runouns here would not solve this. Local builds use
+    # a different database name (see DB_NAME above) to avoid
+    # clobbering any existing runouns database on the developer's
+    # machine. The dump must remain database-agnostic, like sshra's
+    # original.
     mysqldump \
         --host="$DB_HOST" \
         --port="$DB_PORT" \
         --user="$DB_USER" \
         --password="$DB_PASSWORD" \
-        --databases "$DB_NAME" \
-        --add-drop-database \
+        "$DB_NAME" \
         --single-transaction \
         --quick \
         | gzip > "$OUTPUT_FILE"
