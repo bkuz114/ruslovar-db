@@ -106,7 +106,7 @@ PYTHON_TRANSFORM=(
     "${MANAGER_BASE_INVOCATION[@]}"
     add
     --config "$CONFIG_FILE"
-	--no-dump
+    --no-dump
 )
 
 PYTHON_VERIFY=(
@@ -282,8 +282,8 @@ run_sql_transformations() {
     echo "Target DB: $DB_NAME"
     echo ""
 
-	output=$(mysql_exec_db < "$SQL_TRANSFORM" 2>&1)
-	echo "$output"
+    output=$(mysql_exec_db < "$SQL_TRANSFORM" 2>&1)
+    echo "$output"
 
     echo ""
     echo "SQL transformations applied."
@@ -298,7 +298,7 @@ run_python_transformations() {
     echo "Command: $PYTHON_TRANSFORM"
     echo ""
 
-	python3 "${PYTHON_TRANSFORM[@]}"
+    python3 "${PYTHON_TRANSFORM[@]}"
 
     echo ""
     echo "Python transformations applied."
@@ -313,7 +313,7 @@ run_verification() {
     echo "Command: $PYTHON_VERIFY"
     echo ""
 
-	python3 "${PYTHON_VERIFY[@]}"
+    python3 "${PYTHON_VERIFY[@]}"
 
     echo ""
     echo "Verification passed."
