@@ -72,7 +72,18 @@ env:
   REGISTRY: ${{ vars.REGISTRY }}
   DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
 
-  # MySQL connection settings for the build script
+  # MySQL connection settings for the build script.
+  #
+  # Note:
+  # These values are used only for the MySQL instance that this workflow
+  # starts to run bin/build-db.sh. They tell the build script where to
+  # connect and what credentials to use during the build process.
+  #
+  # They have no impact on the final SQL dump (db/nouns_morf.sql.gz) or
+  # the Docker image built later in this workflow. The dump contains
+  # only tables and data—no database name, no credentials, no connection
+  # settings. The image simply contains the dump and initializes MySQL
+  # when a user runs it.
   DB_HOST: 127.0.0.1
   DB_PORT: 3306
   DB_USER: root
