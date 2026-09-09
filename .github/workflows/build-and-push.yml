@@ -1,0 +1,235 @@
+# =============================================================================
+# Workflow: Build and Push Database Image
+#
+# Regenerates db/nouns_morf.sql.gz from the upstream Russian morphology dump,
+# then builds and pushes the ruslovar-db Docker image to the registry.
+#
+# Triggered manually via the Actions tab. The user optionally supplies a
+# version tag. If left empty, only :latest is pushed. If populated, both
+# :latest and :<version> are pushed.
+#
+# Required repository variables (Settings → Secrets and variables → Actions → Variables):
+#   REGISTRY           - Registry hostname (e.g., docker.io)
+#   DOCKER_IMAGE_NAME  - Image name without username (e.g., ruslovar-db)
+#
+# Required repository secrets (Settings → Secrets and variables → Actions → Secrets):
+#   DOCKERHUB_USERNAME - Registry username (also used as the image namespace)
+#   DOCKERHUB_TOKEN    - Registry access token
+# =============================================================================
+
+name: Build and Push Database Image
+
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
+on:
+  # Manual trigger only. No automatic builds on push or pull request.
+  # Database changes are infrequent and should be deliberate.
+  workflow_dispatch:
+    inputs:
+      # Optional version tag. Empty means "latest only."
+      # Non-empty means "latest + this version tag."
+      version:
+        description: 'Version tag (e.g., v1.2.0). Leave empty for latest only.'
+        required: false
+        type: string
+        default: ''
+
+# -------------------------------------------------------------------------
+# MySQL connection settings for the build script (the script called by
+# the workflow as a pre-step for creating the Docker image that will be
+# pushed to Docker hub).
+#
+# The build script (bin/build-db.sh) performs several tasks:
+#
+#   1. Downloads the original, unmodified Russian morphology dump
+#      from the upstream source.
+#   2. Imports that dump into a temporary MySQL database.
+#   3. Applies SQL transformations to the imported data.
+#   4. Runs the Python transformation and verification script
+#      (tools/manager.py) against the temporary database.
+#   5. Exports the final, transformed database as a gzipped SQL file
+#      (db/nouns_morf.sql.gz). This file is what the Docker build
+#      consumes when creating the final image.
+#
+# To do all of this, the build script needs to connect to a MySQL
+# instance. This workflow starts one automatically—see the
+# "services" section below. The values here tell the build script
+# where to connect and what credentials to use. Thus, they must
+# correspond with the values in the "services" section where the
+# MySQL will be created. Specifically, DB_PASSWORD must be the same
+# as the service's MYSQL_ROOT_PASSWORD, and DB_HOST must be
+# 127.0.0.1 so the script can reach the MySQL instance started by
+# this workflow.
+#
+# Note: These values are used only for the MySQL instance that exists
+# during the CI job. None of these credentials carry over to the
+# final Docker image. The image simply contains the exported SQL
+# dump; it does not contain a running MySQL instance or any of the
+# credentials used here.
+# -------------------------------------------------------------------------
+env:
+  REGISTRY: ${{ vars.REGISTRY }}
+  DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+
+  # MySQL connection settings for the build script
+  DB_HOST: 127.0.0.1
+  DB_PORT: 3306
+  DB_USER: root
+  DB_PASSWORD: password
+  DB_NAME: runouns
+
+jobs:
+  build-db:
+    runs-on: ubuntu-latest
+
+    # -------------------------------------------------------------------------
+    # MySQL service
+    #
+    # Starts a MySQL 8.0 instance for the build script to use. This is
+    # the MySQL instance referenced in the comments above.
+    #
+    # The root password is set to "password" so it matches DB_PASSWORD
+    # above. They must match or the build script cannot log in.
+    #
+    # No database is pre-created here—the build script handles database
+    # creation and cleanup itself (DB_NAME=runouns).
+    #
+    # This MySQL instance exists only during the CI job. It has no
+    # relationship to the Docker image that gets built and pushed later
+    # in this workflow.
+    # -------------------------------------------------------------------------
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: password
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      # -----------------------------------------------------------------------
+      # 1. Check out the repository
+      # -----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -----------------------------------------------------------------------
+      # 2. Install Python dependencies
+      #
+      # The build script invokes tools/manager.py, which requires the
+      # packages listed in tools/requirements.txt. The runner is fresh,
+      # so these must be installed before the script runs.
+      # -----------------------------------------------------------------------
+      - name: Install Python dependencies
+        run: pip install -r tools/requirements.txt
+
+      # -----------------------------------------------------------------------
+      # 3. Run the database build script
+      #
+      # This fetches the upstream dump, imports it into the temporary MySQL
+      # instance started by this workflow (see the services section),
+      # applies SQL transformations, runs the Python transformation and
+      # verification, and exports the result to db/nouns_morf.sql.gz.
+      #
+      # The script reads DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, and DB_NAME
+      # from the environment variables defined in the env: block above.
+      # -----------------------------------------------------------------------
+      - name: Run database build script
+        run: ./bin/build-db.sh
+
+      # -----------------------------------------------------------------------
+      # 4. Set up QEMU
+      #
+      # Enables emulation for non-native architectures (arm64 on amd64
+      # runners).
+      # -----------------------------------------------------------------------
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      # -----------------------------------------------------------------------
+      # 5. Set up Docker Buildx
+      #
+      # Enables multi-platform image builds.
+      # -----------------------------------------------------------------------
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # -----------------------------------------------------------------------
+      # 6. Log in to the registry
+      #
+      # Authenticates to Docker Hub using repository secrets.
+      # -----------------------------------------------------------------------
+      - name: Log in to registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # -----------------------------------------------------------------------
+      # 7. Determine image tags
+      #
+      # Constructs the tag list based on whether a version was provided.
+      #
+      # The tag list is written to a special file referenced by the
+      # GITHUB_OUTPUT environment variable. GitHub Actions provides this
+      # file path to every run: step. Writing "key=value" lines to it
+      # makes those values available to later steps via
+      # ${{ steps.<step-id>.outputs.<key> }}.
+      #
+      # This step exists because the docker/build-push-action step below
+      # needs a static, comma-separated list of tags. That list depends on
+      # whether a version was supplied, and there is no way to express
+      # conditional logic inside an action's with: block. So the logic
+      # lives here, in a shell step, and the result is passed forward.
+      # -----------------------------------------------------------------------
+      - name: Determine image tags
+        id: tags
+        run: |
+          # Pull in GitHub expression values and assign to short shell
+          # variables. This keeps the tag construction below readable.
+          REGISTRY="${{ env.REGISTRY }}"
+          NAMESPACE="${{ secrets.DOCKERHUB_USERNAME }}"
+          IMAGE="${{ env.DOCKER_IMAGE_NAME }}"
+          VERSION="${{ github.event.inputs.version }}"
+
+          # The :latest tag is always pushed
+          LATEST_TAG="$REGISTRY/$NAMESPACE/$IMAGE:latest"
+
+          # If a version was provided, include it as a second tag
+          if [ -n "$VERSION" ]; then
+            TAGS="$LATEST_TAG,$REGISTRY/$NAMESPACE/$IMAGE:$VERSION"
+          else
+            TAGS="$LATEST_TAG"
+          fi
+
+          # Write the final tag list to GITHUB_OUTPUT so the next step
+          # can reference it as ${{ steps.tags.outputs.tags }}
+          echo "tags=$TAGS" >> $GITHUB_OUTPUT
+
+      # -----------------------------------------------------------------------
+      # 8. Build and push
+      #
+      # Builds the Docker image using the repo root as context and the
+      # Dockerfile at the repo root. The tags are read from the output of
+      # the previous step.
+      #
+      # This single step replaces what would otherwise be two nearly
+      # identical build steps (one for latest-only, one for latest+version).
+      # Constructing the tag list in a separate step avoids duplicating
+      # the entire docker/build-push-action configuration.
+      # -----------------------------------------------------------------------
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: ${{ steps.tags.outputs.tags }}
