@@ -764,10 +764,37 @@ def entry_exists(
         Optional[int]: The root code if found, None otherwise.
     """
 
-    # Case-insensitive lookup lowercases the column value before
-    # comparing. COLLATE is applied to the parameter (not the column)
-    # because the column charset is utf8mb3 and does not support
-    # utf8mb4_bin collation.
+    # ============ Build WHERE predicate ================
+    #
+    # Case-insensitive WHERE predicate:
+    #
+    #     WHERE LOWER(word) = %s COLLATE utf8mb4_bin
+    #
+    # Case-sensitive WHERE predicate:
+    #
+    #     WHERE word = %s COLLATE utf8mb4_bin
+    #
+    # ===================================================
+    #
+    # Notes:
+    # 1. Lowercase both column and parameter (%s value passed to
+    #    cursor.execute) so they match
+    # 2. The "COLLATE utf8mb4_bin" is required and must go on the right
+    #    side of the predicate. Explanation:
+    #   - Default string comparison in MySQL doesn't distinguish
+    #     between е and ё.
+    #   - You can specify your own comparison via COLLATE keyword.
+    #   - utf8mb4_bin is one COLLATE type. It compares raw bytes,
+    #     making е and ё distinct.
+    #   - We want to distinguish between е and ё, so we specify
+    #     COLLATE utf8mb4_bin.
+    #   - The COLLATE keyword must be applied on either the column
+    #     (e.g., word) or parameter (e.g., the %s).
+    #   - The columns in this database table are utf8mb3, and MySQL
+    #     doesn't allow COLLATE utf8mb4_bin on such values, so for
+    #     our purposes the COLLATE must be applied on the parameter.
+    #     (Parameters here are just strings, they have no predefined
+    #     column charset, so nothing for MySQL to reject.)
     if case_insensitive:
         where_clause = "LOWER(word) = %s COLLATE utf8mb4_bin"
         param = root_word.lower()
