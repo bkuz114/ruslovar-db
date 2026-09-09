@@ -367,8 +367,7 @@ export_database() {
         "$DB_NAME" \
         --single-transaction \
         --quick \
-        # use maximum compression (same as -9)
-        | gzip --best > "$OUTPUT_FILE"
+        | gzip --best > "$OUTPUT_FILE"  # use maximum compression (same as -9)
 
     echo ""
     echo "Export complete."
