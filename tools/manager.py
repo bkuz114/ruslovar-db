@@ -1113,7 +1113,16 @@ def _verify_plural(row_map, entry, root_code) -> None:
 
 
 def _verify_field(entry_word, field_name, expected, actual) -> None:
-    """Compare expected vs actual, raising with context on mismatch."""
+    """Compare expected vs actual, raising with context on mismatch.
+
+    Normalizes SQL NULL (None) to the string "NULL" on both sides
+    before comparison, so callers can pass either representation.
+    """
+    if expected is None:
+        expected = "NULL"
+    if actual is None:
+        actual = "NULL"
+
     if expected != actual:
         raise ValueError(
             f"'{entry_word}': {field_name} mismatch. "
