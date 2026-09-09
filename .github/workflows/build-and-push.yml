@@ -89,9 +89,9 @@ env:
   # break YAML parsing (a bare Refs: line inside a run: block would be
   # interpreted as a new mapping key).
   COMMIT_MESSAGE: |
-    chore(db): regenerate nouns_morf.sql.gz via GitHub Actions (#7)
+    chore(db): regenerate nouns_morf.sql.gz via GitHub Actions (#6)
 
-    Refs: #7
+    Refs: #6
 
   # MySQL connection settings for the build script.
   #
