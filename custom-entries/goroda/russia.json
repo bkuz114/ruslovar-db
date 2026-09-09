@@ -1,0 +1,3763 @@
+{
+  "category": "город",
+  "entries": [
+    {
+      "word": "Абакан",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Абакан",
+        "genitive": "Абакана",
+        "dative": "Абакану",
+        "accusative": "Абакан",
+        "instrumental": "Абаканом",
+        "prepositional": "Абакане"
+      },
+      "plural": {
+        "nominative": "Абаканы",
+        "genitive": "Абаканов",
+        "dative": "Абаканам",
+        "accusative": "Абаканы",
+        "instrumental": "Абаканами",
+        "prepositional": "Абаканах"
+      }
+    },
+    {
+      "word": "Альметьевск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Альметьевск",
+        "genitive": "Альметьевска",
+        "dative": "Альметьевску",
+        "accusative": "Альметьевск",
+        "instrumental": "Альметьевском",
+        "prepositional": "Альметьевске"
+      },
+      "plural": {
+        "nominative": "Альметьевски",
+        "genitive": "Альметьевсков",
+        "dative": "Альметьевскам",
+        "accusative": "Альметьевски",
+        "instrumental": "Альметьевсками",
+        "prepositional": "Альметьевсках"
+      }
+    },
+    {
+      "word": "Ангарск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ангарск",
+        "genitive": "Ангарска",
+        "dative": "Ангарску",
+        "accusative": "Ангарск",
+        "instrumental": "Ангарском",
+        "prepositional": "Ангарске"
+      },
+      "plural": {
+        "nominative": "Ангарски",
+        "genitive": "Ангарсков",
+        "dative": "Ангарскам",
+        "accusative": "Ангарски",
+        "instrumental": "Ангарсками",
+        "prepositional": "Ангарсках"
+      }
+    },
+    {
+      "word": "Арзамас",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Арзамас",
+        "genitive": "Арзамаса",
+        "dative": "Арзамасу",
+        "accusative": "Арзамас",
+        "instrumental": "Арзамасом",
+        "prepositional": "Арзамасе"
+      },
+      "plural": {
+        "nominative": "Арзамасы",
+        "genitive": "Арзамасов",
+        "dative": "Арзамасам",
+        "accusative": "Арзамасы",
+        "instrumental": "Арзамасами",
+        "prepositional": "Арзамасах"
+      }
+    },
+    {
+      "word": "Армавир",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Армавир",
+        "genitive": "Армавира",
+        "dative": "Армавиру",
+        "accusative": "Армавир",
+        "instrumental": "Армавиром",
+        "prepositional": "Армавире"
+      },
+      "plural": {
+        "nominative": "Армавиры",
+        "genitive": "Армавиров",
+        "dative": "Армавирам",
+        "accusative": "Армавиры",
+        "instrumental": "Армавирами",
+        "prepositional": "Армавирах"
+      }
+    },
+    {
+      "word": "Артём",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Артём",
+        "genitive": "Артёма",
+        "dative": "Артёму",
+        "accusative": "Артём",
+        "instrumental": "Артёмом",
+        "prepositional": "Артёме"
+      },
+      "plural": {
+        "nominative": "Артёмы",
+        "genitive": "Артёмов",
+        "dative": "Артёмам",
+        "accusative": "Артёмы",
+        "instrumental": "Артёмами",
+        "prepositional": "Артёмах"
+      }
+    },
+    {
+      "word": "Артем",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Артем",
+        "genitive": "Артема",
+        "dative": "Артему",
+        "accusative": "Артем",
+        "instrumental": "Артемом",
+        "prepositional": "Артеме"
+      },
+      "plural": {
+        "nominative": "Артемы",
+        "genitive": "Артемов",
+        "dative": "Артемам",
+        "accusative": "Артемы",
+        "instrumental": "Артемами",
+        "prepositional": "Артемах"
+      }
+    },
+    {
+      "word": "Архангельск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Архангельск",
+        "genitive": "Архангельска",
+        "dative": "Архангельску",
+        "accusative": "Архангельск",
+        "instrumental": "Архангельском",
+        "prepositional": "Архангельске"
+      },
+      "plural": {
+        "nominative": "Архангельски",
+        "genitive": "Архангельсков",
+        "dative": "Архангельскам",
+        "accusative": "Архангельски",
+        "instrumental": "Архангельсками",
+        "prepositional": "Архангельсках"
+      }
+    },
+    {
+      "word": "Астрахань",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Астрахань",
+        "genitive": "Астрахани",
+        "dative": "Астрахани",
+        "accusative": "Астрахань",
+        "instrumental": "Астраханью",
+        "prepositional": "Астрахани"
+      },
+      "plural": {
+        "nominative": "Астрахани",
+        "genitive": "Астраханей",
+        "dative": "Астраханям",
+        "accusative": "Астрахани",
+        "instrumental": "Астраханями",
+        "prepositional": "Астраханях"
+      }
+    },
+    {
+      "word": "Ачинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ачинск",
+        "genitive": "Ачинска",
+        "dative": "Ачинску",
+        "accusative": "Ачинск",
+        "instrumental": "Ачинском",
+        "prepositional": "Ачинске"
+      },
+      "plural": {
+        "nominative": "Ачински",
+        "genitive": "Ачинсков",
+        "dative": "Ачинскам",
+        "accusative": "Ачински",
+        "instrumental": "Ачинсками",
+        "prepositional": "Ачинсках"
+      }
+    },
+    {
+      "word": "Балаково",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Балаково",
+        "genitive": "Балакова",
+        "dative": "Балакову",
+        "accusative": "Балаково",
+        "instrumental": "Балаковом",
+        "prepositional": "Балакове"
+      },
+      "plural": {
+        "nominative": "Балакова",
+        "genitive": "Балаков",
+        "dative": "Балаковам",
+        "accusative": "Балакова",
+        "instrumental": "Балаковами",
+        "prepositional": "Балаковах"
+      }
+    },
+    {
+      "word": "Балашиха",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Балашиха",
+        "genitive": "Балашихи",
+        "dative": "Балашихе",
+        "accusative": "Балашиху",
+        "instrumental": "Балашихой",
+        "prepositional": "Балашихе"
+      },
+      "plural": {
+        "nominative": "Балашихи",
+        "genitive": "Балаших",
+        "dative": "Балашихам",
+        "accusative": "Балашихи",
+        "instrumental": "Балашихами",
+        "prepositional": "Балашихах"
+      }
+    },
+    {
+      "word": "Барнаул",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Барнаул",
+        "genitive": "Барнаула",
+        "dative": "Барнаулу",
+        "accusative": "Барнаул",
+        "instrumental": "Барнаулом",
+        "prepositional": "Барнауле"
+      },
+      "plural": {
+        "nominative": "Барнаулы",
+        "genitive": "Барнаулов",
+        "dative": "Барнаулам",
+        "accusative": "Барнаулы",
+        "instrumental": "Барнаулами",
+        "prepositional": "Барнаулах"
+      }
+    },
+    {
+      "word": "Батайск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Батайск",
+        "genitive": "Батайска",
+        "dative": "Батайску",
+        "accusative": "Батайск",
+        "instrumental": "Батайском",
+        "prepositional": "Батайске"
+      },
+      "plural": {
+        "nominative": "Батайски",
+        "genitive": "Батайсков",
+        "dative": "Батайскам",
+        "accusative": "Батайски",
+        "instrumental": "Батайсками",
+        "prepositional": "Батайсках"
+      }
+    },
+    {
+      "word": "Белгород",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Белгород",
+        "genitive": "Белгорода",
+        "dative": "Белгороду",
+        "accusative": "Белгород",
+        "instrumental": "Белгородом",
+        "prepositional": "Белгороде"
+      },
+      "plural": {
+        "nominative": "Белгороды",
+        "genitive": "Белгородов",
+        "dative": "Белгородам",
+        "accusative": "Белгороды",
+        "instrumental": "Белгородами",
+        "prepositional": "Белгородах"
+      }
+    },
+    {
+      "word": "Бердск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Бердск",
+        "genitive": "Бердска",
+        "dative": "Бердску",
+        "accusative": "Бердск",
+        "instrumental": "Бердском",
+        "prepositional": "Бердске"
+      },
+      "plural": {
+        "nominative": "Бердски",
+        "genitive": "Бердсков",
+        "dative": "Бердскам",
+        "accusative": "Бердски",
+        "instrumental": "Бердсками",
+        "prepositional": "Бердсках"
+      }
+    },
+    {
+      "word": "Березники",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Березники",
+        "genitive": "Березников",
+        "dative": "Березникам",
+        "accusative": "Березники",
+        "instrumental": "Березниками",
+        "prepositional": "Березниках"
+      },
+      "plural": {
+        "nominative": "Березники",
+        "genitive": "Березников",
+        "dative": "Березникам",
+        "accusative": "Березники",
+        "instrumental": "Березниками",
+        "prepositional": "Березниках"
+      }
+    },
+    {
+      "word": "Бийск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Бийск",
+        "genitive": "Бийска",
+        "dative": "Бийску",
+        "accusative": "Бийск",
+        "instrumental": "Бийском",
+        "prepositional": "Бийске"
+      },
+      "plural": {
+        "nominative": "Бийски",
+        "genitive": "Бийсков",
+        "dative": "Бийскам",
+        "accusative": "Бийски",
+        "instrumental": "Бийсками",
+        "prepositional": "Бийсках"
+      }
+    },
+    {
+      "word": "Благовещенск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Благовещенск",
+        "genitive": "Благовещенска",
+        "dative": "Благовещенску",
+        "accusative": "Благовещенск",
+        "instrumental": "Благовещенском",
+        "prepositional": "Благовещенске"
+      },
+      "plural": {
+        "nominative": "Благовещенски",
+        "genitive": "Благовещенсков",
+        "dative": "Благовещенскам",
+        "accusative": "Благовещенски",
+        "instrumental": "Благовещенсками",
+        "prepositional": "Благовещенсках"
+      }
+    },
+    {
+      "word": "Братск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Братск",
+        "genitive": "Братска",
+        "dative": "Братску",
+        "accusative": "Братск",
+        "instrumental": "Братском",
+        "prepositional": "Братске"
+      },
+      "plural": {
+        "nominative": "Братски",
+        "genitive": "Братсков",
+        "dative": "Братскам",
+        "accusative": "Братски",
+        "instrumental": "Братсками",
+        "prepositional": "Братсках"
+      }
+    },
+    {
+      "word": "Брянск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Брянск",
+        "genitive": "Брянска",
+        "dative": "Брянску",
+        "accusative": "Брянск",
+        "instrumental": "Брянском",
+        "prepositional": "Брянске"
+      },
+      "plural": {
+        "nominative": "Брянски",
+        "genitive": "Брянсков",
+        "dative": "Брянскам",
+        "accusative": "Брянски",
+        "instrumental": "Брянсками",
+        "prepositional": "Брянсках"
+      }
+    },
+    {
+      "word": "Владивосток",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Владивосток",
+        "genitive": "Владивостока",
+        "dative": "Владивостоку",
+        "accusative": "Владивосток",
+        "instrumental": "Владивостоком",
+        "prepositional": "Владивостоке"
+      },
+      "plural": {
+        "nominative": "Владивостоки",
+        "genitive": "Владивостоков",
+        "dative": "Владивостокам",
+        "accusative": "Владивостоки",
+        "instrumental": "Владивостоками",
+        "prepositional": "Владивостоках"
+      }
+    },
+    {
+      "word": "Владикавказ",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Владикавказ",
+        "genitive": "Владикавказа",
+        "dative": "Владикавказу",
+        "accusative": "Владикавказ",
+        "instrumental": "Владикавказом",
+        "prepositional": "Владикавказе"
+      },
+      "plural": {
+        "nominative": "Владикавказы",
+        "genitive": "Владикавказов",
+        "dative": "Владикавказам",
+        "accusative": "Владикавказы",
+        "instrumental": "Владикавказами",
+        "prepositional": "Владикавказах"
+      }
+    },
+    {
+      "word": "Владимир",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Владимир",
+        "genitive": "Владимира",
+        "dative": "Владимиру",
+        "accusative": "Владимир",
+        "instrumental": "Владимиром",
+        "prepositional": "Владимире"
+      },
+      "plural": {
+        "nominative": "Владимиры",
+        "genitive": "Владимиров",
+        "dative": "Владимирам",
+        "accusative": "Владимиры",
+        "instrumental": "Владимирами",
+        "prepositional": "Владимирах"
+      }
+    },
+    {
+      "word": "Волгоград",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Волгоград",
+        "genitive": "Волгограда",
+        "dative": "Волгограду",
+        "accusative": "Волгоград",
+        "instrumental": "Волгоградом",
+        "prepositional": "Волгограде"
+      },
+      "plural": {
+        "nominative": "Волгограды",
+        "genitive": "Волгоградов",
+        "dative": "Волгоградам",
+        "accusative": "Волгограды",
+        "instrumental": "Волгоградами",
+        "prepositional": "Волгоградах"
+      }
+    },
+    {
+      "word": "Волгодонск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Волгодонск",
+        "genitive": "Волгодонска",
+        "dative": "Волгодонску",
+        "accusative": "Волгодонск",
+        "instrumental": "Волгодонском",
+        "prepositional": "Волгодонске"
+      },
+      "plural": {
+        "nominative": "Волгодонски",
+        "genitive": "Волгодонсков",
+        "dative": "Волгодонскам",
+        "accusative": "Волгодонски",
+        "instrumental": "Волгодонсками",
+        "prepositional": "Волгодонсках"
+      }
+    },
+    {
+      "word": "Волжский",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Волжский",
+        "genitive": "Волжского",
+        "dative": "Волжскому",
+        "accusative": "Волжский",
+        "instrumental": "Волжским",
+        "prepositional": "Волжском"
+      },
+      "plural": {
+        "nominative": "Волжские",
+        "genitive": "Волжских",
+        "dative": "Волжским",
+        "accusative": "Волжские",
+        "instrumental": "Волжскими",
+        "prepositional": "Волжских"
+      }
+    },
+    {
+      "word": "Вологда",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Вологда",
+        "genitive": "Вологды",
+        "dative": "Вологде",
+        "accusative": "Вологду",
+        "instrumental": "Вологдой",
+        "prepositional": "Вологде"
+      },
+      "plural": {
+        "nominative": "Вологды",
+        "genitive": "Вологд",
+        "dative": "Вологдам",
+        "accusative": "Вологды",
+        "instrumental": "Вологдами",
+        "prepositional": "Вологдах"
+      }
+    },
+    {
+      "word": "Воронеж",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Воронеж",
+        "genitive": "Воронежа",
+        "dative": "Воронежу",
+        "accusative": "Воронеж",
+        "instrumental": "Воронежем",
+        "prepositional": "Воронеже"
+      },
+      "plural": {
+        "nominative": "Воронежи",
+        "genitive": "Воронежей",
+        "dative": "Воронежам",
+        "accusative": "Воронежи",
+        "instrumental": "Воронежами",
+        "prepositional": "Воронежах"
+      }
+    },
+    {
+      "word": "Грозный",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Грозный",
+        "genitive": "Грозного",
+        "dative": "Грозному",
+        "accusative": "Грозный",
+        "instrumental": "Грозным",
+        "prepositional": "Грозном"
+      },
+      "plural": {
+        "nominative": "Грозные",
+        "genitive": "Грозных",
+        "dative": "Грозным",
+        "accusative": "Грозные",
+        "instrumental": "Грозными",
+        "prepositional": "Грозных"
+      }
+    },
+    {
+      "word": "Дербент",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Дербент",
+        "genitive": "Дербента",
+        "dative": "Дербенту",
+        "accusative": "Дербент",
+        "instrumental": "Дербентом",
+        "prepositional": "Дербенте"
+      },
+      "plural": {
+        "nominative": "Дербенты",
+        "genitive": "Дербентов",
+        "dative": "Дербентам",
+        "accusative": "Дербенты",
+        "instrumental": "Дербентами",
+        "prepositional": "Дербентах"
+      }
+    },
+    {
+      "word": "Дзержинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Дзержинск",
+        "genitive": "Дзержинска",
+        "dative": "Дзержинску",
+        "accusative": "Дзержинск",
+        "instrumental": "Дзержинском",
+        "prepositional": "Дзержинске"
+      },
+      "plural": {
+        "nominative": "Дзержински",
+        "genitive": "Дзержинсков",
+        "dative": "Дзержинскам",
+        "accusative": "Дзержински",
+        "instrumental": "Дзержинсками",
+        "prepositional": "Дзержинсках"
+      }
+    },
+    {
+      "word": "Димитровград",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Димитровград",
+        "genitive": "Димитровграда",
+        "dative": "Димитровграду",
+        "accusative": "Димитровград",
+        "instrumental": "Димитровградом",
+        "prepositional": "Димитровграде"
+      },
+      "plural": {
+        "nominative": "Димитровграды",
+        "genitive": "Димитровградов",
+        "dative": "Димитровградам",
+        "accusative": "Димитровграды",
+        "instrumental": "Димитровградами",
+        "prepositional": "Димитровградах"
+      }
+    },
+    {
+      "word": "Домодедово",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Домодедово",
+        "genitive": "Домодедова",
+        "dative": "Домодедову",
+        "accusative": "Домодедово",
+        "instrumental": "Домодедовом",
+        "prepositional": "Домодедове"
+      },
+      "plural": {
+        "nominative": "Домодедова",
+        "genitive": "Домодедов",
+        "dative": "Домодедовам",
+        "accusative": "Домодедова",
+        "instrumental": "Домодедовами",
+        "prepositional": "Домодедовах"
+      }
+    },
+    {
+      "word": "Евпатория",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Евпатория",
+        "genitive": "Евпатории",
+        "dative": "Евпатории",
+        "accusative": "Евпаторию",
+        "instrumental": "Евпаторией",
+        "prepositional": "Евпатории"
+      },
+      "plural": {
+        "nominative": "Евпатории",
+        "genitive": "Евпаторий",
+        "dative": "Евпаториям",
+        "accusative": "Евпатории",
+        "instrumental": "Евпаториями",
+        "prepositional": "Евпаториях"
+      }
+    },
+    {
+      "word": "Екатеринбург",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Екатеринбург",
+        "genitive": "Екатеринбурга",
+        "dative": "Екатеринбургу",
+        "accusative": "Екатеринбург",
+        "instrumental": "Екатеринбургом",
+        "prepositional": "Екатеринбурге"
+      },
+      "plural": {
+        "nominative": "Екатеринбурги",
+        "genitive": "Екатеринбургов",
+        "dative": "Екатеринбургам",
+        "accusative": "Екатеринбурги",
+        "instrumental": "Екатеринбургами",
+        "prepositional": "Екатеринбургах"
+      }
+    },
+    {
+      "word": "Елец",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Елец",
+        "genitive": "Ельца",
+        "dative": "Ельцу",
+        "accusative": "Елец",
+        "instrumental": "Ельцом",
+        "prepositional": "Ельце"
+      },
+      "plural": {
+        "nominative": "Ельцы",
+        "genitive": "Ельцов",
+        "dative": "Ельцам",
+        "accusative": "Ельцы",
+        "instrumental": "Ельцами",
+        "prepositional": "Ельцах"
+      }
+    },
+    {
+      "word": "Ессентуки",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ессентуки",
+        "genitive": "Ессентуков",
+        "dative": "Ессентукам",
+        "accusative": "Ессентуки",
+        "instrumental": "Ессентуками",
+        "prepositional": "Ессентуках"
+      },
+      "plural": {
+        "nominative": "Ессентуки",
+        "genitive": "Ессентуков",
+        "dative": "Ессентукам",
+        "accusative": "Ессентуки",
+        "instrumental": "Ессентуками",
+        "prepositional": "Ессентуках"
+      }
+    },
+    {
+      "word": "Железногорск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Железногорск",
+        "genitive": "Железногорска",
+        "dative": "Железногорску",
+        "accusative": "Железногорск",
+        "instrumental": "Железногорском",
+        "prepositional": "Железногорске"
+      },
+      "plural": {
+        "nominative": "Железногорски",
+        "genitive": "Железногорсков",
+        "dative": "Железногорскам",
+        "accusative": "Железногорски",
+        "instrumental": "Железногорсками",
+        "prepositional": "Железногорсках"
+      }
+    },
+    {
+      "word": "Жуковский",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Жуковский",
+        "genitive": "Жуковского",
+        "dative": "Жуковскому",
+        "accusative": "Жуковский",
+        "instrumental": "Жуковским",
+        "prepositional": "Жуковском"
+      },
+      "plural": {
+        "nominative": "Жуковские",
+        "genitive": "Жуковских",
+        "dative": "Жуковским",
+        "accusative": "Жуковские",
+        "instrumental": "Жуковскими",
+        "prepositional": "Жуковских"
+      }
+    },
+    {
+      "word": "Зеленоград",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Зеленоград",
+        "genitive": "Зеленограда",
+        "dative": "Зеленограду",
+        "accusative": "Зеленоград",
+        "instrumental": "Зеленоградом",
+        "prepositional": "Зеленограде"
+      },
+      "plural": {
+        "nominative": "Зеленограды",
+        "genitive": "Зеленоградов",
+        "dative": "Зеленоградам",
+        "accusative": "Зеленограды",
+        "instrumental": "Зеленоградами",
+        "prepositional": "Зеленоградах"
+      }
+    },
+    {
+      "word": "Златоуст",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Златоуст",
+        "genitive": "Златоуста",
+        "dative": "Златоусту",
+        "accusative": "Златоуст",
+        "instrumental": "Златоустом",
+        "prepositional": "Златоусте"
+      },
+      "plural": {
+        "nominative": "Златоусты",
+        "genitive": "Златоустов",
+        "dative": "Златоустам",
+        "accusative": "Златоусты",
+        "instrumental": "Златоустами",
+        "prepositional": "Златоустах"
+      }
+    },
+    {
+      "word": "Иваново",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Иваново",
+        "genitive": "Иванова",
+        "dative": "Иванову",
+        "accusative": "Иваново",
+        "instrumental": "Ивановом",
+        "prepositional": "Иванове"
+      },
+      "plural": {
+        "nominative": "Иванова",
+        "genitive": "Иванов",
+        "dative": "Ивановам",
+        "accusative": "Иванова",
+        "instrumental": "Ивановами",
+        "prepositional": "Ивановах"
+      }
+    },
+    {
+      "word": "Ижевск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ижевск",
+        "genitive": "Ижевска",
+        "dative": "Ижевску",
+        "accusative": "Ижевск",
+        "instrumental": "Ижевском",
+        "prepositional": "Ижевске"
+      },
+      "plural": {
+        "nominative": "Ижевски",
+        "genitive": "Ижевсков",
+        "dative": "Ижевскам",
+        "accusative": "Ижевски",
+        "instrumental": "Ижевсками",
+        "prepositional": "Ижевсках"
+      }
+    },
+    {
+      "word": "Иркутск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Иркутск",
+        "genitive": "Иркутска",
+        "dative": "Иркутску",
+        "accusative": "Иркутск",
+        "instrumental": "Иркутском",
+        "prepositional": "Иркутске"
+      },
+      "plural": {
+        "nominative": "Иркутски",
+        "genitive": "Иркутсков",
+        "dative": "Иркутскам",
+        "accusative": "Иркутски",
+        "instrumental": "Иркутсками",
+        "prepositional": "Иркутсках"
+      }
+    },
+    {
+      "word": "Йошкар-Ола",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Йошкар-Ола",
+        "genitive": "Йошкар-Олы",
+        "dative": "Йошкар-Оле",
+        "accusative": "Йошкар-Олу",
+        "instrumental": "Йошкар-Олой",
+        "prepositional": "Йошкар-Оле"
+      },
+      "plural": {
+        "nominative": "Йошкар-Олы",
+        "genitive": "Йошкар-Ол",
+        "dative": "Йошкар-Олам",
+        "accusative": "Йошкар-Олы",
+        "instrumental": "Йошкар-Олами",
+        "prepositional": "Йошкар-Олах"
+      }
+    },
+    {
+      "word": "Казань",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Казань",
+        "genitive": "Казани",
+        "dative": "Казани",
+        "accusative": "Казань",
+        "instrumental": "Казанью",
+        "prepositional": "Казани"
+      },
+      "plural": {
+        "nominative": "Казани",
+        "genitive": "Казаней",
+        "dative": "Казаням",
+        "accusative": "Казани",
+        "instrumental": "Казанями",
+        "prepositional": "Казанях"
+      }
+    },
+    {
+      "word": "Калининград",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Калининград",
+        "genitive": "Калининграда",
+        "dative": "Калининграду",
+        "accusative": "Калининград",
+        "instrumental": "Калининградом",
+        "prepositional": "Калининграде"
+      },
+      "plural": {
+        "nominative": "Калининграды",
+        "genitive": "Калининградов",
+        "dative": "Калининградам",
+        "accusative": "Калининграды",
+        "instrumental": "Калининградами",
+        "prepositional": "Калининградах"
+      }
+    },
+    {
+      "word": "Калуга",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Калуга",
+        "genitive": "Калуги",
+        "dative": "Калуге",
+        "accusative": "Калугу",
+        "instrumental": "Калугой",
+        "prepositional": "Калуге"
+      },
+      "plural": {
+        "nominative": "Калуги",
+        "genitive": "Калуг",
+        "dative": "Калугам",
+        "accusative": "Калуги",
+        "instrumental": "Калугами",
+        "prepositional": "Калугах"
+      }
+    },
+    {
+      "word": "Каменск-Уральский",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Каменск-Уральский",
+        "genitive": "Каменска-Уральского",
+        "dative": "Каменску-Уральскому",
+        "accusative": "Каменск-Уральский",
+        "instrumental": "Каменском-Уральским",
+        "prepositional": "Каменске-Уральском"
+      },
+      "plural": {
+        "nominative": "Каменски-Уральские",
+        "genitive": "Каменсков-Уральских",
+        "dative": "Каменскам-Уральским",
+        "accusative": "Каменски-Уральские",
+        "instrumental": "Каменсками-Уральскими",
+        "prepositional": "Каменсках-Уральских"
+      }
+    },
+    {
+      "word": "Камышин",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Камышин",
+        "genitive": "Камышина",
+        "dative": "Камышину",
+        "accusative": "Камышин",
+        "instrumental": "Камышином",
+        "prepositional": "Камышине"
+      },
+      "plural": {
+        "nominative": "Камышины",
+        "genitive": "Камышинов",
+        "dative": "Камышинам",
+        "accusative": "Камышины",
+        "instrumental": "Камышинами",
+        "prepositional": "Камышинах"
+      }
+    },
+    {
+      "word": "Каспийск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Каспийск",
+        "genitive": "Каспийска",
+        "dative": "Каспийску",
+        "accusative": "Каспийск",
+        "instrumental": "Каспийском",
+        "prepositional": "Каспийске"
+      },
+      "plural": {
+        "nominative": "Каспийски",
+        "genitive": "Каспийсков",
+        "dative": "Каспийскам",
+        "accusative": "Каспийски",
+        "instrumental": "Каспийсками",
+        "prepositional": "Каспийсках"
+      }
+    },
+    {
+      "word": "Кемерово",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кемерово",
+        "genitive": "Кемерова",
+        "dative": "Кемерову",
+        "accusative": "Кемерово",
+        "instrumental": "Кемеровом",
+        "prepositional": "Кемерове"
+      },
+      "plural": {
+        "nominative": "Кемерова",
+        "genitive": "Кемеров",
+        "dative": "Кемеровам",
+        "accusative": "Кемерова",
+        "instrumental": "Кемеровами",
+        "prepositional": "Кемеровах"
+      }
+    },
+    {
+      "word": "Керчь",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Керчь",
+        "genitive": "Керчи",
+        "dative": "Керчи",
+        "accusative": "Керчь",
+        "instrumental": "Керчью",
+        "prepositional": "Керчи"
+      },
+      "plural": {
+        "nominative": "Керчи",
+        "genitive": "Керчей",
+        "dative": "Керчам",
+        "accusative": "Керчи",
+        "instrumental": "Керчами",
+        "prepositional": "Керчах"
+      }
+    },
+    {
+      "word": "Киров",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Киров",
+        "genitive": "Кирова",
+        "dative": "Кирову",
+        "accusative": "Киров",
+        "instrumental": "Кировом",
+        "prepositional": "Кирове"
+      },
+      "plural": {
+        "nominative": "Кировы",
+        "genitive": "Кировов",
+        "dative": "Кировам",
+        "accusative": "Кировы",
+        "instrumental": "Кировами",
+        "prepositional": "Кировах"
+      }
+    },
+    {
+      "word": "Киселёвск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Киселёвск",
+        "genitive": "Киселёвска",
+        "dative": "Киселёвску",
+        "accusative": "Киселёвск",
+        "instrumental": "Киселёвском",
+        "prepositional": "Киселёвске"
+      },
+      "plural": {
+        "nominative": "Киселёвски",
+        "genitive": "Киселёвсков",
+        "dative": "Киселёвскам",
+        "accusative": "Киселёвски",
+        "instrumental": "Киселёвсками",
+        "prepositional": "Киселёвсках"
+      }
+    },
+    {
+      "word": "Киселевск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Киселевск",
+        "genitive": "Киселевска",
+        "dative": "Киселевску",
+        "accusative": "Киселевск",
+        "instrumental": "Киселевском",
+        "prepositional": "Киселевске"
+      },
+      "plural": {
+        "nominative": "Киселевски",
+        "genitive": "Киселевсков",
+        "dative": "Киселевскам",
+        "accusative": "Киселевски",
+        "instrumental": "Киселевсками",
+        "prepositional": "Киселевсках"
+      }
+    },
+    {
+      "word": "Кисловодск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кисловодск",
+        "genitive": "Кисловодска",
+        "dative": "Кисловодску",
+        "accusative": "Кисловодск",
+        "instrumental": "Кисловодском",
+        "prepositional": "Кисловодске"
+      },
+      "plural": {
+        "nominative": "Кисловодски",
+        "genitive": "Кисловодсков",
+        "dative": "Кисловодскам",
+        "accusative": "Кисловодски",
+        "instrumental": "Кисловодсками",
+        "prepositional": "Кисловодсках"
+      }
+    },
+    {
+      "word": "Ковров",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ковров",
+        "genitive": "Коврова",
+        "dative": "Коврову",
+        "accusative": "Ковров",
+        "instrumental": "Ковровом",
+        "prepositional": "Коврове"
+      },
+      "plural": {
+        "nominative": "Ковровы",
+        "genitive": "Ковровов",
+        "dative": "Ковровам",
+        "accusative": "Ковровы",
+        "instrumental": "Ковровами",
+        "prepositional": "Ковровах"
+      }
+    },
+    {
+      "word": "Коломна",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Коломна",
+        "genitive": "Коломны",
+        "dative": "Коломне",
+        "accusative": "Коломну",
+        "instrumental": "Коломной",
+        "prepositional": "Коломне"
+      },
+      "plural": {
+        "nominative": "Коломны",
+        "genitive": "Коломн",
+        "dative": "Коломнам",
+        "accusative": "Коломны",
+        "instrumental": "Коломнами",
+        "prepositional": "Коломнах"
+      }
+    },
+    {
+      "word": "Комсомольск-на-Амуре",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Комсомольск-на-Амуре",
+        "genitive": "Комсомольска-на-Амуре",
+        "dative": "Комсомольску-на-Амуре",
+        "accusative": "Комсомольск-на-Амуре",
+        "instrumental": "Комсомольском-на-Амуре",
+        "prepositional": "Комсомольске-на-Амуре"
+      },
+      "plural": {
+        "nominative": "Комсомольски-на-Амуре",
+        "genitive": "Комсомольсков-на-Амуре",
+        "dative": "Комсомольскам-на-Амуре",
+        "accusative": "Комсомольски-на-Амуре",
+        "instrumental": "Комсомольсками-на-Амуре",
+        "prepositional": "Комсомольсках-на-Амуре"
+      }
+    },
+    {
+      "word": "Копейск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Копейск",
+        "genitive": "Копейска",
+        "dative": "Копейску",
+        "accusative": "Копейск",
+        "instrumental": "Копейском",
+        "prepositional": "Копейске"
+      },
+      "plural": {
+        "nominative": "Копейски",
+        "genitive": "Копейсков",
+        "dative": "Копейскам",
+        "accusative": "Копейски",
+        "instrumental": "Копейсками",
+        "prepositional": "Копейсках"
+      }
+    },
+    {
+      "word": "Королёв",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Королёв",
+        "genitive": "Королёва",
+        "dative": "Королёву",
+        "accusative": "Королёв",
+        "instrumental": "Королёвым",
+        "prepositional": "Королёве"
+      },
+      "plural": {
+        "nominative": "Королёвы",
+        "genitive": "Королёвов",
+        "dative": "Королёвам",
+        "accusative": "Королёвы",
+        "instrumental": "Королёвами",
+        "prepositional": "Королёвах"
+      }
+    },
+    {
+      "word": "Королев",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Королев",
+        "genitive": "Королева",
+        "dative": "Королеву",
+        "accusative": "Королев",
+        "instrumental": "Королевым",
+        "prepositional": "Королеве"
+      },
+      "plural": {
+        "nominative": "Королевы",
+        "genitive": "Королевов",
+        "dative": "Королевам",
+        "accusative": "Королевы",
+        "instrumental": "Королевами",
+        "prepositional": "Королевах"
+      }
+    },
+    {
+      "word": "Кострома",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кострома",
+        "genitive": "Костромы",
+        "dative": "Костроме",
+        "accusative": "Костромы",
+        "instrumental": "Костромой",
+        "prepositional": "Костроме"
+      },
+      "plural": {
+        "nominative": "Костромы",
+        "genitive": "Костром",
+        "dative": "Костромам",
+        "accusative": "Костромы",
+        "instrumental": "Костромами",
+        "prepositional": "Костромах"
+      }
+    },
+    {
+      "word": "Красногорск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Красногорск",
+        "genitive": "Красногорска",
+        "dative": "Красногорску",
+        "accusative": "Красногорск",
+        "instrumental": "Красногорском",
+        "prepositional": "Красногорске"
+      },
+      "plural": {
+        "nominative": "Красногорски",
+        "genitive": "Красногорсков",
+        "dative": "Красногорскам",
+        "accusative": "Красногорски",
+        "instrumental": "Красногорсками",
+        "prepositional": "Красногорсках"
+      }
+    },
+    {
+      "word": "Краснодар",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Краснодар",
+        "genitive": "Краснодара",
+        "dative": "Краснодару",
+        "accusative": "Краснодар",
+        "instrumental": "Краснодаром",
+        "prepositional": "Краснодаре"
+      },
+      "plural": {
+        "nominative": "Краснодары",
+        "genitive": "Краснодаров",
+        "dative": "Краснодарам",
+        "accusative": "Краснодары",
+        "instrumental": "Краснодарами",
+        "prepositional": "Краснодарах"
+      }
+    },
+    {
+      "word": "Красноярск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Красноярск",
+        "genitive": "Красноярска",
+        "dative": "Красноярску",
+        "accusative": "Красноярск",
+        "instrumental": "Красноярском",
+        "prepositional": "Красноярске"
+      },
+      "plural": {
+        "nominative": "Красноярски",
+        "genitive": "Красноярсков",
+        "dative": "Красноярскам",
+        "accusative": "Красноярски",
+        "instrumental": "Красноярсками",
+        "prepositional": "Красноярсках"
+      }
+    },
+    {
+      "word": "Курган",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Курган",
+        "genitive": "Кургана",
+        "dative": "Кургану",
+        "accusative": "Курган",
+        "instrumental": "Курганом",
+        "prepositional": "Кургане"
+      },
+      "plural": {
+        "nominative": "Курганы",
+        "genitive": "Курганов",
+        "dative": "Курганам",
+        "accusative": "Курганы",
+        "instrumental": "Курганами",
+        "prepositional": "Курганах"
+      }
+    },
+    {
+      "word": "Курск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Курск",
+        "genitive": "Курска",
+        "dative": "Курску",
+        "accusative": "Курск",
+        "instrumental": "Курском",
+        "prepositional": "Курске"
+      },
+      "plural": {
+        "nominative": "Курски",
+        "genitive": "Курсков",
+        "dative": "Курскам",
+        "accusative": "Курски",
+        "instrumental": "Курсками",
+        "prepositional": "Курсках"
+      }
+    },
+    {
+      "word": "Кызыл",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Кызыл",
+        "genitive": "Кызыла",
+        "dative": "Кызылу",
+        "accusative": "Кызыл",
+        "instrumental": "Кызылом",
+        "prepositional": "Кызыле"
+      },
+      "plural": {
+        "nominative": "Кызылы",
+        "genitive": "Кызылов",
+        "dative": "Кызылам",
+        "accusative": "Кызылы",
+        "instrumental": "Кызылами",
+        "prepositional": "Кызылах"
+      }
+    },
+    {
+      "word": "Ленинск-Кузнецкий",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ленинск-Кузнецкий",
+        "genitive": "Ленинска-Кузнецкого",
+        "dative": "Ленинску-Кузнецкому",
+        "accusative": "Ленинск-Кузнецкий",
+        "instrumental": "Ленинском-Кузнецким",
+        "prepositional": "Ленинске-Кузнецком"
+      },
+      "plural": {
+        "nominative": "Ленински-Кузнецкие",
+        "genitive": "Ленинсков-Кузнецких",
+        "dative": "Ленинскам-Кузнецким",
+        "accusative": "Ленински-Кузнецкие",
+        "instrumental": "Ленинсками-Кузнецкими",
+        "prepositional": "Ленинсках-Кузнецких"
+      }
+    },
+    {
+      "word": "Липецк",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Липецк",
+        "genitive": "Липецка",
+        "dative": "Липецку",
+        "accusative": "Липецк",
+        "instrumental": "Липецком",
+        "prepositional": "Липецке"
+      },
+      "plural": {
+        "nominative": "Липецки",
+        "genitive": "Липецков",
+        "dative": "Липецкам",
+        "accusative": "Липецки",
+        "instrumental": "Липецками",
+        "prepositional": "Липецках"
+      }
+    },
+    {
+      "word": "Люберцы",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Люберцы",
+        "genitive": "Люберцов",
+        "dative": "Люберцам",
+        "accusative": "Люберцы",
+        "instrumental": "Люберцами",
+        "prepositional": "Люберцах"
+      },
+      "plural": {
+        "nominative": "Люберцы",
+        "genitive": "Люберцов",
+        "dative": "Люберцам",
+        "accusative": "Люберцы",
+        "instrumental": "Люберцами",
+        "prepositional": "Люберцах"
+      }
+    },
+    {
+      "word": "Магадан",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Магадан",
+        "genitive": "Магадана",
+        "dative": "Магадану",
+        "accusative": "Магадан",
+        "instrumental": "Магаданом",
+        "prepositional": "Магадане"
+      },
+      "plural": {
+        "nominative": "Магаданы",
+        "genitive": "Магаданов",
+        "dative": "Магаданам",
+        "accusative": "Магаданы",
+        "instrumental": "Магаданами",
+        "prepositional": "Магаданах"
+      }
+    },
+    {
+      "word": "Магнитогорск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Магнитогорск",
+        "genitive": "Магнитогорска",
+        "dative": "Магнитогорску",
+        "accusative": "Магнитогорск",
+        "instrumental": "Магнитогорском",
+        "prepositional": "Магнитогорске"
+      },
+      "plural": {
+        "nominative": "Магнитогорски",
+        "genitive": "Магнитогорсков",
+        "dative": "Магнитогорскам",
+        "accusative": "Магнитогорски",
+        "instrumental": "Магнитогорсками",
+        "prepositional": "Магнитогорсках"
+      }
+    },
+    {
+      "word": "Майкоп",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Майкоп",
+        "genitive": "Майкопа",
+        "dative": "Майкопу",
+        "accusative": "Майкоп",
+        "instrumental": "Майкопом",
+        "prepositional": "Майкопе"
+      },
+      "plural": {
+        "nominative": "Майкопы",
+        "genitive": "Майкопов",
+        "dative": "Майкопам",
+        "accusative": "Майкопы",
+        "instrumental": "Майкопами",
+        "prepositional": "Майкопах"
+      }
+    },
+    {
+      "word": "Махачкала",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Махачкала",
+        "genitive": "Махачкалы",
+        "dative": "Махачкале",
+        "accusative": "Махачкалу",
+        "instrumental": "Махачкалой",
+        "prepositional": "Махачкале"
+      },
+      "plural": {
+        "nominative": "Махачкалы",
+        "genitive": "Махачкал",
+        "dative": "Махачкалам",
+        "accusative": "Махачкалы",
+        "instrumental": "Махачкалами",
+        "prepositional": "Махачкалах"
+      }
+    },
+    {
+      "word": "Миасс",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Миасс",
+        "genitive": "Миасса",
+        "dative": "Миассу",
+        "accusative": "Миасс",
+        "instrumental": "Миассом",
+        "prepositional": "Миассе"
+      },
+      "plural": {
+        "nominative": "Миассы",
+        "genitive": "Миассов",
+        "dative": "Миассам",
+        "accusative": "Миассы",
+        "instrumental": "Миассами",
+        "prepositional": "Миассах"
+      }
+    },
+    {
+      "word": "Москва",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Москва",
+        "genitive": "Москвы",
+        "dative": "Москве",
+        "accusative": "Москву",
+        "instrumental": "Москвой",
+        "prepositional": "Москве"
+      },
+      "plural": {
+        "nominative": "Москвы",
+        "genitive": "Москв",
+        "dative": "Москвам",
+        "accusative": "Москвы",
+        "instrumental": "Москвами",
+        "prepositional": "Москвах"
+      }
+    },
+    {
+      "word": "Мурманск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Мурманск",
+        "genitive": "Мурманска",
+        "dative": "Мурманску",
+        "accusative": "Мурманск",
+        "instrumental": "Мурманском",
+        "prepositional": "Мурманске"
+      },
+      "plural": {
+        "nominative": "Мурмански",
+        "genitive": "Мурмансков",
+        "dative": "Мурманскам",
+        "accusative": "Мурмански",
+        "instrumental": "Мурмансками",
+        "prepositional": "Мурмансках"
+      }
+    },
+    {
+      "word": "Муром",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Муром",
+        "genitive": "Мурома",
+        "dative": "Мурому",
+        "accusative": "Муром",
+        "instrumental": "Муромом",
+        "prepositional": "Муроме"
+      },
+      "plural": {
+        "nominative": "Муромы",
+        "genitive": "Муромов",
+        "dative": "Муромам",
+        "accusative": "Муромы",
+        "instrumental": "Муромами",
+        "prepositional": "Муромах"
+      }
+    },
+    {
+      "word": "Мытищи",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Мытищи",
+        "genitive": "Мытищ",
+        "dative": "Мытищам",
+        "accusative": "Мытищи",
+        "instrumental": "Мытищами",
+        "prepositional": "Мытищах"
+      },
+      "plural": {
+        "nominative": "Мытищи",
+        "genitive": "Мытищ",
+        "dative": "Мытищам",
+        "accusative": "Мытищи",
+        "instrumental": "Мытищами",
+        "prepositional": "Мытищах"
+      }
+    },
+    {
+      "word": "Нальчик",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нальчик",
+        "genitive": "Нальчика",
+        "dative": "Нальчику",
+        "accusative": "Нальчик",
+        "instrumental": "Нальчиком",
+        "prepositional": "Нальчике"
+      },
+      "plural": {
+        "nominative": "Нальчики",
+        "genitive": "Нальчиков",
+        "dative": "Нальчикам",
+        "accusative": "Нальчики",
+        "instrumental": "Нальчиками",
+        "prepositional": "Нальчиках"
+      }
+    },
+    {
+      "word": "Находка",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Находка",
+        "genitive": "Находки",
+        "dative": "Находке",
+        "accusative": "Находку",
+        "instrumental": "Находкой",
+        "prepositional": "Находке"
+      },
+      "plural": {
+        "nominative": "Находки",
+        "genitive": "Находок",
+        "dative": "Находкам",
+        "accusative": "Находки",
+        "instrumental": "Находками",
+        "prepositional": "Находках"
+      }
+    },
+    {
+      "word": "Невинномысск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Невинномысск",
+        "genitive": "Невинномысска",
+        "dative": "Невинномысску",
+        "accusative": "Невинномысск",
+        "instrumental": "Невинномысском",
+        "prepositional": "Невинномысске"
+      },
+      "plural": {
+        "nominative": "Невинномысски",
+        "genitive": "Невинномыссков",
+        "dative": "Невинномысскам",
+        "accusative": "Невинномысски",
+        "instrumental": "Невинномыссками",
+        "prepositional": "Невинномыссках"
+      }
+    },
+    {
+      "word": "Нефтекамск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нефтекамск",
+        "genitive": "Нефтекамска",
+        "dative": "Нефтекамску",
+        "accusative": "Нефтекамск",
+        "instrumental": "Нефтекамском",
+        "prepositional": "Нефтекамске"
+      },
+      "plural": {
+        "nominative": "Нефтекамски",
+        "genitive": "Нефтекамсков",
+        "dative": "Нефтекамскам",
+        "accusative": "Нефтекамски",
+        "instrumental": "Нефтекамсками",
+        "prepositional": "Нефтекамсках"
+      }
+    },
+    {
+      "word": "Нефтеюганск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нефтеюганск",
+        "genitive": "Нефтеюганска",
+        "dative": "Нефтеюганску",
+        "accusative": "Нефтеюганск",
+        "instrumental": "Нефтеюганском",
+        "prepositional": "Нефтеюганске"
+      },
+      "plural": {
+        "nominative": "Нефтеюгански",
+        "genitive": "Нефтеюгансков",
+        "dative": "Нефтеюганскам",
+        "accusative": "Нефтеюгански",
+        "instrumental": "Нефтеюгансками",
+        "prepositional": "Нефтеюгансках"
+      }
+    },
+    {
+      "word": "Нижневартовск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нижневартовск",
+        "genitive": "Нижневартовска",
+        "dative": "Нижневартовску",
+        "accusative": "Нижневартовск",
+        "instrumental": "Нижневартовском",
+        "prepositional": "Нижневартовске"
+      },
+      "plural": {
+        "nominative": "Нижневартовски",
+        "genitive": "Нижневартовсков",
+        "dative": "Нижневартовскам",
+        "accusative": "Нижневартовски",
+        "instrumental": "Нижневартовсками",
+        "prepositional": "Нижневартовсках"
+      }
+    },
+    {
+      "word": "Нижнекамск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Нижнекамск",
+        "genitive": "Нижнекамска",
+        "dative": "Нижнекамску",
+        "accusative": "Нижнекамск",
+        "instrumental": "Нижнекамском",
+        "prepositional": "Нижнекамске"
+      },
+      "plural": {
+        "nominative": "Нижнекамски",
+        "genitive": "Нижнекамсков",
+        "dative": "Нижнекамскам",
+        "accusative": "Нижнекамски",
+        "instrumental": "Нижнекамсками",
+        "prepositional": "Нижнекамсках"
+      }
+    },
+    {
+      "word": "Новокузнецк",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новокузнецк",
+        "genitive": "Новокузнецка",
+        "dative": "Новокузнецку",
+        "accusative": "Новокузнецк",
+        "instrumental": "Новокузнецком",
+        "prepositional": "Новокузнецке"
+      },
+      "plural": {
+        "nominative": "Новокузнецки",
+        "genitive": "Новокузнецков",
+        "dative": "Новокузнецкам",
+        "accusative": "Новокузнецки",
+        "instrumental": "Новокузнецками",
+        "prepositional": "Новокузнецках"
+      }
+    },
+    {
+      "word": "Новомосковск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новомосковск",
+        "genitive": "Новомосковска",
+        "dative": "Новомосковску",
+        "accusative": "Новомосковск",
+        "instrumental": "Новомосковском",
+        "prepositional": "Новомосковске"
+      },
+      "plural": {
+        "nominative": "Новомосковски",
+        "genitive": "Новомосковсков",
+        "dative": "Новомосковскам",
+        "accusative": "Новомосковски",
+        "instrumental": "Новомосковсками",
+        "prepositional": "Новомосковсках"
+      }
+    },
+    {
+      "word": "Новороссийск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новороссийск",
+        "genitive": "Новороссийска",
+        "dative": "Новороссийску",
+        "accusative": "Новороссийск",
+        "instrumental": "Новороссийском",
+        "prepositional": "Новороссийске"
+      },
+      "plural": {
+        "nominative": "Новороссийски",
+        "genitive": "Новороссийсков",
+        "dative": "Новороссийскам",
+        "accusative": "Новороссийски",
+        "instrumental": "Новороссийсками",
+        "prepositional": "Новороссийсках"
+      }
+    },
+    {
+      "word": "Новосибирск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новосибирск",
+        "genitive": "Новосибирска",
+        "dative": "Новосибирску",
+        "accusative": "Новосибирск",
+        "instrumental": "Новосибирском",
+        "prepositional": "Новосибирске"
+      },
+      "plural": {
+        "nominative": "Новосибирски",
+        "genitive": "Новосибирсков",
+        "dative": "Новосибирскам",
+        "accusative": "Новосибирски",
+        "instrumental": "Новосибирсками",
+        "prepositional": "Новосибирсках"
+      }
+    },
+    {
+      "word": "Новочебоксарск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новочебоксарск",
+        "genitive": "Новочебоксарска",
+        "dative": "Новочебоксарску",
+        "accusative": "Новочебоксарск",
+        "instrumental": "Новочебоксарском",
+        "prepositional": "Новочебоксарске"
+      },
+      "plural": {
+        "nominative": "Новочебоксарски",
+        "genitive": "Новочебоксарсков",
+        "dative": "Новочебоксарскам",
+        "accusative": "Новочебоксарски",
+        "instrumental": "Новочебоксарсками",
+        "prepositional": "Новочебоксарсках"
+      }
+    },
+    {
+      "word": "Новочеркасск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новочеркасск",
+        "genitive": "Новочеркасска",
+        "dative": "Новочеркасску",
+        "accusative": "Новочеркасск",
+        "instrumental": "Новочеркасском",
+        "prepositional": "Новочеркасске"
+      },
+      "plural": {
+        "nominative": "Новочеркасски",
+        "genitive": "Новочеркассков",
+        "dative": "Новочеркасскам",
+        "accusative": "Новочеркасски",
+        "instrumental": "Новочеркассками",
+        "prepositional": "Новочеркассках"
+      }
+    },
+    {
+      "word": "Новошахтинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Новошахтинск",
+        "genitive": "Новошахтинска",
+        "dative": "Новошахтинску",
+        "accusative": "Новошахтинск",
+        "instrumental": "Новошахтинском",
+        "prepositional": "Новошахтинске"
+      },
+      "plural": {
+        "nominative": "Новошахтински",
+        "genitive": "Новошахтинсков",
+        "dative": "Новошахтинскам",
+        "accusative": "Новошахтински",
+        "instrumental": "Новошахтинсками",
+        "prepositional": "Новошахтинсках"
+      }
+    },
+    {
+      "word": "Ногинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ногинск",
+        "genitive": "Ногинска",
+        "dative": "Ногинску",
+        "accusative": "Ногинск",
+        "instrumental": "Ногинском",
+        "prepositional": "Ногинске"
+      },
+      "plural": {
+        "nominative": "Ногински",
+        "genitive": "Ногинсков",
+        "dative": "Ногинскам",
+        "accusative": "Ногински",
+        "instrumental": "Ногинсками",
+        "prepositional": "Ногинсках"
+      }
+    },
+    {
+      "word": "Норильск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Норильск",
+        "genitive": "Норильска",
+        "dative": "Норильску",
+        "accusative": "Норильск",
+        "instrumental": "Норильском",
+        "prepositional": "Норильске"
+      },
+      "plural": {
+        "nominative": "Норильски",
+        "genitive": "Норильсков",
+        "dative": "Норильскам",
+        "accusative": "Норильски",
+        "instrumental": "Норильсками",
+        "prepositional": "Норильсках"
+      }
+    },
+    {
+      "word": "Ноябрьск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ноябрьск",
+        "genitive": "Ноябрьска",
+        "dative": "Ноябрьску",
+        "accusative": "Ноябрьск",
+        "instrumental": "Ноябрьском",
+        "prepositional": "Ноябрьске"
+      },
+      "plural": {
+        "nominative": "Ноябрьски",
+        "genitive": "Ноябрьсков",
+        "dative": "Ноябрьскам",
+        "accusative": "Ноябрьски",
+        "instrumental": "Ноябрьсками",
+        "prepositional": "Ноябрьсках"
+      }
+    },
+    {
+      "word": "Обнинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Обнинск",
+        "genitive": "Обнинска",
+        "dative": "Обнинску",
+        "accusative": "Обнинск",
+        "instrumental": "Обнинском",
+        "prepositional": "Обнинске"
+      },
+      "plural": {
+        "nominative": "Обнински",
+        "genitive": "Обнинсков",
+        "dative": "Обнинскам",
+        "accusative": "Обнински",
+        "instrumental": "Обнинсками",
+        "prepositional": "Обнинсках"
+      }
+    },
+    {
+      "word": "Одинцово",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Одинцово",
+        "genitive": "Одинцова",
+        "dative": "Одинцову",
+        "accusative": "Одинцово",
+        "instrumental": "Одинцовом",
+        "prepositional": "Одинцове"
+      },
+      "plural": {
+        "nominative": "Одинцова",
+        "genitive": "Одинцов",
+        "dative": "Одинцовам",
+        "accusative": "Одинцова",
+        "instrumental": "Одинцовами",
+        "prepositional": "Одинцовах"
+      }
+    },
+    {
+      "word": "Октябрьский",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Октябрьский",
+        "genitive": "Октябрьского",
+        "dative": "Октябрьскому",
+        "accusative": "Октябрьский",
+        "instrumental": "Октябрьским",
+        "prepositional": "Октябрьском"
+      },
+      "plural": {
+        "nominative": "Октябрьские",
+        "genitive": "Октябрьских",
+        "dative": "Октябрьским",
+        "accusative": "Октябрьские",
+        "instrumental": "Октябрьскими",
+        "prepositional": "Октябрьских"
+      }
+    },
+    {
+      "word": "Омск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Омск",
+        "genitive": "Омска",
+        "dative": "Омску",
+        "accusative": "Омск",
+        "instrumental": "Омском",
+        "prepositional": "Омске"
+      },
+      "plural": {
+        "nominative": "Омски",
+        "genitive": "Омсков",
+        "dative": "Омскам",
+        "accusative": "Омски",
+        "instrumental": "Омсками",
+        "prepositional": "Омсках"
+      }
+    },
+    {
+      "word": "Орёл",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Орёл",
+        "genitive": "Орла",
+        "dative": "Орлу",
+        "accusative": "Орёл",
+        "instrumental": "Орлом",
+        "prepositional": "Орле"
+      },
+      "plural": {
+        "nominative": "Орлы",
+        "genitive": "Орлов",
+        "dative": "Орлам",
+        "accusative": "Орлы",
+        "instrumental": "Орлами",
+        "prepositional": "Орлах"
+      }
+    },
+    {
+      "word": "Орел",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Орел",
+        "genitive": "Орла",
+        "dative": "Орлу",
+        "accusative": "Орел",
+        "instrumental": "Орлом",
+        "prepositional": "Орле"
+      },
+      "plural": {
+        "nominative": "Орлы",
+        "genitive": "Орлов",
+        "dative": "Орлам",
+        "accusative": "Орлы",
+        "instrumental": "Орлами",
+        "prepositional": "Орлах"
+      }
+    },
+    {
+      "word": "Оренбург",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Оренбург",
+        "genitive": "Оренбурга",
+        "dative": "Оренбургу",
+        "accusative": "Оренбург",
+        "instrumental": "Оренбургом",
+        "prepositional": "Оренбурге"
+      },
+      "plural": {
+        "nominative": "Оренбурги",
+        "genitive": "Оренбургов",
+        "dative": "Оренбургам",
+        "accusative": "Оренбурги",
+        "instrumental": "Оренбургами",
+        "prepositional": "Оренбургах"
+      }
+    },
+    {
+      "word": "Орск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Орск",
+        "genitive": "Орска",
+        "dative": "Орску",
+        "accusative": "Орск",
+        "instrumental": "Орском",
+        "prepositional": "Орске"
+      },
+      "plural": {
+        "nominative": "Орски",
+        "genitive": "Орсков",
+        "dative": "Орскам",
+        "accusative": "Орски",
+        "instrumental": "Орсками",
+        "prepositional": "Орсках"
+      }
+    },
+    {
+      "word": "Пенза",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Пенза",
+        "genitive": "Пензы",
+        "dative": "Пензе",
+        "accusative": "Пензу",
+        "instrumental": "Пензой",
+        "prepositional": "Пензе"
+      },
+      "plural": {
+        "nominative": "Пензы",
+        "genitive": "Пенз",
+        "dative": "Пензам",
+        "accusative": "Пензы",
+        "instrumental": "Пензами",
+        "prepositional": "Пензах"
+      }
+    },
+    {
+      "word": "Первоуральск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Первоуральск",
+        "genitive": "Первоуральска",
+        "dative": "Первоуральску",
+        "accusative": "Первоуральск",
+        "instrumental": "Первоуральском",
+        "prepositional": "Первоуральске"
+      },
+      "plural": {
+        "nominative": "Первоуральски",
+        "genitive": "Первоуральсков",
+        "dative": "Первоуральскам",
+        "accusative": "Первоуральски",
+        "instrumental": "Первоуральсками",
+        "prepositional": "Первоуральсках"
+      }
+    },
+    {
+      "word": "Пермь",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Пермь",
+        "genitive": "Перми",
+        "dative": "Перми",
+        "accusative": "Пермь",
+        "instrumental": "Пермью",
+        "prepositional": "Перми"
+      },
+      "plural": {
+        "nominative": "Перми",
+        "genitive": "Пермей",
+        "dative": "Пермям",
+        "accusative": "Перми",
+        "instrumental": "Пермями",
+        "prepositional": "Пермях"
+      }
+    },
+    {
+      "word": "Петрозаводск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Петрозаводск",
+        "genitive": "Петрозаводска",
+        "dative": "Петрозаводску",
+        "accusative": "Петрозаводск",
+        "instrumental": "Петрозаводском",
+        "prepositional": "Петрозаводске"
+      },
+      "plural": {
+        "nominative": "Петрозаводски",
+        "genitive": "Петрозаводсков",
+        "dative": "Петрозаводскам",
+        "accusative": "Петрозаводски",
+        "instrumental": "Петрозаводсками",
+        "prepositional": "Петрозаводсках"
+      }
+    },
+    {
+      "word": "Петропавловск-Камчатский",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Петропавловск-Камчатский",
+        "genitive": "Петропавловска-Камчатского",
+        "dative": "Петропавловску-Камчатскому",
+        "accusative": "Петропавловск-Камчатский",
+        "instrumental": "Петропавловском-Камчатским",
+        "prepositional": "Петропавловске-Камчатском"
+      },
+      "plural": {
+        "nominative": "Петропавловски-Камчатские",
+        "genitive": "Петропавловсков-Камчатских",
+        "dative": "Петропавловскам-Камчатским",
+        "accusative": "Петропавловски-Камчатские",
+        "instrumental": "Петропавловсками-Камчатскими",
+        "prepositional": "Петропавловсках-Камчатских"
+      }
+    },
+    {
+      "word": "Подольск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Подольск",
+        "genitive": "Подольска",
+        "dative": "Подольску",
+        "accusative": "Подольск",
+        "instrumental": "Подольском",
+        "prepositional": "Подольске"
+      },
+      "plural": {
+        "nominative": "Подольски",
+        "genitive": "Подольсков",
+        "dative": "Подольскам",
+        "accusative": "Подольски",
+        "instrumental": "Подольсками",
+        "prepositional": "Подольсках"
+      }
+    },
+    {
+      "word": "Прокопьевск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Прокопьевск",
+        "genitive": "Прокопьевска",
+        "dative": "Прокопьевску",
+        "accusative": "Прокопьевск",
+        "instrumental": "Прокопьевском",
+        "prepositional": "Прокопьевске"
+      },
+      "plural": {
+        "nominative": "Прокопьевски",
+        "genitive": "Прокопьевсков",
+        "dative": "Прокопьевскам",
+        "accusative": "Прокопьевски",
+        "instrumental": "Прокопьевсками",
+        "prepositional": "Прокопьевсках"
+      }
+    },
+    {
+      "word": "Псков",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Псков",
+        "genitive": "Пскова",
+        "dative": "Пскову",
+        "accusative": "Псков",
+        "instrumental": "Псковом",
+        "prepositional": "Пскове"
+      },
+      "plural": {
+        "nominative": "Псковы",
+        "genitive": "Псковов",
+        "dative": "Псковам",
+        "accusative": "Псковы",
+        "instrumental": "Псковами",
+        "prepositional": "Псковах"
+      }
+    },
+    {
+      "word": "Пушкино",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Пушкино",
+        "genitive": "Пушкина",
+        "dative": "Пушкину",
+        "accusative": "Пушкино",
+        "instrumental": "Пушкином",
+        "prepositional": "Пушкине"
+      },
+      "plural": {
+        "nominative": "Пушкина",
+        "genitive": "Пушкин",
+        "dative": "Пушкинам",
+        "accusative": "Пушкина",
+        "instrumental": "Пушкинами",
+        "prepositional": "Пушкинах"
+      }
+    },
+    {
+      "word": "Пятигорск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Пятигорск",
+        "genitive": "Пятигорска",
+        "dative": "Пятигорску",
+        "accusative": "Пятигорск",
+        "instrumental": "Пятигорском",
+        "prepositional": "Пятигорске"
+      },
+      "plural": {
+        "nominative": "Пятигорски",
+        "genitive": "Пятигорсков",
+        "dative": "Пятигорскам",
+        "accusative": "Пятигорски",
+        "instrumental": "Пятигорсками",
+        "prepositional": "Пятигорсках"
+      }
+    },
+    {
+      "word": "Раменское",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Раменское",
+        "genitive": "Раменского",
+        "dative": "Раменскому",
+        "accusative": "Раменское",
+        "instrumental": "Раменским",
+        "prepositional": "Раменском"
+      },
+      "plural": {
+        "nominative": "Раменские",
+        "genitive": "Раменских",
+        "dative": "Раменским",
+        "accusative": "Раменские",
+        "instrumental": "Раменскими",
+        "prepositional": "Раменских"
+      }
+    },
+    {
+      "word": "Ростов-на-Дону",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ростов-на-Дону",
+        "genitive": "Ростова-на-Дону",
+        "dative": "Ростову-на-Дону",
+        "accusative": "Ростов-на-Дону",
+        "instrumental": "Ростовом-на-Дону",
+        "prepositional": "Ростове-на-Дону"
+      },
+      "plural": {
+        "nominative": "Ростовы-на-Дону",
+        "genitive": "Ростовов-на-Дону",
+        "dative": "Ростовам-на-Дону",
+        "accusative": "Ростовы-на-Дону",
+        "instrumental": "Ростовами-на-Дону",
+        "prepositional": "Ростовах-на-Дону"
+      }
+    },
+    {
+      "word": "Рубцовск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Рубцовск",
+        "genitive": "Рубцовска",
+        "dative": "Рубцовску",
+        "accusative": "Рубцовск",
+        "instrumental": "Рубцовском",
+        "prepositional": "Рубцовске"
+      },
+      "plural": {
+        "nominative": "Рубцовски",
+        "genitive": "Рубцовсков",
+        "dative": "Рубцовскам",
+        "accusative": "Рубцовски",
+        "instrumental": "Рубцовсками",
+        "prepositional": "Рубцовсках"
+      }
+    },
+    {
+      "word": "Рыбинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Рыбинск",
+        "genitive": "Рыбинска",
+        "dative": "Рыбинску",
+        "accusative": "Рыбинск",
+        "instrumental": "Рыбинском",
+        "prepositional": "Рыбинске"
+      },
+      "plural": {
+        "nominative": "Рыбински",
+        "genitive": "Рыбинсков",
+        "dative": "Рыбинскам",
+        "accusative": "Рыбински",
+        "instrumental": "Рыбинсками",
+        "prepositional": "Рыбинсках"
+      }
+    },
+    {
+      "word": "Рязань",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Рязань",
+        "genitive": "Рязани",
+        "dative": "Рязани",
+        "accusative": "Рязань",
+        "instrumental": "Рязанью",
+        "prepositional": "Рязани"
+      },
+      "plural": {
+        "nominative": "Рязани",
+        "genitive": "Рязаней",
+        "dative": "Рязаням",
+        "accusative": "Рязани",
+        "instrumental": "Рязанями",
+        "prepositional": "Рязанях"
+      }
+    },
+    {
+      "word": "Салават",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Салават",
+        "genitive": "Салавата",
+        "dative": "Салавату",
+        "accusative": "Салават",
+        "instrumental": "Салаватом",
+        "prepositional": "Салавате"
+      },
+      "plural": {
+        "nominative": "Салаваты",
+        "genitive": "Салаватов",
+        "dative": "Салаватам",
+        "accusative": "Салаваты",
+        "instrumental": "Салаватами",
+        "prepositional": "Салаватах"
+      }
+    },
+    {
+      "word": "Самара",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Самара",
+        "genitive": "Самары",
+        "dative": "Самаре",
+        "accusative": "Самару",
+        "instrumental": "Самарой",
+        "prepositional": "Самаре"
+      },
+      "plural": {
+        "nominative": "Самары",
+        "genitive": "Самар",
+        "dative": "Самарам",
+        "accusative": "Самары",
+        "instrumental": "Самарами",
+        "prepositional": "Самарах"
+      }
+    },
+    {
+      "word": "Санкт-Петербург",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Санкт-Петербург",
+        "genitive": "Санкт-Петербурга",
+        "dative": "Санкт-Петербургу",
+        "accusative": "Санкт-Петербург",
+        "instrumental": "Санкт-Петербургом",
+        "prepositional": "Санкт-Петербурге"
+      },
+      "plural": {
+        "nominative": "Санкт-Петербурги",
+        "genitive": "Санкт-Петербургов",
+        "dative": "Санкт-Петербургам",
+        "accusative": "Санкт-Петербурги",
+        "instrumental": "Санкт-Петербургами",
+        "prepositional": "Санкт-Петербургах"
+      }
+    },
+    {
+      "word": "Саранск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Саранск",
+        "genitive": "Саранска",
+        "dative": "Саранску",
+        "accusative": "Саранск",
+        "instrumental": "Саранском",
+        "prepositional": "Саранске"
+      },
+      "plural": {
+        "nominative": "Сарански",
+        "genitive": "Сарансков",
+        "dative": "Саранскам",
+        "accusative": "Сарански",
+        "instrumental": "Сарансками",
+        "prepositional": "Сарансках"
+      }
+    },
+    {
+      "word": "Сарапул",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Сарапул",
+        "genitive": "Сарапула",
+        "dative": "Сарапулу",
+        "accusative": "Сарапул",
+        "instrumental": "Сарапулом",
+        "prepositional": "Сарапуле"
+      },
+      "plural": {
+        "nominative": "Сарапулы",
+        "genitive": "Сарапулов",
+        "dative": "Сарапулам",
+        "accusative": "Сарапулы",
+        "instrumental": "Сарапулами",
+        "prepositional": "Сарапулах"
+      }
+    },
+    {
+      "word": "Саратов",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Саратов",
+        "genitive": "Саратова",
+        "dative": "Саратову",
+        "accusative": "Саратов",
+        "instrumental": "Саратовом",
+        "prepositional": "Саратове"
+      },
+      "plural": {
+        "nominative": "Саратовы",
+        "genitive": "Саратовов",
+        "dative": "Саратовам",
+        "accusative": "Саратовы",
+        "instrumental": "Саратовами",
+        "prepositional": "Саратовах"
+      }
+    },
+    {
+      "word": "Севастополь",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Севастополь",
+        "genitive": "Севастополя",
+        "dative": "Севастополю",
+        "accusative": "Севастополь",
+        "instrumental": "Севастополем",
+        "prepositional": "Севастополе"
+      },
+      "plural": {
+        "nominative": "Севастополи",
+        "genitive": "Севастополей",
+        "dative": "Севастополям",
+        "accusative": "Севастополи",
+        "instrumental": "Севастополями",
+        "prepositional": "Севастополях"
+      }
+    },
+    {
+      "word": "Северодвинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Северодвинск",
+        "genitive": "Северодвинска",
+        "dative": "Северодвинску",
+        "accusative": "Северодвинск",
+        "instrumental": "Северодвинском",
+        "prepositional": "Северодвинске"
+      },
+      "plural": {
+        "nominative": "Северодвински",
+        "genitive": "Северодвинсков",
+        "dative": "Северодвинскам",
+        "accusative": "Северодвински",
+        "instrumental": "Северодвинсками",
+        "prepositional": "Северодвинсках"
+      }
+    },
+    {
+      "word": "Северск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Северск",
+        "genitive": "Северска",
+        "dative": "Северску",
+        "accusative": "Северск",
+        "instrumental": "Северском",
+        "prepositional": "Северске"
+      },
+      "plural": {
+        "nominative": "Северски",
+        "genitive": "Северсков",
+        "dative": "Северскам",
+        "accusative": "Северски",
+        "instrumental": "Северсками",
+        "prepositional": "Северсках"
+      }
+    },
+    {
+      "word": "Серов",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Серов",
+        "genitive": "Серова",
+        "dative": "Серову",
+        "accusative": "Серов",
+        "instrumental": "Серовом",
+        "prepositional": "Серове"
+      },
+      "plural": {
+        "nominative": "Серовы",
+        "genitive": "Серовов",
+        "dative": "Серовам",
+        "accusative": "Серовы",
+        "instrumental": "Серовами",
+        "prepositional": "Серовах"
+      }
+    },
+    {
+      "word": "Серпухов",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Серпухов",
+        "genitive": "Серпухова",
+        "dative": "Серпухову",
+        "accusative": "Серпухов",
+        "instrumental": "Серпуховом",
+        "prepositional": "Серпухове"
+      },
+      "plural": {
+        "nominative": "Серпуховы",
+        "genitive": "Серпуховов",
+        "dative": "Серпуховам",
+        "accusative": "Серпуховы",
+        "instrumental": "Серпуховами",
+        "prepositional": "Серпуховах"
+      }
+    },
+    {
+      "word": "Симферополь",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Симферополь",
+        "genitive": "Симферополя",
+        "dative": "Симферополю",
+        "accusative": "Симферополь",
+        "instrumental": "Симферополем",
+        "prepositional": "Симферополе"
+      },
+      "plural": {
+        "nominative": "Симферополи",
+        "genitive": "Симферополей",
+        "dative": "Симферополям",
+        "accusative": "Симферополи",
+        "instrumental": "Симферополями",
+        "prepositional": "Симферополях"
+      }
+    },
+    {
+      "word": "Смоленск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Смоленск",
+        "genitive": "Смоленска",
+        "dative": "Смоленску",
+        "accusative": "Смоленск",
+        "instrumental": "Смоленском",
+        "prepositional": "Смоленске"
+      },
+      "plural": {
+        "nominative": "Смоленски",
+        "genitive": "Смоленсков",
+        "dative": "Смоленскам",
+        "accusative": "Смоленски",
+        "instrumental": "Смоленсками",
+        "prepositional": "Смоленсках"
+      }
+    },
+    {
+      "word": "Соликамск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Соликамск",
+        "genitive": "Соликамска",
+        "dative": "Соликамску",
+        "accusative": "Соликамск",
+        "instrumental": "Соликамском",
+        "prepositional": "Соликамске"
+      },
+      "plural": {
+        "nominative": "Соликамски",
+        "genitive": "Соликамсков",
+        "dative": "Соликамскам",
+        "accusative": "Соликамски",
+        "instrumental": "Соликамсками",
+        "prepositional": "Соликамсках"
+      }
+    },
+    {
+      "word": "Сочи",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": true
+    },
+    {
+      "word": "Ставрополь",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ставрополь",
+        "genitive": "Ставрополя",
+        "dative": "Ставрополю",
+        "accusative": "Ставрополь",
+        "instrumental": "Ставрополем",
+        "prepositional": "Ставрополе"
+      },
+      "plural": {
+        "nominative": "Ставрополи",
+        "genitive": "Ставрополей",
+        "dative": "Ставрополям",
+        "accusative": "Ставрополи",
+        "instrumental": "Ставрополями",
+        "prepositional": "Ставрополях"
+      }
+    },
+    {
+      "word": "Стерлитамак",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Стерлитамак",
+        "genitive": "Стерлитамака",
+        "dative": "Стерлитамаку",
+        "accusative": "Стерлитамак",
+        "instrumental": "Стерлитамаком",
+        "prepositional": "Стерлитамаке"
+      },
+      "plural": {
+        "nominative": "Стерлитамаки",
+        "genitive": "Стерлитамаков",
+        "dative": "Стерлитамакам",
+        "accusative": "Стерлитамаки",
+        "instrumental": "Стерлитамаками",
+        "prepositional": "Стерлитамаках"
+      }
+    },
+    {
+      "word": "Сургут",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Сургут",
+        "genitive": "Сургута",
+        "dative": "Сургуту",
+        "accusative": "Сургут",
+        "instrumental": "Сургутом",
+        "prepositional": "Сургуте"
+      },
+      "plural": {
+        "nominative": "Сургуты",
+        "genitive": "Сургутов",
+        "dative": "Сургутам",
+        "accusative": "Сургуты",
+        "instrumental": "Сургутами",
+        "prepositional": "Сургутах"
+      }
+    },
+    {
+      "word": "Сызрань",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Сызрань",
+        "genitive": "Сызрани",
+        "dative": "Сызрани",
+        "accusative": "Сызрань",
+        "instrumental": "Сызранью",
+        "prepositional": "Сызрани"
+      },
+      "plural": {
+        "nominative": "Сызрани",
+        "genitive": "Сызраней",
+        "dative": "Сызраням",
+        "accusative": "Сызрани",
+        "instrumental": "Сызранями",
+        "prepositional": "Сызранях"
+      }
+    },
+    {
+      "word": "Сыктывкар",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Сыктывкар",
+        "genitive": "Сыктывкара",
+        "dative": "Сыктывкару",
+        "accusative": "Сыктывкар",
+        "instrumental": "Сыктывкаром",
+        "prepositional": "Сыктывкаре"
+      },
+      "plural": {
+        "nominative": "Сыктывкары",
+        "genitive": "Сыктывкаров",
+        "dative": "Сыктывкарам",
+        "accusative": "Сыктывкары",
+        "instrumental": "Сыктывкарами",
+        "prepositional": "Сыктывкарах"
+      }
+    },
+    {
+      "word": "Таганрог",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Таганрог",
+        "genitive": "Таганрога",
+        "dative": "Таганрогу",
+        "accusative": "Таганрог",
+        "instrumental": "Таганрогом",
+        "prepositional": "Таганроге"
+      },
+      "plural": {
+        "nominative": "Таганроги",
+        "genitive": "Таганрогов",
+        "dative": "Таганрогам",
+        "accusative": "Таганроги",
+        "instrumental": "Таганрогами",
+        "prepositional": "Таганрогах"
+      }
+    },
+    {
+      "word": "Тамбов",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тамбов",
+        "genitive": "Тамбова",
+        "dative": "Тамбову",
+        "accusative": "Тамбов",
+        "instrumental": "Тамбовом",
+        "prepositional": "Тамбове"
+      },
+      "plural": {
+        "nominative": "Тамбовы",
+        "genitive": "Тамбовов",
+        "dative": "Тамбовам",
+        "accusative": "Тамбовы",
+        "instrumental": "Тамбовами",
+        "prepositional": "Тамбовах"
+      }
+    },
+    {
+      "word": "Тверь",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тверь",
+        "genitive": "Твери",
+        "dative": "Твери",
+        "accusative": "Тверь",
+        "instrumental": "Тверью",
+        "prepositional": "Твери"
+      },
+      "plural": {
+        "nominative": "Твери",
+        "genitive": "Тверей",
+        "dative": "Тверям",
+        "accusative": "Твери",
+        "instrumental": "Тверями",
+        "prepositional": "Тверях"
+      }
+    },
+    {
+      "word": "Тобольск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тобольск",
+        "genitive": "Тобольска",
+        "dative": "Тобольску",
+        "accusative": "Тобольск",
+        "instrumental": "Тобольском",
+        "prepositional": "Тобольске"
+      },
+      "plural": {
+        "nominative": "Тобольски",
+        "genitive": "Тобольсков",
+        "dative": "Тобольскам",
+        "accusative": "Тобольски",
+        "instrumental": "Тобольсками",
+        "prepositional": "Тобольсках"
+      }
+    },
+    {
+      "word": "Тольятти",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": true
+    },
+    {
+      "word": "Томск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Томск",
+        "genitive": "Томска",
+        "dative": "Томску",
+        "accusative": "Томск",
+        "instrumental": "Томском",
+        "prepositional": "Томске"
+      },
+      "plural": {
+        "nominative": "Томски",
+        "genitive": "Томсков",
+        "dative": "Томскам",
+        "accusative": "Томски",
+        "instrumental": "Томсками",
+        "prepositional": "Томсках"
+      }
+    },
+    {
+      "word": "Тула",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тула",
+        "genitive": "Тулы",
+        "dative": "Туле",
+        "accusative": "Тулу",
+        "instrumental": "Тулой",
+        "prepositional": "Туле"
+      },
+      "plural": {
+        "nominative": "Тулы",
+        "genitive": "Тул",
+        "dative": "Тулам",
+        "accusative": "Тулы",
+        "instrumental": "Тулами",
+        "prepositional": "Тулах"
+      }
+    },
+    {
+      "word": "Тюмень",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Тюмень",
+        "genitive": "Тюмени",
+        "dative": "Тюмени",
+        "accusative": "Тюмень",
+        "instrumental": "Тюменью",
+        "prepositional": "Тюмени"
+      },
+      "plural": {
+        "nominative": "Тюмени",
+        "genitive": "Тюменей",
+        "dative": "Тюменям",
+        "accusative": "Тюмени",
+        "instrumental": "Тюменями",
+        "prepositional": "Тюменях"
+      }
+    },
+    {
+      "word": "Улан-Удэ",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": true
+    },
+    {
+      "word": "Ульяновск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ульяновск",
+        "genitive": "Ульяновска",
+        "dative": "Ульяновску",
+        "accusative": "Ульяновск",
+        "instrumental": "Ульяновском",
+        "prepositional": "Ульяновске"
+      },
+      "plural": {
+        "nominative": "Ульяновски",
+        "genitive": "Ульяновсков",
+        "dative": "Ульяновскам",
+        "accusative": "Ульяновски",
+        "instrumental": "Ульяновсками",
+        "prepositional": "Ульяновсках"
+      }
+    },
+    {
+      "word": "Уссурийск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Уссурийск",
+        "genitive": "Уссурийска",
+        "dative": "Уссурийску",
+        "accusative": "Уссурийск",
+        "instrumental": "Уссурийском",
+        "prepositional": "Уссурийске"
+      },
+      "plural": {
+        "nominative": "Уссурийски",
+        "genitive": "Уссурийсков",
+        "dative": "Уссурийскам",
+        "accusative": "Уссурийски",
+        "instrumental": "Уссурийсками",
+        "prepositional": "Уссурийсках"
+      }
+    },
+    {
+      "word": "Уфа",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Уфа",
+        "genitive": "Уфы",
+        "dative": "Уфе",
+        "accusative": "Уфу",
+        "instrumental": "Уфой",
+        "prepositional": "Уфе"
+      },
+      "plural": {
+        "nominative": "Уфы",
+        "genitive": "Уф",
+        "dative": "Уфам",
+        "accusative": "Уфы",
+        "instrumental": "Уфами",
+        "prepositional": "Уфах"
+      }
+    },
+    {
+      "word": "Хабаровск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Хабаровск",
+        "genitive": "Хабаровска",
+        "dative": "Хабаровску",
+        "accusative": "Хабаровск",
+        "instrumental": "Хабаровском",
+        "prepositional": "Хабаровске"
+      },
+      "plural": {
+        "nominative": "Хабаровски",
+        "genitive": "Хабаровсков",
+        "dative": "Хабаровскам",
+        "accusative": "Хабаровски",
+        "instrumental": "Хабаровсками",
+        "prepositional": "Хабаровсках"
+      }
+    },
+    {
+      "word": "Хасавюрт",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Хасавюрт",
+        "genitive": "Хасавюрта",
+        "dative": "Хасавюрту",
+        "accusative": "Хасавюрт",
+        "instrumental": "Хасавюртом",
+        "prepositional": "Хасавюрте"
+      },
+      "plural": {
+        "nominative": "Хасавюрты",
+        "genitive": "Хасавюртов",
+        "dative": "Хасавюртам",
+        "accusative": "Хасавюрты",
+        "instrumental": "Хасавюртами",
+        "prepositional": "Хасавюртах"
+      }
+    },
+    {
+      "word": "Химки",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Химки",
+        "genitive": "Химок",
+        "dative": "Химкам",
+        "accusative": "Химки",
+        "instrumental": "Химками",
+        "prepositional": "Химках"
+      },
+      "plural": {
+        "nominative": "Химки",
+        "genitive": "Химок",
+        "dative": "Химкам",
+        "accusative": "Химки",
+        "instrumental": "Химками",
+        "prepositional": "Химках"
+      }
+    },
+    {
+      "word": "Чебоксары",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Чебоксары",
+        "genitive": "Чебоксар",
+        "dative": "Чебоксарам",
+        "accusative": "Чебоксары",
+        "instrumental": "Чебоксарами",
+        "prepositional": "Чебоксарах"
+      },
+      "plural": {
+        "nominative": "Чебоксары",
+        "genitive": "Чебоксар",
+        "dative": "Чебоксарам",
+        "accusative": "Чебоксары",
+        "instrumental": "Чебоксарами",
+        "prepositional": "Чебоксарах"
+      }
+    },
+    {
+      "word": "Челябинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Челябинск",
+        "genitive": "Челябинска",
+        "dative": "Челябинску",
+        "accusative": "Челябинск",
+        "instrumental": "Челябинском",
+        "prepositional": "Челябинске"
+      },
+      "plural": {
+        "nominative": "Челябински",
+        "genitive": "Челябинсков",
+        "dative": "Челябинскам",
+        "accusative": "Челябински",
+        "instrumental": "Челябинсками",
+        "prepositional": "Челябинсках"
+      }
+    },
+    {
+      "word": "Череповец",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Череповец",
+        "genitive": "Череповца",
+        "dative": "Череповцу",
+        "accusative": "Череповец",
+        "instrumental": "Череповцом",
+        "prepositional": "Череповце"
+      },
+      "plural": {
+        "nominative": "Череповцы",
+        "genitive": "Череповцов",
+        "dative": "Череповцам",
+        "accusative": "Череповцы",
+        "instrumental": "Череповцами",
+        "prepositional": "Череповцах"
+      }
+    },
+    {
+      "word": "Черкесск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Черкесск",
+        "genitive": "Черкесска",
+        "dative": "Черкесску",
+        "accusative": "Черкесск",
+        "instrumental": "Черкесском",
+        "prepositional": "Черкесске"
+      },
+      "plural": {
+        "nominative": "Черкесски",
+        "genitive": "Черкессков",
+        "dative": "Черкесскам",
+        "accusative": "Черкесски",
+        "instrumental": "Черкессками",
+        "prepositional": "Черкессках"
+      }
+    },
+    {
+      "word": "Чита",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Чита",
+        "genitive": "Читы",
+        "dative": "Чите",
+        "accusative": "Читу",
+        "instrumental": "Читой",
+        "prepositional": "Чите"
+      },
+      "plural": {
+        "nominative": "Читы",
+        "genitive": "Чит",
+        "dative": "Читам",
+        "accusative": "Читы",
+        "instrumental": "Читами",
+        "prepositional": "Читах"
+      }
+    },
+    {
+      "word": "Шахты",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Шахты",
+        "genitive": "Шахт",
+        "dative": "Шахтам",
+        "accusative": "Шахты",
+        "instrumental": "Шахтами",
+        "prepositional": "Шахтах"
+      },
+      "plural": {
+        "nominative": "Шахты",
+        "genitive": "Шахт",
+        "dative": "Шахтам",
+        "accusative": "Шахты",
+        "instrumental": "Шахтами",
+        "prepositional": "Шахтах"
+      }
+    },
+    {
+      "word": "Щёлково",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Щёлково",
+        "genitive": "Щёлкова",
+        "dative": "Щёлкову",
+        "accusative": "Щёлково",
+        "instrumental": "Щёлковом",
+        "prepositional": "Щёлкове"
+      },
+      "plural": {
+        "nominative": "Щёлкова",
+        "genitive": "Щёлков",
+        "dative": "Щёлковам",
+        "accusative": "Щёлкова",
+        "instrumental": "Щёлковами",
+        "prepositional": "Щёлковах"
+      }
+    },
+    {
+      "word": "Щелково",
+      "gender": "ср",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Щелково",
+        "genitive": "Щелкова",
+        "dative": "Щелкову",
+        "accusative": "Щелково",
+        "instrumental": "Щелковом",
+        "prepositional": "Щелкове"
+      },
+      "plural": {
+        "nominative": "Щелкова",
+        "genitive": "Щелков",
+        "dative": "Щелковам",
+        "accusative": "Щелкова",
+        "instrumental": "Щелковами",
+        "prepositional": "Щелковах"
+      }
+    },
+    {
+      "word": "Электросталь",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Электросталь",
+        "genitive": "Электростали",
+        "dative": "Электростали",
+        "accusative": "Электросталь",
+        "instrumental": "Электросталью",
+        "prepositional": "Электростали"
+      },
+      "plural": {
+        "nominative": "Электростали",
+        "genitive": "Электросталей",
+        "dative": "Электросталям",
+        "accusative": "Электростали",
+        "instrumental": "Электросталями",
+        "prepositional": "Электросталях"
+      }
+    },
+    {
+      "word": "Элиста",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Элиста",
+        "genitive": "Элисты",
+        "dative": "Элисте",
+        "accusative": "Элисту",
+        "instrumental": "Элистой",
+        "prepositional": "Элисте"
+      },
+      "plural": {
+        "nominative": "Элисты",
+        "genitive": "Элист",
+        "dative": "Элистам",
+        "accusative": "Элисты",
+        "instrumental": "Элистами",
+        "prepositional": "Элистах"
+      }
+    },
+    {
+      "word": "Энгельс",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Энгельс",
+        "genitive": "Энгельса",
+        "dative": "Энгельсу",
+        "accusative": "Энгельс",
+        "instrumental": "Энгельсом",
+        "prepositional": "Энгельсе"
+      },
+      "plural": {
+        "nominative": "Энгельсы",
+        "genitive": "Энгельсов",
+        "dative": "Энгельсам",
+        "accusative": "Энгельсы",
+        "instrumental": "Энгельсами",
+        "prepositional": "Энгельсах"
+      }
+    },
+    {
+      "word": "Южно-Сахалинск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Южно-Сахалинск",
+        "genitive": "Южно-Сахалинска",
+        "dative": "Южно-Сахалинску",
+        "accusative": "Южно-Сахалинск",
+        "instrumental": "Южно-Сахалинском",
+        "prepositional": "Южно-Сахалинске"
+      },
+      "plural": {
+        "nominative": "Южно-Сахалински",
+        "genitive": "Южно-Сахалинсков",
+        "dative": "Южно-Сахалинскам",
+        "accusative": "Южно-Сахалински",
+        "instrumental": "Южно-Сахалинсками",
+        "prepositional": "Южно-Сахалинсках"
+      }
+    },
+    {
+      "word": "Якутск",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Якутск",
+        "genitive": "Якутска",
+        "dative": "Якутску",
+        "accusative": "Якутск",
+        "instrumental": "Якутском",
+        "prepositional": "Якутске"
+      },
+      "plural": {
+        "nominative": "Якутски",
+        "genitive": "Якутсков",
+        "dative": "Якутскам",
+        "accusative": "Якутски",
+        "instrumental": "Якутсками",
+        "prepositional": "Якутсках"
+      }
+    },
+    {
+      "word": "Ялта",
+      "gender": "жен",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ялта",
+        "genitive": "Ялты",
+        "dative": "Ялте",
+        "accusative": "Ялту",
+        "instrumental": "Ялтой",
+        "prepositional": "Ялте"
+      },
+      "plural": {
+        "nominative": "Ялты",
+        "genitive": "Ялт",
+        "dative": "Ялтам",
+        "accusative": "Ялты",
+        "instrumental": "Ялтами",
+        "prepositional": "Ялтах"
+      }
+    },
+    {
+      "word": "Ярославль",
+      "gender": "муж",
+      "animacy": 0,
+      "indeclinable": false,
+      "singular": {
+        "nominative": "Ярославль",
+        "genitive": "Ярославля",
+        "dative": "Ярославлю",
+        "accusative": "Ярославль",
+        "instrumental": "Ярославлем",
+        "prepositional": "Ярославле"
+      },
+      "plural": {
+        "nominative": "Ярославли",
+        "genitive": "Ярославлей",
+        "dative": "Ярославлям",
+        "accusative": "Ярославли",
+        "instrumental": "Ярославлями",
+        "prepositional": "Ярославлях"
+      }
+    }
+  ]
+}
