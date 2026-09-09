@@ -8,11 +8,11 @@
 # version tag. If left empty, only :latest is pushed. If populated, both
 # :latest and :<version> are pushed.
 #
-# Required repository variables (Settings → Secrets and variables → Actions → Variables):
+# Required repository variables (Settings > Secrets and variables > Actions > Variables):
 #   REGISTRY           - Registry hostname (e.g., docker.io)
 #   DOCKER_IMAGE_NAME  - Image name without username (e.g., ruslovar-db)
 #
-# Required repository secrets (Settings → Secrets and variables → Actions → Secrets):
+# Required repository secrets (Settings > Secrets and variables > Actions > Secrets):
 #   DOCKERHUB_USERNAME - Registry username (also used as the image namespace)
 #   DOCKERHUB_TOKEN    - Registry access token
 # =============================================================================
@@ -27,10 +27,22 @@ on:
   # Database changes are infrequent and should be deliberate.
   workflow_dispatch:
     inputs:
+      # What should the workflow do?
+      action:
+        description: 'What should this workflow do? "dump" regenerates the SQL dump and pushes it to the repo. "image" builds the Docker image with the regenerated dump baked in and pushes it to Docker Hub. "both" does both.'
+        required: true
+        type: choice
+        options:
+          - dump
+          - image
+          - both
+        default: both
+
       # Optional version tag. Empty means "latest only."
       # Non-empty means "latest + this version tag."
+      # Only used when building the Docker image.
       version:
-        description: 'Version tag (e.g., v1.2.0). Leave empty for latest only.'
+        description: 'Version tag (e.g., v1.2.0). Leave empty for latest only. Only used when building the Docker image.'
         required: false
         type: string
         default: ''
@@ -72,6 +84,15 @@ env:
   REGISTRY: ${{ vars.REGISTRY }}
   DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
 
+  # Commit message used by the "Commit updated dump" step.
+  # Stored here as a block scalar so the multi-line message does not
+  # break YAML parsing (a bare Refs: line inside a run: block would be
+  # interpreted as a new mapping key).
+  COMMIT_MESSAGE: |
+    chore(db): regenerate nouns_morf.sql.gz via GitHub Actions (#7)
+
+    Refs: #7
+
   # MySQL connection settings for the build script.
   #
   # Note:
@@ -91,7 +112,15 @@ env:
   DB_NAME: runouns
 
 jobs:
-  build-db:
+  # ---------------------------------------------------------------------------
+  # Job 1: Regenerate the database dump
+  #
+  # Always runs. Fetches the upstream dump, applies transformations,
+  # verifies the result, and exports db/nouns_morf.sql.gz. If the user
+  # selected "dump" or "both", the regenerated dump is committed back to
+  # the repository.
+  # ---------------------------------------------------------------------------
+  build-dump:
     runs-on: ubuntu-latest
 
     # -------------------------------------------------------------------------
@@ -155,7 +184,76 @@ jobs:
         run: ./bin/build-db.sh
 
       # -----------------------------------------------------------------------
-      # 4. Set up QEMU
+      # 4. Upload the generated dump as an artifact
+      #
+      # The next job (build-image) runs on a different runner. To make
+      # db/nouns_morf.sql.gz available there, it is uploaded as a workflow
+      # artifact. The build-image job downloads it before building the
+      # Docker image.
+      # -----------------------------------------------------------------------
+      - name: Upload generated dump as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: nouns_morf
+          path: db/nouns_morf.sql.gz
+
+      # -----------------------------------------------------------------------
+      # 5. Commit and push the regenerated dump
+      #
+      # Runs only when the user selected "dump" or "both".
+      #
+      # Stages db/nouns_morf.sql.gz and commits it back to the repository.
+      # If the regenerated dump is identical to what is already committed,
+      # the step skips committing.
+      # -----------------------------------------------------------------------
+      - name: Commit updated dump
+        if: github.event.inputs.action == 'dump' || github.event.inputs.action == 'both'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add db/nouns_morf.sql.gz
+
+          if git diff --cached --quiet; then
+            echo "No changes to db/nouns_morf.sql.gz. Nothing to commit."
+          else
+            git commit -m "$COMMIT_MESSAGE"
+            git push
+          fi
+
+  # ---------------------------------------------------------------------------
+  # Job 2: Build and push the Docker image
+  #
+  # Runs only when the user selected "image" or "both". Depends on
+  # build-dump completing successfully. Downloads the generated dump
+  # artifact, then builds and pushes the Docker image.
+  # ---------------------------------------------------------------------------
+  build-image:
+    needs: build-dump
+    if: github.event.inputs.action == 'image' || github.event.inputs.action == 'both'
+    runs-on: ubuntu-latest
+
+    steps:
+      # -----------------------------------------------------------------------
+      # 1. Check out the repository
+      # -----------------------------------------------------------------------
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # -----------------------------------------------------------------------
+      # 2. Download the generated dump artifact
+      #
+      # Retrieves db/nouns_morf.sql.gz from the build-dump job. The
+      # Dockerfile expects this file at db/nouns_morf.sql.gz.
+      # -----------------------------------------------------------------------
+      - name: Download generated dump artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: nouns_morf
+          path: db/
+
+      # -----------------------------------------------------------------------
+      # 3. Set up QEMU
       #
       # Enables emulation for non-native architectures (arm64 on amd64
       # runners).
@@ -164,7 +262,7 @@ jobs:
         uses: docker/setup-qemu-action@v3
 
       # -----------------------------------------------------------------------
-      # 5. Set up Docker Buildx
+      # 4. Set up Docker Buildx
       #
       # Enables multi-platform image builds.
       # -----------------------------------------------------------------------
@@ -172,7 +270,7 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       # -----------------------------------------------------------------------
-      # 6. Log in to the registry
+      # 5. Log in to the registry
       #
       # Authenticates to Docker Hub using repository secrets.
       # -----------------------------------------------------------------------
@@ -184,7 +282,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # -----------------------------------------------------------------------
-      # 7. Determine image tags
+      # 6. Determine image tags
       #
       # Constructs the tag list based on whether a version was provided.
       #
@@ -225,7 +323,7 @@ jobs:
           echo "tags=$TAGS" >> $GITHUB_OUTPUT
 
       # -----------------------------------------------------------------------
-      # 8. Build and push
+      # 7. Build and push
       #
       # Builds the Docker image using the repo root as context and the
       # Dockerfile at the repo root. The tags are read from the output of
