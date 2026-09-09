@@ -795,12 +795,14 @@ def entry_exists(
     #     our purposes the COLLATE must be applied on the parameter.
     #     (Parameters here are just strings, they have no predefined
     #     column charset, so nothing for MySQL to reject.)
+
     if case_insensitive:
-        where_clause = "LOWER(word) = %s COLLATE utf8mb4_bin"
+        prefix = "LOWER(word)"
         param = root_word.lower()
     else:
-        where_clause = "word = %s COLLATE utf8mb4_bin"
+        prefix = "word"
         param = root_word
+    where_clause = f"{prefix} = %s COLLATE utf8mb4_bin"
 
     cursor.execute(
         f"""
