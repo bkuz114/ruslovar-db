@@ -1475,8 +1475,6 @@ def delete_file_entries(import_file: ImportFile, config: dict) -> FileResult:
                     root_code=0,
                     status="not_found",
                     rows_affected=0,
-                    error=True,
-                    error_message=f"Cannot delete {entry.word}: Not found in database",
                 )
                 result.entries.append(entry_result)
                 print_entry_result(entry_result)
