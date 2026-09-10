@@ -743,6 +743,48 @@ def get_created_at(cursor: pymysql.cursors.Cursor) -> datetime:
     return cursor.fetchone()["now"]
 
 
+def insert_row(
+    cursor: pymysql.cursors.Cursor,
+    word: str,
+    code: int,
+    code_parent: int,
+    plural: int,
+    # gender is None for plural, hence make optional
+    gender: Optional[str],
+    # wcase (declension class e.g. "им", etc.) None indeclinable, hence make optional
+    wcase: Optional[str],
+    animacy: int,
+    created_at: datetime,
+    category: str,
+) -> None:
+    """Insert a single row into nouns_morf.
+
+    Args:
+        cursor (pymysql.cursors.Cursor): Active cursor.
+        word (str): The word form to insert.
+        code (int): The code value for this row.
+        code_parent (int): The parent code for this row.
+        plural (int): 0 for singular rows, 1 for plural rows.
+        gender (Optional[str]): The grammatical gender, or None
+            for plural rows (stored as NULL).
+        wcase (Optional[str]): The grammatical case, or None for
+            indeclinable roots (stored as NULL).
+        animacy (int): 1 for animate, 0 for inanimate.
+        created_at (datetime): Shared timestamp for all rows.
+        category (str): Category string.
+    """
+    cursor.execute(
+        """
+        INSERT INTO nouns_morf
+            (word, code, code_parent, plural, gender, wcase, soul,
+             is_custom, created_at, category)
+        VALUES
+            (%s, %s, %s, %s, %s, %s, %s, 1, %s, %s)
+        """,
+        (word, code, code_parent, plural, gender, wcase, animacy, created_at, category),
+    )
+
+
 def entry_exists(
     cursor: pymysql.cursors.Cursor,
     root_word: str,
@@ -852,23 +894,17 @@ def insert_entry(
         root_word = entry.singular["nominative"]
         root_wcase = "им"
 
-    cursor.execute(
-        """
-        INSERT INTO nouns_morf
-            (word, code, code_parent, plural, gender, wcase, soul,
-             is_custom, created_at, category)
-        VALUES
-            (%s, %s, 0, 0, %s, %s, %s, 1, %s, %s)
-        """,
-        (
-            root_word,
-            code,
-            entry.gender,
-            root_wcase,
-            entry.animacy,
-            created_at,
-            category,
-        ),
+    insert_row(
+        cursor,
+        word=root_word,
+        code=code,
+        code_parent=0,
+        plural=0,
+        gender=entry.gender,
+        wcase=root_wcase,
+        animacy=entry.animacy,
+        created_at=created_at,
+        category=category,
     )
     root_code = code  # the root row's code is the first code assigned
     code += 1
@@ -882,46 +918,34 @@ def insert_entry(
     for wcase, case_key in CASE_ORDER[1:]:
         if case_key not in entry.singular:
             continue
-        cursor.execute(
-            """
-            INSERT INTO nouns_morf
-                (word, code, code_parent, plural, gender, wcase, soul,
-                 is_custom, created_at, category)
-            VALUES
-                (%s, %s, %s, 0, %s, %s, %s, 1, %s, %s)
-            """,
-            (
-                entry.singular[case_key],
-                code,
-                root_code,
-                entry.gender,
-                wcase,
-                entry.animacy,
-                created_at,
-                category,
-            ),
+        insert_row(
+            cursor,
+            word=entry.singular[case_key],
+            code=code,
+            code_parent=root_code,
+            plural=0,
+            gender=entry.gender,
+            wcase=wcase,
+            animacy=entry.animacy,
+            created_at=created_at,
+            category=category,
         )
         code += 1
 
     # Insert plural declensions if present.
     if entry.plural:
         # Nominative plural is a child of the root.
-        cursor.execute(
-            """
-            INSERT INTO nouns_morf
-                (word, code, code_parent, plural, gender, wcase, soul,
-                 is_custom, created_at, category)
-            VALUES
-                (%s, %s, %s, 1, NULL, 'им', %s, 1, %s, %s)
-            """,
-            (
-                entry.plural["nominative"],
-                code,
-                root_code,
-                entry.animacy,
-                created_at,
-                category,
-            ),
+        insert_row(
+            cursor,
+            word=entry.plural["nominative"],
+            code=code,
+            code_parent=root_code,
+            plural=1,
+            gender=None,
+            wcase="им",
+            animacy=entry.animacy,
+            created_at=created_at,
+            category=category,
         )
         plural_root_code = code
         code += 1
@@ -930,23 +954,17 @@ def insert_entry(
         for wcase, case_key in CASE_ORDER[1:]:
             if case_key not in entry.plural:
                 continue
-            cursor.execute(
-                """
-                INSERT INTO nouns_morf
-                    (word, code, code_parent, plural, gender, wcase, soul,
-                     is_custom, created_at, category)
-                VALUES
-                    (%s, %s, %s, 1, NULL, %s, %s, 1, %s, %s)
-                """,
-                (
-                    entry.plural[case_key],
-                    code,
-                    plural_root_code,
-                    wcase,
-                    entry.animacy,
-                    created_at,
-                    category,
-                ),
+            insert_row(
+                cursor,
+                word=entry.plural[case_key],
+                code=code,
+                code_parent=plural_root_code,
+                plural=1,
+                gender=None,
+                wcase=wcase,
+                animacy=entry.animacy,
+                created_at=created_at,
+                category=category,
             )
             code += 1
 
