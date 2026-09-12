@@ -2717,7 +2717,7 @@ def _process_file(
         category, raw_entries = validate_file(doc)
     except (OSError, json.JSONDecodeError, ParseError) as exc:
         logger.error(f"  ! {path}: {exc}")
-        return counts, True, False, [], ""
+        return counts, [], ""
 
     # Step 2: parse entries. Parse failures are reported and excluded.
     entries = []
