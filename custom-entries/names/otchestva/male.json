@@ -4,7 +4,7 @@
     {
       "word": "Александрович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Александрович",
@@ -27,7 +27,7 @@
     {
       "word": "Алексеевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алексеевич",
@@ -50,7 +50,7 @@
     {
       "word": "Андреевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Андреевич",
@@ -73,7 +73,7 @@
     {
       "word": "Артёмович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Артёмович",
@@ -96,7 +96,7 @@
     {
       "word": "Артемович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Артемович",
@@ -119,7 +119,7 @@
     {
       "word": "Борисович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Борисович",
@@ -142,7 +142,7 @@
     {
       "word": "Вадимович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Вадимович",
@@ -165,7 +165,7 @@
     {
       "word": "Васильевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Васильевич",
@@ -188,7 +188,7 @@
     {
       "word": "Викторович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Викторович",
@@ -211,7 +211,7 @@
     {
       "word": "Владимирович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Владимирович",
@@ -234,7 +234,7 @@
     {
       "word": "Геннадьевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Геннадьевич",
@@ -257,7 +257,7 @@
     {
       "word": "Григорьевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Григорьевич",
@@ -280,7 +280,7 @@
     {
       "word": "Данилович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Данилович",
@@ -303,7 +303,7 @@
     {
       "word": "Денисович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Денисович",
@@ -326,7 +326,7 @@
     {
       "word": "Дмитриевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Дмитриевич",
@@ -349,7 +349,7 @@
     {
       "word": "Евгеньевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Евгеньевич",
@@ -372,7 +372,7 @@
     {
       "word": "Егорович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Егорович",
@@ -395,7 +395,7 @@
     {
       "word": "Захарович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Захарович",
@@ -418,7 +418,7 @@
     {
       "word": "Иванович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Иванович",
@@ -441,7 +441,7 @@
     {
       "word": "Игоревич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Игоревич",
@@ -464,7 +464,7 @@
     {
       "word": "Ильич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ильич",
@@ -487,7 +487,7 @@
     {
       "word": "Кириллович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кириллович",
@@ -510,7 +510,7 @@
     {
       "word": "Константинович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Константинович",
@@ -533,7 +533,7 @@
     {
       "word": "Кузьмич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кузьмич",
@@ -556,7 +556,7 @@
     {
       "word": "Львович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Львович",
@@ -579,7 +579,7 @@
     {
       "word": "Лукич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лукич",
@@ -602,7 +602,7 @@
     {
       "word": "Максимович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Максимович",
@@ -625,7 +625,7 @@
     {
       "word": "Матвеевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Матвеевич",
@@ -648,7 +648,7 @@
     {
       "word": "Михайлович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Михайлович",
@@ -671,7 +671,7 @@
     {
       "word": "Никитич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никитич",
@@ -694,7 +694,7 @@
     {
       "word": "Николаевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Николаевич",
@@ -717,7 +717,7 @@
     {
       "word": "Олегович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Олегович",
@@ -740,7 +740,7 @@
     {
       "word": "Павлович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Павлович",
@@ -763,7 +763,7 @@
     {
       "word": "Петрович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Петрович",
@@ -786,7 +786,7 @@
     {
       "word": "Романович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Романович",
@@ -809,7 +809,7 @@
     {
       "word": "Семёнович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семёнович",
@@ -832,7 +832,7 @@
     {
       "word": "Семенович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семенович",
@@ -855,7 +855,7 @@
     {
       "word": "Сергеевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сергеевич",
@@ -878,7 +878,7 @@
     {
       "word": "Степанович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Степанович",
@@ -901,7 +901,7 @@
     {
       "word": "Тимофеевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тимофеевич",
@@ -924,7 +924,7 @@
     {
       "word": "Фёдорович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фёдорович",
@@ -947,7 +947,7 @@
     {
       "word": "Федорович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Федорович",
@@ -970,7 +970,7 @@
     {
       "word": "Филиппович",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Филиппович",
@@ -993,7 +993,7 @@
     {
       "word": "Фомич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фомич",
@@ -1016,7 +1016,7 @@
     {
       "word": "Юрьевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Юрьевич",
@@ -1039,7 +1039,7 @@
     {
       "word": "Яковлевич",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Яковлевич",

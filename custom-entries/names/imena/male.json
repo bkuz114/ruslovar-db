@@ -4,7 +4,7 @@
     {
       "word": "Александр",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Александр",
@@ -27,7 +27,7 @@
     {
       "word": "Алексей",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алексей",
@@ -50,7 +50,7 @@
     {
       "word": "Андрей",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Андрей",
@@ -73,7 +73,7 @@
     {
       "word": "Артём",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Артём",
@@ -96,7 +96,7 @@
     {
       "word": "Артем",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Артем",
@@ -119,7 +119,7 @@
     {
       "word": "Борис",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Борис",
@@ -142,7 +142,7 @@
     {
       "word": "Вадим",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Вадим",
@@ -165,7 +165,7 @@
     {
       "word": "Василий",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Василий",
@@ -188,7 +188,7 @@
     {
       "word": "Виктор",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Виктор",
@@ -211,7 +211,7 @@
     {
       "word": "Владимир",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Владимир",
@@ -234,7 +234,7 @@
     {
       "word": "Геннадий",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Геннадий",
@@ -257,7 +257,7 @@
     {
       "word": "Григорий",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Григорий",
@@ -280,7 +280,7 @@
     {
       "word": "Даниил",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Даниил",
@@ -303,7 +303,7 @@
     {
       "word": "Денис",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Денис",
@@ -326,7 +326,7 @@
     {
       "word": "Дмитрий",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Дмитрий",
@@ -349,7 +349,7 @@
     {
       "word": "Евгений",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Евгений",
@@ -372,7 +372,7 @@
     {
       "word": "Егор",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Егор",
@@ -395,7 +395,7 @@
     {
       "word": "Захар",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Захар",
@@ -418,7 +418,7 @@
     {
       "word": "Иван",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Иван",
@@ -441,7 +441,7 @@
     {
       "word": "Игорь",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Игорь",
@@ -464,7 +464,7 @@
     {
       "word": "Илья",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Илья",
@@ -487,7 +487,7 @@
     {
       "word": "Кирилл",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кирилл",
@@ -510,7 +510,7 @@
     {
       "word": "Константин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Константин",
@@ -533,7 +533,7 @@
     {
       "word": "Кузьма",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кузьма",
@@ -556,7 +556,7 @@
     {
       "word": "Лев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лев",
@@ -579,7 +579,7 @@
     {
       "word": "Лука",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лука",
@@ -602,7 +602,7 @@
     {
       "word": "Максим",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Максим",
@@ -625,7 +625,7 @@
     {
       "word": "Матвей",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Матвей",
@@ -648,7 +648,7 @@
     {
       "word": "Михаил",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Михаил",
@@ -671,7 +671,7 @@
     {
       "word": "Никита",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никита",
@@ -694,7 +694,7 @@
     {
       "word": "Николай",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Николай",
@@ -717,7 +717,7 @@
     {
       "word": "Олег",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Олег",
@@ -740,7 +740,7 @@
     {
       "word": "Павел",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Павел",
@@ -763,7 +763,7 @@
     {
       "word": "Пётр",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Пётр",
@@ -786,7 +786,7 @@
     {
       "word": "Петр",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Петр",
@@ -809,7 +809,7 @@
     {
       "word": "Роман",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Роман",
@@ -832,7 +832,7 @@
     {
       "word": "Семён",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семён",
@@ -855,7 +855,7 @@
     {
       "word": "Семен",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семен",
@@ -878,7 +878,7 @@
     {
       "word": "Сергей",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сергей",
@@ -901,7 +901,7 @@
     {
       "word": "Степан",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Степан",
@@ -924,7 +924,7 @@
     {
       "word": "Тимофей",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тимофей",
@@ -947,7 +947,7 @@
     {
       "word": "Фёдор",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фёдор",
@@ -970,7 +970,7 @@
     {
       "word": "Федор",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Федор",
@@ -993,7 +993,7 @@
     {
       "word": "Филипп",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Филипп",
@@ -1016,7 +1016,7 @@
     {
       "word": "Фома",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фома",
@@ -1039,7 +1039,7 @@
     {
       "word": "Юрий",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Юрий",
@@ -1062,7 +1062,7 @@
     {
       "word": "Яков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Яков",

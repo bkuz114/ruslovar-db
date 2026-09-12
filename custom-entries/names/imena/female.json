@@ -4,7 +4,7 @@
     {
       "word": "Александра",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Александра",
@@ -27,7 +27,7 @@
     {
       "word": "Алёна",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алёна",
@@ -50,7 +50,7 @@
     {
       "word": "Алена",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алена",
@@ -73,7 +73,7 @@
     {
       "word": "Алина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алина",
@@ -96,7 +96,7 @@
     {
       "word": "Анастасия",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Анастасия",
@@ -119,7 +119,7 @@
     {
       "word": "Анна",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Анна",
@@ -142,7 +142,7 @@
     {
       "word": "Валентина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Валентина",
@@ -165,7 +165,7 @@
     {
       "word": "Валерия",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Валерия",
@@ -188,7 +188,7 @@
     {
       "word": "Варвара",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Варвара",
@@ -211,7 +211,7 @@
     {
       "word": "Вера",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Вера",
@@ -234,7 +234,7 @@
     {
       "word": "Виктория",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Виктория",
@@ -257,7 +257,7 @@
     {
       "word": "Галина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Галина",
@@ -280,7 +280,7 @@
     {
       "word": "Дарья",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Дарья",
@@ -303,7 +303,7 @@
     {
       "word": "Евгения",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Евгения",
@@ -326,7 +326,7 @@
     {
       "word": "Екатерина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Екатерина",
@@ -349,7 +349,7 @@
     {
       "word": "Елена",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Елена",
@@ -372,7 +372,7 @@
     {
       "word": "Ирина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ирина",
@@ -395,7 +395,7 @@
     {
       "word": "Ксения",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ксения",
@@ -418,7 +418,7 @@
     {
       "word": "Лариса",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лариса",
@@ -441,7 +441,7 @@
     {
       "word": "Любовь",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Любовь",
@@ -464,7 +464,7 @@
     {
       "word": "Людмила",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Людмила",
@@ -487,7 +487,7 @@
     {
       "word": "Маргарита",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Маргарита",
@@ -510,7 +510,7 @@
     {
       "word": "Мария",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Мария",
@@ -533,7 +533,7 @@
     {
       "word": "Марина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Марина",
@@ -556,7 +556,7 @@
     {
       "word": "Надежда",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Надежда",
@@ -579,7 +579,7 @@
     {
       "word": "Наталья",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Наталья",
@@ -602,7 +602,7 @@
     {
       "word": "Нина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Нина",
@@ -625,7 +625,7 @@
     {
       "word": "Ольга",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ольга",
@@ -648,7 +648,7 @@
     {
       "word": "Полина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Полина",
@@ -671,7 +671,7 @@
     {
       "word": "Светлана",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Светлана",
@@ -694,7 +694,7 @@
     {
       "word": "Софья",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Софья",
@@ -717,7 +717,7 @@
     {
       "word": "Тамара",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тамара",
@@ -740,7 +740,7 @@
     {
       "word": "Татьяна",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Татьяна",
@@ -763,7 +763,7 @@
     {
       "word": "Ульяна",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ульяна",
@@ -786,7 +786,7 @@
     {
       "word": "Юлия",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Юлия",

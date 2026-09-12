@@ -4,7 +4,7 @@
     {
       "word": "Абакан",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Абакан",
@@ -26,7 +26,7 @@
     {
       "word": "Альметьевск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Альметьевск",
@@ -48,7 +48,7 @@
     {
       "word": "Ангарск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ангарск",
@@ -70,7 +70,7 @@
     {
       "word": "Арзамас",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Арзамас",
@@ -92,7 +92,7 @@
     {
       "word": "Армавир",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Армавир",
@@ -114,7 +114,7 @@
     {
       "word": "Артём",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Артём",
@@ -136,7 +136,7 @@
     {
       "word": "Артем",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Артем",
@@ -158,7 +158,7 @@
     {
       "word": "Архангельск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Архангельск",
@@ -180,7 +180,7 @@
     {
       "word": "Астрахань",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Астрахань",
@@ -202,7 +202,7 @@
     {
       "word": "Ачинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ачинск",
@@ -224,7 +224,7 @@
     {
       "word": "Балаково",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Балаково",
@@ -246,7 +246,7 @@
     {
       "word": "Балашиха",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Балашиха",
@@ -268,7 +268,7 @@
     {
       "word": "Барнаул",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Барнаул",
@@ -290,7 +290,7 @@
     {
       "word": "Батайск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Батайск",
@@ -312,7 +312,7 @@
     {
       "word": "Белгород",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Белгород",
@@ -334,7 +334,7 @@
     {
       "word": "Бердск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Бердск",
@@ -356,7 +356,7 @@
     {
       "word": "Березники",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Березники",
@@ -378,7 +378,7 @@
     {
       "word": "Бийск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Бийск",
@@ -400,7 +400,7 @@
     {
       "word": "Благовещенск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Благовещенск",
@@ -422,7 +422,7 @@
     {
       "word": "Братск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Братск",
@@ -444,7 +444,7 @@
     {
       "word": "Брянск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Брянск",
@@ -466,7 +466,7 @@
     {
       "word": "Владивосток",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Владивосток",
@@ -488,7 +488,7 @@
     {
       "word": "Владикавказ",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Владикавказ",
@@ -510,7 +510,7 @@
     {
       "word": "Владимир",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Владимир",
@@ -532,7 +532,7 @@
     {
       "word": "Волгоград",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Волгоград",
@@ -554,7 +554,7 @@
     {
       "word": "Волгодонск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Волгодонск",
@@ -576,7 +576,7 @@
     {
       "word": "Волжский",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Волжский",
@@ -598,7 +598,7 @@
     {
       "word": "Вологда",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Вологда",
@@ -620,7 +620,7 @@
     {
       "word": "Воронеж",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Воронеж",
@@ -642,7 +642,7 @@
     {
       "word": "Грозный",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Грозный",
@@ -664,7 +664,7 @@
     {
       "word": "Дербент",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Дербент",
@@ -686,7 +686,7 @@
     {
       "word": "Дзержинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Дзержинск",
@@ -708,7 +708,7 @@
     {
       "word": "Димитровград",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Димитровград",
@@ -730,7 +730,7 @@
     {
       "word": "Домодедово",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Домодедово",
@@ -752,7 +752,7 @@
     {
       "word": "Евпатория",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Евпатория",
@@ -774,7 +774,7 @@
     {
       "word": "Екатеринбург",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Екатеринбург",
@@ -796,7 +796,7 @@
     {
       "word": "Елец",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Елец",
@@ -818,7 +818,7 @@
     {
       "word": "Ессентуки",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ессентуки",
@@ -840,7 +840,7 @@
     {
       "word": "Железногорск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Железногорск",
@@ -862,7 +862,7 @@
     {
       "word": "Жуковский",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Жуковский",
@@ -884,7 +884,7 @@
     {
       "word": "Зеленоград",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Зеленоград",
@@ -906,7 +906,7 @@
     {
       "word": "Златоуст",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Златоуст",
@@ -928,7 +928,7 @@
     {
       "word": "Иваново",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Иваново",
@@ -950,7 +950,7 @@
     {
       "word": "Ижевск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ижевск",
@@ -972,7 +972,7 @@
     {
       "word": "Иркутск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Иркутск",
@@ -994,7 +994,7 @@
     {
       "word": "Йошкар-Ола",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Йошкар-Ола",
@@ -1016,7 +1016,7 @@
     {
       "word": "Казань",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Казань",
@@ -1038,7 +1038,7 @@
     {
       "word": "Калининград",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Калининград",
@@ -1060,7 +1060,7 @@
     {
       "word": "Калуга",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Калуга",
@@ -1082,7 +1082,7 @@
     {
       "word": "Каменск-Уральский",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Каменск-Уральский",
@@ -1104,7 +1104,7 @@
     {
       "word": "Камышин",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Камышин",
@@ -1126,7 +1126,7 @@
     {
       "word": "Каспийск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Каспийск",
@@ -1148,7 +1148,7 @@
     {
       "word": "Кемерово",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Кемерово",
@@ -1170,7 +1170,7 @@
     {
       "word": "Керчь",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Керчь",
@@ -1192,7 +1192,7 @@
     {
       "word": "Киров",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Киров",
@@ -1214,7 +1214,7 @@
     {
       "word": "Киселёвск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселёвск",
@@ -1236,7 +1236,7 @@
     {
       "word": "Киселевск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселевск",
@@ -1258,7 +1258,7 @@
     {
       "word": "Кисловодск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Кисловодск",
@@ -1280,7 +1280,7 @@
     {
       "word": "Ковров",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ковров",
@@ -1302,7 +1302,7 @@
     {
       "word": "Коломна",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Коломна",
@@ -1324,7 +1324,7 @@
     {
       "word": "Комсомольск-на-Амуре",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Комсомольск-на-Амуре",
@@ -1346,7 +1346,7 @@
     {
       "word": "Копейск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Копейск",
@@ -1368,7 +1368,7 @@
     {
       "word": "Королёв",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Королёв",
@@ -1390,7 +1390,7 @@
     {
       "word": "Королев",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Королев",
@@ -1412,7 +1412,7 @@
     {
       "word": "Кострома",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Кострома",
@@ -1434,7 +1434,7 @@
     {
       "word": "Красногорск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Красногорск",
@@ -1456,7 +1456,7 @@
     {
       "word": "Краснодар",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Краснодар",
@@ -1478,7 +1478,7 @@
     {
       "word": "Красноярск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Красноярск",
@@ -1500,7 +1500,7 @@
     {
       "word": "Курган",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Курган",
@@ -1522,7 +1522,7 @@
     {
       "word": "Курск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Курск",
@@ -1544,7 +1544,7 @@
     {
       "word": "Кызыл",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Кызыл",
@@ -1566,7 +1566,7 @@
     {
       "word": "Ленинск-Кузнецкий",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ленинск-Кузнецкий",
@@ -1588,7 +1588,7 @@
     {
       "word": "Липецк",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Липецк",
@@ -1610,7 +1610,7 @@
     {
       "word": "Люберцы",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Люберцы",
@@ -1632,7 +1632,7 @@
     {
       "word": "Магадан",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Магадан",
@@ -1654,7 +1654,7 @@
     {
       "word": "Магнитогорск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Магнитогорск",
@@ -1676,7 +1676,7 @@
     {
       "word": "Майкоп",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Майкоп",
@@ -1698,7 +1698,7 @@
     {
       "word": "Махачкала",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Махачкала",
@@ -1720,7 +1720,7 @@
     {
       "word": "Миасс",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Миасс",
@@ -1742,7 +1742,7 @@
     {
       "word": "Москва",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Москва",
@@ -1764,7 +1764,7 @@
     {
       "word": "Мурманск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Мурманск",
@@ -1786,7 +1786,7 @@
     {
       "word": "Муром",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Муром",
@@ -1808,7 +1808,7 @@
     {
       "word": "Мытищи",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Мытищи",
@@ -1830,7 +1830,7 @@
     {
       "word": "Нальчик",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Нальчик",
@@ -1852,7 +1852,7 @@
     {
       "word": "Находка",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Находка",
@@ -1874,7 +1874,7 @@
     {
       "word": "Невинномысск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Невинномысск",
@@ -1896,7 +1896,7 @@
     {
       "word": "Нефтекамск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Нефтекамск",
@@ -1918,7 +1918,7 @@
     {
       "word": "Нефтеюганск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Нефтеюганск",
@@ -1940,7 +1940,7 @@
     {
       "word": "Нижневартовск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Нижневартовск",
@@ -1962,7 +1962,7 @@
     {
       "word": "Нижнекамск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Нижнекамск",
@@ -1984,7 +1984,7 @@
     {
       "word": "Новокузнецк",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новокузнецк",
@@ -2006,7 +2006,7 @@
     {
       "word": "Новомосковск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новомосковск",
@@ -2028,7 +2028,7 @@
     {
       "word": "Новороссийск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новороссийск",
@@ -2050,7 +2050,7 @@
     {
       "word": "Новосибирск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новосибирск",
@@ -2072,7 +2072,7 @@
     {
       "word": "Новочебоксарск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новочебоксарск",
@@ -2094,7 +2094,7 @@
     {
       "word": "Новочеркасск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новочеркасск",
@@ -2116,7 +2116,7 @@
     {
       "word": "Новошахтинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Новошахтинск",
@@ -2138,7 +2138,7 @@
     {
       "word": "Ногинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ногинск",
@@ -2160,7 +2160,7 @@
     {
       "word": "Норильск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Норильск",
@@ -2182,7 +2182,7 @@
     {
       "word": "Ноябрьск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ноябрьск",
@@ -2204,7 +2204,7 @@
     {
       "word": "Обнинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Обнинск",
@@ -2226,7 +2226,7 @@
     {
       "word": "Одинцово",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Одинцово",
@@ -2248,7 +2248,7 @@
     {
       "word": "Октябрьский",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Октябрьский",
@@ -2270,7 +2270,7 @@
     {
       "word": "Омск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Омск",
@@ -2292,7 +2292,7 @@
     {
       "word": "Орёл",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Орёл",
@@ -2314,7 +2314,7 @@
     {
       "word": "Орел",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Орел",
@@ -2336,7 +2336,7 @@
     {
       "word": "Оренбург",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Оренбург",
@@ -2358,7 +2358,7 @@
     {
       "word": "Орск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Орск",
@@ -2380,7 +2380,7 @@
     {
       "word": "Пенза",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Пенза",
@@ -2402,7 +2402,7 @@
     {
       "word": "Первоуральск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Первоуральск",
@@ -2424,7 +2424,7 @@
     {
       "word": "Пермь",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Пермь",
@@ -2446,7 +2446,7 @@
     {
       "word": "Петрозаводск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Петрозаводск",
@@ -2468,7 +2468,7 @@
     {
       "word": "Петропавловск-Камчатский",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Петропавловск-Камчатский",
@@ -2490,7 +2490,7 @@
     {
       "word": "Подольск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Подольск",
@@ -2512,7 +2512,7 @@
     {
       "word": "Прокопьевск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Прокопьевск",
@@ -2534,7 +2534,7 @@
     {
       "word": "Псков",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Псков",
@@ -2556,7 +2556,7 @@
     {
       "word": "Пушкино",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Пушкино",
@@ -2578,7 +2578,7 @@
     {
       "word": "Пятигорск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Пятигорск",
@@ -2600,7 +2600,7 @@
     {
       "word": "Раменское",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Раменское",
@@ -2622,7 +2622,7 @@
     {
       "word": "Ростов-на-Дону",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ростов-на-Дону",
@@ -2644,7 +2644,7 @@
     {
       "word": "Рубцовск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Рубцовск",
@@ -2666,7 +2666,7 @@
     {
       "word": "Рыбинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Рыбинск",
@@ -2688,7 +2688,7 @@
     {
       "word": "Рязань",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Рязань",
@@ -2710,7 +2710,7 @@
     {
       "word": "Салават",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Салават",
@@ -2732,7 +2732,7 @@
     {
       "word": "Самара",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Самара",
@@ -2754,7 +2754,7 @@
     {
       "word": "Санкт-Петербург",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Санкт-Петербург",
@@ -2776,7 +2776,7 @@
     {
       "word": "Саранск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Саранск",
@@ -2798,7 +2798,7 @@
     {
       "word": "Сарапул",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Сарапул",
@@ -2820,7 +2820,7 @@
     {
       "word": "Саратов",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Саратов",
@@ -2842,7 +2842,7 @@
     {
       "word": "Севастополь",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Севастополь",
@@ -2864,7 +2864,7 @@
     {
       "word": "Северодвинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Северодвинск",
@@ -2886,7 +2886,7 @@
     {
       "word": "Северск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Северск",
@@ -2908,7 +2908,7 @@
     {
       "word": "Серов",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Серов",
@@ -2930,7 +2930,7 @@
     {
       "word": "Серпухов",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Серпухов",
@@ -2952,7 +2952,7 @@
     {
       "word": "Симферополь",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Симферополь",
@@ -2974,7 +2974,7 @@
     {
       "word": "Смоленск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Смоленск",
@@ -2996,7 +2996,7 @@
     {
       "word": "Соликамск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Соликамск",
@@ -3018,13 +3018,13 @@
     {
       "word": "Сочи",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": true
     },
     {
       "word": "Ставрополь",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ставрополь",
@@ -3046,7 +3046,7 @@
     {
       "word": "Стерлитамак",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Стерлитамак",
@@ -3068,7 +3068,7 @@
     {
       "word": "Сургут",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Сургут",
@@ -3090,7 +3090,7 @@
     {
       "word": "Сызрань",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Сызрань",
@@ -3112,7 +3112,7 @@
     {
       "word": "Сыктывкар",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Сыктывкар",
@@ -3134,7 +3134,7 @@
     {
       "word": "Таганрог",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Таганрог",
@@ -3156,7 +3156,7 @@
     {
       "word": "Тамбов",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Тамбов",
@@ -3178,7 +3178,7 @@
     {
       "word": "Тверь",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Тверь",
@@ -3200,7 +3200,7 @@
     {
       "word": "Тобольск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Тобольск",
@@ -3222,13 +3222,13 @@
     {
       "word": "Тольятти",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": true
     },
     {
       "word": "Томск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Томск",
@@ -3250,7 +3250,7 @@
     {
       "word": "Тула",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Тула",
@@ -3272,7 +3272,7 @@
     {
       "word": "Тюмень",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Тюмень",
@@ -3294,13 +3294,13 @@
     {
       "word": "Улан-Удэ",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": true
     },
     {
       "word": "Ульяновск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ульяновск",
@@ -3322,7 +3322,7 @@
     {
       "word": "Уссурийск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Уссурийск",
@@ -3344,7 +3344,7 @@
     {
       "word": "Уфа",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Уфа",
@@ -3366,7 +3366,7 @@
     {
       "word": "Хабаровск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Хабаровск",
@@ -3388,7 +3388,7 @@
     {
       "word": "Хасавюрт",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Хасавюрт",
@@ -3410,7 +3410,7 @@
     {
       "word": "Химки",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Химки",
@@ -3432,7 +3432,7 @@
     {
       "word": "Чебоксары",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Чебоксары",
@@ -3454,7 +3454,7 @@
     {
       "word": "Челябинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Челябинск",
@@ -3476,7 +3476,7 @@
     {
       "word": "Череповец",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Череповец",
@@ -3498,7 +3498,7 @@
     {
       "word": "Черкесск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Черкесск",
@@ -3520,7 +3520,7 @@
     {
       "word": "Чита",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Чита",
@@ -3542,7 +3542,7 @@
     {
       "word": "Шахты",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Шахты",
@@ -3564,7 +3564,7 @@
     {
       "word": "Щёлково",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Щёлково",
@@ -3586,7 +3586,7 @@
     {
       "word": "Щелково",
       "gender": "ср",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Щелково",
@@ -3608,7 +3608,7 @@
     {
       "word": "Электросталь",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Электросталь",
@@ -3630,7 +3630,7 @@
     {
       "word": "Элиста",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Элиста",
@@ -3652,7 +3652,7 @@
     {
       "word": "Энгельс",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Энгельс",
@@ -3674,7 +3674,7 @@
     {
       "word": "Южно-Сахалинск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Южно-Сахалинск",
@@ -3696,7 +3696,7 @@
     {
       "word": "Якутск",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Якутск",
@@ -3718,7 +3718,7 @@
     {
       "word": "Ялта",
       "gender": "жен",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ялта",
@@ -3740,7 +3740,7 @@
     {
       "word": "Ярославль",
       "gender": "муж",
-      "animacy": 0,
+      "animate": false,
       "indeclinable": false,
       "singular": {
         "nominative": "Ярославль",

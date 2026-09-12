@@ -54,6 +54,7 @@ DB_HOST="${DB_HOST:-127.0.0.1}"
 DB_PORT="${DB_PORT:-3306}"
 DB_USER="${DB_USER:-root}"
 DB_PASSWORD="${DB_PASSWORD:-password}"
+DB_TABLE="nouns_morf"
 
 # Name of the temporary build database used during the build process.
 #
@@ -108,7 +109,7 @@ JSON_ENTRIES="${JSON_ENTRIES:-$REPO_ROOT/custom-entries}"
 # it splits on whitespace. and paths get mangled.
 MANAGER_BASE_INVOCATION=(
     "$MANAGER"
-    file
+    apply
     "$JSON_ENTRIES"
 )
 
@@ -117,7 +118,6 @@ PYTHON_TRANSFORM=(
     "${MANAGER_BASE_INVOCATION[@]}"
     add
     --config "$CONFIG_FILE"
-    --no-dump
 )
 
 PYTHON_VERIFY=(
@@ -240,6 +240,7 @@ port = $DB_PORT
 user = $DB_USER
 password = $DB_PASSWORD
 database = $DB_NAME
+table = $DB_TABLE
 charset = utf8mb4
 EOF
 

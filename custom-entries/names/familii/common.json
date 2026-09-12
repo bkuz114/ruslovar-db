@@ -4,7 +4,7 @@
     {
       "word": "Алексеев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алексеев",
@@ -26,7 +26,7 @@
     {
       "word": "Алексеева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Алексеева",
@@ -48,7 +48,7 @@
     {
       "word": "Андреев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Андреев",
@@ -70,7 +70,7 @@
     {
       "word": "Андреева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Андреева",
@@ -92,7 +92,7 @@
     {
       "word": "Белов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Белов",
@@ -114,7 +114,7 @@
     {
       "word": "Белова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Белова",
@@ -136,7 +136,7 @@
     {
       "word": "Беляев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Беляев",
@@ -158,7 +158,7 @@
     {
       "word": "Беляева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Беляева",
@@ -180,7 +180,7 @@
     {
       "word": "Богданов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Богданов",
@@ -202,7 +202,7 @@
     {
       "word": "Богданова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Богданова",
@@ -224,7 +224,7 @@
     {
       "word": "Борисов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Борисов",
@@ -246,7 +246,7 @@
     {
       "word": "Борисова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Борисова",
@@ -268,7 +268,7 @@
     {
       "word": "Васильев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Васильев",
@@ -290,7 +290,7 @@
     {
       "word": "Васильева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Васильева",
@@ -312,7 +312,7 @@
     {
       "word": "Виноградов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Виноградов",
@@ -334,7 +334,7 @@
     {
       "word": "Виноградова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Виноградова",
@@ -356,7 +356,7 @@
     {
       "word": "Волков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Волков",
@@ -378,7 +378,7 @@
     {
       "word": "Волкова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Волкова",
@@ -400,7 +400,7 @@
     {
       "word": "Герасимов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Герасимов",
@@ -422,7 +422,7 @@
     {
       "word": "Герасимова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Герасимова",
@@ -444,7 +444,7 @@
     {
       "word": "Григорьев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Григорьев",
@@ -466,7 +466,7 @@
     {
       "word": "Григорьева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Григорьева",
@@ -488,7 +488,7 @@
     {
       "word": "Гусев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Гусев",
@@ -510,7 +510,7 @@
     {
       "word": "Гусева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Гусева",
@@ -532,7 +532,7 @@
     {
       "word": "Данилов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Данилов",
@@ -554,7 +554,7 @@
     {
       "word": "Данилова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Данилова",
@@ -576,7 +576,7 @@
     {
       "word": "Достоевская",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Достоевская",
@@ -598,7 +598,7 @@
     {
       "word": "Достоевский",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Достоевский",
@@ -620,7 +620,7 @@
     {
       "word": "Егоров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Егоров",
@@ -642,7 +642,7 @@
     {
       "word": "Егорова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Егорова",
@@ -664,7 +664,7 @@
     {
       "word": "Ефимов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ефимов",
@@ -686,7 +686,7 @@
     {
       "word": "Ефимова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ефимова",
@@ -708,7 +708,7 @@
     {
       "word": "Жуков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Жуков",
@@ -730,7 +730,7 @@
     {
       "word": "Жукова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Жукова",
@@ -752,7 +752,7 @@
     {
       "word": "Захаров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Захаров",
@@ -774,7 +774,7 @@
     {
       "word": "Захарова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Захарова",
@@ -796,7 +796,7 @@
     {
       "word": "Иванов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Иванов",
@@ -818,7 +818,7 @@
     {
       "word": "Иванова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Иванова",
@@ -840,7 +840,7 @@
     {
       "word": "Ильин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ильин",
@@ -862,7 +862,7 @@
     {
       "word": "Ильина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ильина",
@@ -884,7 +884,7 @@
     {
       "word": "Карпов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Карпов",
@@ -906,7 +906,7 @@
     {
       "word": "Карпова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Карпова",
@@ -928,7 +928,7 @@
     {
       "word": "Киселёв",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселёв",
@@ -950,7 +950,7 @@
     {
       "word": "Киселев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселев",
@@ -972,7 +972,7 @@
     {
       "word": "Киселёва",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселёва",
@@ -994,7 +994,7 @@
     {
       "word": "Киселева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Киселева",
@@ -1016,7 +1016,7 @@
     {
       "word": "Климов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Климов",
@@ -1038,7 +1038,7 @@
     {
       "word": "Климова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Климова",
@@ -1060,7 +1060,7 @@
     {
       "word": "Ковалёв",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ковалёв",
@@ -1082,7 +1082,7 @@
     {
       "word": "Ковалев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ковалев",
@@ -1104,7 +1104,7 @@
     {
       "word": "Ковалёва",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ковалёва",
@@ -1126,7 +1126,7 @@
     {
       "word": "Ковалева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ковалева",
@@ -1148,7 +1148,7 @@
     {
       "word": "Коваль",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Коваль",
@@ -1171,7 +1171,7 @@
     {
       "word": "Козлов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Козлов",
@@ -1193,7 +1193,7 @@
     {
       "word": "Козлова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Козлова",
@@ -1215,7 +1215,7 @@
     {
       "word": "Комаров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Комаров",
@@ -1237,7 +1237,7 @@
     {
       "word": "Комарова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Комарова",
@@ -1259,7 +1259,7 @@
     {
       "word": "Крылов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Крылов",
@@ -1281,7 +1281,7 @@
     {
       "word": "Крылова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Крылова",
@@ -1303,7 +1303,7 @@
     {
       "word": "Кузнецов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кузнецов",
@@ -1325,7 +1325,7 @@
     {
       "word": "Кузнецова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Кузнецова",
@@ -1347,7 +1347,7 @@
     {
       "word": "Лавров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лавров",
@@ -1369,7 +1369,7 @@
     {
       "word": "Лаврова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лаврова",
@@ -1391,7 +1391,7 @@
     {
       "word": "Лазарев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лазарев",
@@ -1413,7 +1413,7 @@
     {
       "word": "Лазарева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лазарева",
@@ -1435,7 +1435,7 @@
     {
       "word": "Лебедев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лебедев",
@@ -1457,7 +1457,7 @@
     {
       "word": "Лебедева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лебедева",
@@ -1479,7 +1479,7 @@
     {
       "word": "Логинов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Логинов",
@@ -1501,7 +1501,7 @@
     {
       "word": "Логинова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Логинова",
@@ -1523,7 +1523,7 @@
     {
       "word": "Лукин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лукин",
@@ -1545,7 +1545,7 @@
     {
       "word": "Лукина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Лукина",
@@ -1567,7 +1567,7 @@
     {
       "word": "Макаров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Макаров",
@@ -1589,7 +1589,7 @@
     {
       "word": "Макарова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Макарова",
@@ -1611,7 +1611,7 @@
     {
       "word": "Матвеев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Матвеев",
@@ -1633,7 +1633,7 @@
     {
       "word": "Матвеева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Матвеева",
@@ -1655,7 +1655,7 @@
     {
       "word": "Медведев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Медведев",
@@ -1677,7 +1677,7 @@
     {
       "word": "Медведева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Медведева",
@@ -1699,7 +1699,7 @@
     {
       "word": "Мельник",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Мельник",
@@ -1722,7 +1722,7 @@
     {
       "word": "Мельников",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Мельников",
@@ -1744,7 +1744,7 @@
     {
       "word": "Мельникова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Мельникова",
@@ -1766,7 +1766,7 @@
     {
       "word": "Миронов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Миронов",
@@ -1788,7 +1788,7 @@
     {
       "word": "Миронова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Миронова",
@@ -1810,7 +1810,7 @@
     {
       "word": "Михайлов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Михайлов",
@@ -1832,7 +1832,7 @@
     {
       "word": "Михайлова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Михайлова",
@@ -1854,7 +1854,7 @@
     {
       "word": "Морозов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Морозов",
@@ -1876,7 +1876,7 @@
     {
       "word": "Морозова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Морозова",
@@ -1898,7 +1898,7 @@
     {
       "word": "Никитин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никитин",
@@ -1920,7 +1920,7 @@
     {
       "word": "Никитина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никитина",
@@ -1942,7 +1942,7 @@
     {
       "word": "Никифоров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никифоров",
@@ -1964,7 +1964,7 @@
     {
       "word": "Никифорова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Никифорова",
@@ -1986,7 +1986,7 @@
     {
       "word": "Николаев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Николаев",
@@ -2008,7 +2008,7 @@
     {
       "word": "Николаева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Николаева",
@@ -2030,7 +2030,7 @@
     {
       "word": "Новиков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Новиков",
@@ -2052,7 +2052,7 @@
     {
       "word": "Новикова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Новикова",
@@ -2074,7 +2074,7 @@
     {
       "word": "Орехов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Орехов",
@@ -2096,7 +2096,7 @@
     {
       "word": "Орехова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Орехова",
@@ -2118,7 +2118,7 @@
     {
       "word": "Орлов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Орлов",
@@ -2140,7 +2140,7 @@
     {
       "word": "Орлова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Орлова",
@@ -2162,7 +2162,7 @@
     {
       "word": "Осипов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Осипов",
@@ -2184,7 +2184,7 @@
     {
       "word": "Осипова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Осипова",
@@ -2206,7 +2206,7 @@
     {
       "word": "Павлов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Павлов",
@@ -2228,7 +2228,7 @@
     {
       "word": "Павлова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Павлова",
@@ -2250,7 +2250,7 @@
     {
       "word": "Панфилов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Панфилов",
@@ -2272,7 +2272,7 @@
     {
       "word": "Панфилова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Панфилова",
@@ -2294,7 +2294,7 @@
     {
       "word": "Петров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Петров",
@@ -2316,7 +2316,7 @@
     {
       "word": "Петрова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Петрова",
@@ -2338,7 +2338,7 @@
     {
       "word": "Поляков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Поляков",
@@ -2360,7 +2360,7 @@
     {
       "word": "Полякова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Полякова",
@@ -2382,7 +2382,7 @@
     {
       "word": "Попов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Попов",
@@ -2404,7 +2404,7 @@
     {
       "word": "Попова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Попова",
@@ -2426,7 +2426,7 @@
     {
       "word": "Родионов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Родионов",
@@ -2448,7 +2448,7 @@
     {
       "word": "Родионова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Родионова",
@@ -2470,7 +2470,7 @@
     {
       "word": "Савельев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Савельев",
@@ -2492,7 +2492,7 @@
     {
       "word": "Савельева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Савельева",
@@ -2514,7 +2514,7 @@
     {
       "word": "Семёнов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семёнов",
@@ -2536,7 +2536,7 @@
     {
       "word": "Семенов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семенов",
@@ -2558,7 +2558,7 @@
     {
       "word": "Семёнова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семёнова",
@@ -2580,7 +2580,7 @@
     {
       "word": "Семенова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Семенова",
@@ -2602,7 +2602,7 @@
     {
       "word": "Сергеев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сергеев",
@@ -2624,7 +2624,7 @@
     {
       "word": "Сергеева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сергеева",
@@ -2646,7 +2646,7 @@
     {
       "word": "Сидоров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сидоров",
@@ -2668,7 +2668,7 @@
     {
       "word": "Сидорова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сидорова",
@@ -2690,7 +2690,7 @@
     {
       "word": "Симонов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Симонов",
@@ -2712,7 +2712,7 @@
     {
       "word": "Симонова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Симонова",
@@ -2734,7 +2734,7 @@
     {
       "word": "Смирнов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Смирнов",
@@ -2756,7 +2756,7 @@
     {
       "word": "Смирнова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Смирнова",
@@ -2778,7 +2778,7 @@
     {
       "word": "Соболев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соболев",
@@ -2800,7 +2800,7 @@
     {
       "word": "Соболева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соболева",
@@ -2822,7 +2822,7 @@
     {
       "word": "Соколов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соколов",
@@ -2844,7 +2844,7 @@
     {
       "word": "Соколова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соколова",
@@ -2866,7 +2866,7 @@
     {
       "word": "Соловьёв",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соловьёв",
@@ -2888,7 +2888,7 @@
     {
       "word": "Соловьев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соловьев",
@@ -2910,7 +2910,7 @@
     {
       "word": "Соловьёва",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соловьёва",
@@ -2932,7 +2932,7 @@
     {
       "word": "Соловьева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Соловьева",
@@ -2954,7 +2954,7 @@
     {
       "word": "Сорокин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сорокин",
@@ -2976,7 +2976,7 @@
     {
       "word": "Сорокина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Сорокина",
@@ -2998,7 +2998,7 @@
     {
       "word": "Степанов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Степанов",
@@ -3020,7 +3020,7 @@
     {
       "word": "Степанова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Степанова",
@@ -3042,7 +3042,7 @@
     {
       "word": "Тарасов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тарасов",
@@ -3064,7 +3064,7 @@
     {
       "word": "Тарасова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тарасова",
@@ -3086,7 +3086,7 @@
     {
       "word": "Тверская",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тверская",
@@ -3108,7 +3108,7 @@
     {
       "word": "Тверской",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тверской",
@@ -3130,7 +3130,7 @@
     {
       "word": "Терентьев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Терентьев",
@@ -3152,7 +3152,7 @@
     {
       "word": "Терентьева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Терентьева",
@@ -3174,7 +3174,7 @@
     {
       "word": "Тимофеев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тимофеев",
@@ -3196,7 +3196,7 @@
     {
       "word": "Тимофеева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тимофеева",
@@ -3218,7 +3218,7 @@
     {
       "word": "Тихонов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тихонов",
@@ -3240,7 +3240,7 @@
     {
       "word": "Тихонова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Тихонова",
@@ -3262,7 +3262,7 @@
     {
       "word": "Толстая",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Толстая",
@@ -3284,7 +3284,7 @@
     {
       "word": "Толстой",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Толстой",
@@ -3306,7 +3306,7 @@
     {
       "word": "Третьяков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Третьяков",
@@ -3328,7 +3328,7 @@
     {
       "word": "Третьякова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Третьякова",
@@ -3350,7 +3350,7 @@
     {
       "word": "Ушаков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ушаков",
@@ -3372,7 +3372,7 @@
     {
       "word": "Ушакова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Ушакова",
@@ -3394,7 +3394,7 @@
     {
       "word": "Фадеев",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фадеев",
@@ -3416,7 +3416,7 @@
     {
       "word": "Фадеева",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фадеева",
@@ -3438,7 +3438,7 @@
     {
       "word": "Фёдоров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фёдоров",
@@ -3460,7 +3460,7 @@
     {
       "word": "Федоров",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Федоров",
@@ -3482,7 +3482,7 @@
     {
       "word": "Фёдорова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фёдорова",
@@ -3504,7 +3504,7 @@
     {
       "word": "Федорова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Федорова",
@@ -3526,7 +3526,7 @@
     {
       "word": "Филиппов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Филиппов",
@@ -3548,7 +3548,7 @@
     {
       "word": "Филиппова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Филиппова",
@@ -3570,7 +3570,7 @@
     {
       "word": "Фомин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фомин",
@@ -3592,7 +3592,7 @@
     {
       "word": "Фомина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фомина",
@@ -3614,7 +3614,7 @@
     {
       "word": "Фролов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фролов",
@@ -3636,7 +3636,7 @@
     {
       "word": "Фролова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Фролова",
@@ -3658,7 +3658,7 @@
     {
       "word": "Чернов",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Чернов",
@@ -3680,7 +3680,7 @@
     {
       "word": "Чернова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Чернова",
@@ -3702,7 +3702,7 @@
     {
       "word": "Шестаков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Шестаков",
@@ -3724,7 +3724,7 @@
     {
       "word": "Шестакова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Шестакова",
@@ -3746,7 +3746,7 @@
     {
       "word": "Щербаков",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Щербаков",
@@ -3768,7 +3768,7 @@
     {
       "word": "Щербакова",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Щербакова",
@@ -3790,7 +3790,7 @@
     {
       "word": "Юдин",
       "gender": "муж",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Юдин",
@@ -3812,7 +3812,7 @@
     {
       "word": "Юдина",
       "gender": "жен",
-      "animacy": 1,
+      "animate": true,
       "indeclinable": false,
       "singular": {
         "nominative": "Юдина",
