@@ -679,6 +679,29 @@ class EntryResult(Result):
             f"{self.outcome.symbol} {self.word}: {self.message or self.outcome.summary}"
         )
 
+    def print_entry_summary(self, logger: Logger, indent: str = "    ") -> None:
+        """Write this result's summary_line through the Logger.
+
+        Routes to logger.error, logger.warning, or logger.operation based on
+        the result's flags: error=True logs at error level, warning=True
+        logs at warning level, otherwise operation level with the outcome's
+        color. The caller supplies the logger so the destination and
+        color settings stay with the caller, not the result.
+
+        Args:
+            logger (Logger): The logger to write through.
+
+        Returns:
+            None
+        """
+        summary = f"{indent}{self.summary_line}"
+        if self.error:
+            logger.error(summary)
+        elif self.warning:
+            logger.warning(summary)
+        else:
+            logger.operation(summary, self.outcome.code)
+
 
 @dataclass(kw_only=True)
 class TransformResult(Result):
