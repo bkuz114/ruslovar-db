@@ -439,7 +439,14 @@ class ResultOutcome(Enum):
 
     SKIPPED = ResultOutcomeHolder(summary="skipped", symbol="x", code=Colors.DIM)
 
+    # A verify found exactly one matching tree. This is the clean case.
     MATCHED = ResultOutcomeHolder(summary="matched", symbol="✓", code=Colors.CYAN)
+
+    # A verify found more than one matching tree for the same word, so the
+    # result is ambiguous and the user needs to decide which one they mean.
+    MATCHED_AMBIGUOUS = ResultOutcomeHolder(
+        summary="matched_ambiguous", symbol="!", code=Colors.BRIGHT_YELLOW
+    )
 
     COMPLETE = ResultOutcomeHolder(summary="complete", symbol="=", code=Colors.GREEN)
 
@@ -685,6 +692,7 @@ class Counts:
     deleted: int = 0
     skipped: int = 0
     matched: int = 0
+    matched_ambiguous: int = 0
     mismatched: int = 0
     not_found: int = 0
     failed: int = 0
@@ -2067,17 +2075,24 @@ def op_verify(
                 normalize_tree(load_tree(conn, table, r.code)) == entry for r in roots
             )
             if matched:
+                # outcome depends on if there were multiple matches or only one.
+                # If multiple, can not explicitly verify.
                 multiple = len(roots) > 1
+                message = None
+                if multiple:
+                    # multiple exactly matches - ambiguous state.
+                    outcome = ResultOutcome.MATCHED_AMBIGUOUS
+                    message = f"{len(roots)} roots for this word"
+                    logger.warning(f"{entry.word}: {len(roots)} roots for this word")
+                else:
+                    # a single match
+                    outcome = ResultOutcome.MATCHED
+                    logger.entry_matched(f"{entry.word}: matched")
+
                 result = EntryResult(
-                    word=entry.word,
-                    outcome=ResultOutcome.MATCHED,
-                    warning=multiple,
-                    message=(f"{len(roots)} roots for this word" if multiple else None),
+                    word=entry.word, outcome=outcome, warning=multiple, message=message
                 )
                 results.append(result)
-                logger.entry_matched(f"{entry.word}: matched")
-                if multiple:
-                    logger.warning(f"{entry.word}: {len(roots)} roots for this word")
             else:
                 result = EntryResult(
                     word=entry.word,
