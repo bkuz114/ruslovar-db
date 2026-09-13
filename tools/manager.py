@@ -335,40 +335,6 @@ class Logger:
         color = code if code is not None else Colors.URGENT_RED
         self._write(text, level="critical", code=color, end=end, stream=sys.stderr)
 
-    # --- per-entry result lines ---
-
-    def entry_added(self, text: str) -> None:
-        """Print a per-entry 'added' line. Level: OPERATION, green, '+ '."""
-        self._write(f"+ {text}", level="operation", code=Colors.GREEN)
-
-    def entry_updated(self, text: str) -> None:
-        """Print a per-entry 'updated' line. Level: OPERATION, yellow, '~ '."""
-        self._write(f"~ {text}", level="operation", code=Colors.YELLOW)
-
-    def entry_deleted(self, text: str) -> None:
-        """Print a per-entry 'deleted' line. Level: OPERATION, red, '- '."""
-        self._write(f"- {text}", level="operation", code=Colors.RED)
-
-    def entry_skipped(self, text: str) -> None:
-        """Print a per-entry 'skipped' line. Level: OPERATION, dim, 'x '."""
-        self._write(f"x {text}", level="operation", code=Colors.DIM)
-
-    def entry_matched(self, text: str) -> None:
-        """Print a per-entry 'matched' line. Level: OPERATION, cyan, '✓ '."""
-        self._write(f"✓ {text}", level="operation", code=Colors.CYAN)
-
-    def entry_mismatched(self, text: str) -> None:
-        """Print a per-entry 'mismatched' line. Level: OPERATION, red, '✗ '."""
-        self._write(f"✗ {text}", level="warn", code=Colors.BRIGHT_RED)
-
-    def entry_failed(self, text: str) -> None:
-        """Print a per-entry failure line.
-
-        Level: ERROR, so failures still show when --log-level is raised.
-        Bright red, '! '.
-        """
-        self._write(f"! {text}", level="error", code=Colors.BRIGHT_RED)
-
     # --- structure ---
 
     def header(self, text: str) -> None:
@@ -1814,7 +1780,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             if already:
                 result = EntryResult(word=entry.word, outcome=ResultOutcome.SKIPPED)
                 results.append(result)
-                logger.entry_skipped(f"{entry.word}: already present")
+                result.print_entry_summary(logger)
                 continue
 
             # Step 4: insert.
@@ -1822,7 +1788,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             conn.commit()
             result = EntryResult(word=entry.word, outcome=ResultOutcome.ADDED)
             results.append(result)
-            logger.entry_added(f"{entry.word}: added")
+            result.print_entry_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -1832,7 +1798,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
                 message=str(exc),
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {exc}")
+            result.print_entry_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -1842,7 +1808,8 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {type(exc).__name__}: {exc}")
+            result.print_entry_summary(logger)
+
     return results
 
 
@@ -1904,6 +1871,7 @@ def op_update(
                     message="upstream entry",
                 )
                 results.append(result)
+                result.print_entry_summary(logger)
                 continue
 
             # Step: Multiple roots detected. Refuse unless forced, and show the SQL that
@@ -1924,6 +1892,7 @@ def op_update(
                     message=f"{len(roots)} roots match",
                 )
                 results.append(result)
+                result.print_entry_summary(logger)
                 continue
 
             # If every match already has this content, there is nothing to change.
@@ -1934,7 +1903,7 @@ def op_update(
             ):
                 result = EntryResult(word=entry.word, outcome=ResultOutcome.NO_CHANGE)
                 results.append(result)
-                logger.entry_skipped(f"{entry.word}: no change")
+                result.print_entry_summary(logger)
                 continue
 
             # Step: replace any existing, then update.
@@ -1952,7 +1921,7 @@ def op_update(
 
             result = EntryResult(word=entry.word, outcome=action)
             results.append(result)
-            logger.entry_updated(f"{entry.word}: {action}")
+            result.print_entry_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -1962,7 +1931,7 @@ def op_update(
                 message=str(exc),
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {exc}")
+            result.print_entry_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -1972,7 +1941,8 @@ def op_update(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {type(exc).__name__}: {exc}")
+            result.print_entry_summary(logger)
+
     return results
 
 
@@ -2016,7 +1986,7 @@ def op_delete(
                     message="no matching entry",
                 )
                 results.append(result)
-                logger.entry_failed(f"{entry.word}: not found")
+                result.print_entry_summary(logger)
                 continue
 
             # Step 3: N>1. Refuse unless forced, and show the SQL.
@@ -2035,6 +2005,7 @@ def op_delete(
                     message=f"{len(matches)} matches",
                 )
                 results.append(result)
+                result.print_entry_summary(logger)
                 continue
 
             # Step 4: delete every match.
@@ -2043,7 +2014,7 @@ def op_delete(
             conn.commit()
             result = EntryResult(word=entry.word, outcome=ResultOutcome.DELETED)
             results.append(result)
-            logger.entry_deleted(f"{entry.word}: deleted")
+            result.print_entry_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -2053,7 +2024,7 @@ def op_delete(
                 message=str(exc),
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {exc}")
+            result.print_entry_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -2063,7 +2034,8 @@ def op_delete(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {type(exc).__name__}: {exc}")
+            result.print_entry_summary(logger)
+
     return results
 
 
@@ -2100,7 +2072,7 @@ def op_verify(
                     message="not in database",
                 )
                 results.append(result)
-                logger.entry_failed(f"{entry.word}: not found")
+                result.print_entry_summary(logger)
                 continue
 
             # Step 3: compare each root's content against the entry.
@@ -2116,16 +2088,15 @@ def op_verify(
                     # multiple exactly matches - ambiguous state.
                     outcome = ResultOutcome.MATCHED_AMBIGUOUS
                     message = f"{len(roots)} roots for this word"
-                    logger.warning(f"{entry.word}: {len(roots)} roots for this word")
                 else:
                     # a single match
                     outcome = ResultOutcome.MATCHED
-                    logger.entry_matched(f"{entry.word}: matched")
 
                 result = EntryResult(
                     word=entry.word, outcome=outcome, warning=multiple, message=message
                 )
                 results.append(result)
+                result.print_entry_summary(logger)
             else:
                 result = EntryResult(
                     word=entry.word,
@@ -2134,7 +2105,7 @@ def op_verify(
                     message="database content differs",
                 )
                 results.append(result)
-                logger.entry_mismatched(f"{entry.word}: content differs")
+                result.print_entry_summary(logger)
         except RumorphError as exc:
             result = EntryResult(
                 word=entry.word,
@@ -2143,7 +2114,7 @@ def op_verify(
                 message=str(exc),
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {exc}")
+            result.print_entry_summary(logger)
         except Exception as exc:
             result = EntryResult(
                 word=entry.word,
@@ -2152,7 +2123,8 @@ def op_verify(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            logger.entry_failed(f"{entry.word}: {type(exc).__name__}: {exc}")
+            result.print_entry_summary(logger)
+
     return results
 
 
@@ -2509,25 +2481,6 @@ def get_tree_table(tree: list[NounRow]) -> str:
 # =============================================================================
 
 
-def print_result(logger: Logger, r: EntryResult) -> None:
-    """Print one entry's result.
-
-    Errors get '!', warnings get '?', successes get the outcome's symbol.
-
-    Args:
-        logger: The logger.
-        r: The result.
-    """
-    if r.error:
-        logger.info(f"  ! {r.word}: {r.message}", Colors.BRIGHT_RED)
-    elif r.warning:
-        logger.info(f"  ? {r.word}: {r.message}", Colors.BRIGHT_YELLOW)
-    else:
-        symbol = r.outcome.symbol
-        code = r.outcome.code
-        logger.info(f"  {symbol} {r.word}: {r.outcome.summary}", code)
-
-
 # Delimiters for the four summary levels. Run is heaviest, file is
 # lightest, so nesting is visible at a glance.
 _RUN_RULE = "═" * 60
@@ -2538,9 +2491,6 @@ _FILE_RULE = "─" * 40
 def build_entry_lines(results: list[EntryResult], indent: str = "    ") -> str:
     """Render one line per entry result.
 
-    Reuses the symbol table from RESULT_SYMBOLS. Errors and warnings get
-    their own prefix, matching print_result.
-
     Args:
         results: The EntryResult objects for one file.
         indent: Leading whitespace for every line.
@@ -2550,16 +2500,7 @@ def build_entry_lines(results: list[EntryResult], indent: str = "    ") -> str:
     """
     lines = []
     for r in results:
-        if r.error:
-            symbol = "!"
-            detail = r.message or r.outcome.summary
-        elif r.warning:
-            symbol = "?"
-            detail = r.message or r.outcome.summary
-        else:
-            symbol = r.outcome.symbol
-            detail = r.outcome.summary
-        lines.append(f"{indent}{symbol} {r.word}: {detail}")
+        lines.append(f"{indent}{r.summary_line}")
     return "\n".join(lines)
 
 
