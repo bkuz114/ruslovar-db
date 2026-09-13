@@ -477,12 +477,19 @@ class Result:
     outcome is a short name: added, updated, deleted, skipped, matched,
     mismatched, not_found, no_change, or error. message describes the
     problem, if any. error and warning are flags.
+
+    kind identifies what produced the result: "entry" for one noun
+    entry, "check" for one sanity check, "file" for a file-level
+    result, and so on. It exists so that code can filter results by
+    origin without isinstance checks against the subclasses. The
+    subclasses set it; the base default is "result".
     """
 
     outcome: str
     message: str | None = None
     error: bool = False
     warning: bool = False
+    kind: str = "result"
 
     @property
     def label(self) -> str:
@@ -497,6 +504,7 @@ class EntryResult(Result):
     word: str
     root_code: int = 0
     rows_affected: int = 0
+    kind: str = "entry"
 
     @property
     def label(self) -> str:
@@ -509,6 +517,7 @@ class TransformResult(Result):
 
     # human readable summary of the check
     check: str
+    kind: str = "check"
 
     @property
     def label(self) -> str:
