@@ -669,6 +669,13 @@ class EntryResult(Result):
     def label(self) -> str:
         return self.word
 
+    @property
+    def summary_line(self) -> str:
+        """One-line summary of this entry result, for display."""
+        return (
+            f"{self.outcome.symbol} {self.word}: {self.message or self.outcome.summary}"
+        )
+
 
 @dataclass(kw_only=True)
 class TransformResult(Result):
