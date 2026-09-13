@@ -2534,11 +2534,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     ut = sub.add_parser("util", parents=[common], help="Standalone operations.")
     ut.add_argument("--word", help="Look up a word and print its rows.")
     ut.add_argument("--sanity", action="store_true", help="Run sanity checks.")
-    ut.add_argument(
-        "--sanity-transformations",
-        action="store_true",
-        help="Run only the transformation checks.",
-    )
 
     return parser.parse_args(argv)
 
@@ -2646,7 +2641,7 @@ def main(argv: list[str] | None = None) -> int:
 
 
 def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
-    """Handle util: --word, --sanity, --sanity-transformations.
+    """Handle util: --word, --sanity
 
     Runs each requested operation against the provided connection,
     returns the collected results.
@@ -2661,7 +2656,7 @@ def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Resu
         The list of Result objects produced by the requested operations.
     """
     results = []
-    if args.sanity or args.sanity_transformations:
+    if args.sanity:
         results.extend(check_transformations(conn, config["table"], logger))
     if args.word:
         # no results to return
