@@ -29,13 +29,14 @@ on:
     inputs:
       # What should the workflow do?
       action:
-        description: 'What should this workflow do? "dump" regenerates the SQL dump and pushes it to the repo. "image" builds the Docker image with the regenerated dump baked in and pushes it to Docker Hub. "both" does both.'
+        description: 'What should this workflow do? "dump" regenerates the SQL dump and pushes it to the repo. "image" builds the Docker image with the regenerated dump baked in and pushes it to Docker Hub. "both" does both. "test" regenerates the dump without committing or building the image, for validating the build system.'
         required: true
         type: choice
         options:
           - dump
           - image
           - both
+          - test
         default: both
 
       # Optional version tag. Empty means "latest only."
