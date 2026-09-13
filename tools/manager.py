@@ -177,35 +177,6 @@ names, but they are separate concepts and could diverge."""
 JSON_TO_CASE = {v: k for k, v in CASE_TO_JSON.items()}
 
 
-class ResultOutcome(str, Enum):
-    """Identifiers for the result state of a single operation or check.
-
-    These are not semantic values. They are identifiers whose only jobs
-    are to be compared against each other and looked up in the symbol
-    map used by the end-of-run summary printing. They are consumed by
-    Result objects (as the outcome field), by RESULT_SYMBOLS (as lookup
-    keys), and by the summary printers (which count them and print them
-    directly). Nothing outside those uses depends on their values.
-
-    str subclass so that comparisons, dict lookups, and f-string
-    formatting against the underlying strings keep working unchanged.
-    """
-
-    ADDED = "added"
-    UPDATED = "updated"
-    DELETED = "deleted"
-    SKIPPED = "skipped"
-    MATCHED = "matched"
-    COMPLETE = "complete"
-    MISMATCHED = "mismatched"
-    NOT_FOUND = "not_found"
-    NO_CHANGE = "no_change"
-    JSON_VALIDATED = "json_validated"
-    ERROR = "error"
-    TRANSFORMATION_OK = "transformation_ok"
-    TRANSFORMATION_FAIL = "transformation_fail"
-
-
 # =============================================================================
 # Errors
 # =============================================================================
@@ -429,6 +400,86 @@ class Logger:
 # =============================================================================
 
 
+@dataclass(frozen=True)
+class ResultOutcomeHolder:
+    """Display attributes for one ResultOutcome member.
+
+    Carries the summary name (the Counts field name and the text used in
+    printed output), the symbol (the leading character in per-entry
+    lines), and the ANSI color code for that line.
+    """
+
+    summary: str
+    symbol: str
+    code: str
+
+    def __str__(self):
+        return f"{self.symbol} {self.summary}"
+
+
+class ResultOutcome(Enum):
+    """Identifiers for the result state of a single operation or check.
+
+    These are not semantic values. Each member is an identifier that
+    also carries the three pieces of display information the summary
+    printers need: a summary name (used as the Counts field name and in
+    printed output), a symbol (the leading character in per-entry lines),
+    and a color code (the ANSI escape for that line).
+
+    Members are ResultOutcomeHolder instances; the summary, symbol, and
+    code properties expose their fields. Nothing outside the summary
+    printing and counting code depends on these values.
+    """
+
+    ADDED = ResultOutcomeHolder(summary="added", symbol="+", code=Colors.GREEN)
+
+    UPDATED: ResultOutcomeHolder(summary="updated", symbol="~", code=Colors.YELLOW)
+
+    DELETED = ResultOutcomeHolder(summary="deleted", symbol="-", code=Colors.RED)
+
+    SKIPPED = ResultOutcomeHolder(summary="skipped", symbol="x", code=Colors.DIM)
+
+    MATCHED = ResultOutcomeHolder(summary="matched", symbol="✓", code=Colors.CYAN)
+
+    COMPLETE = ResultOutcomeHolder(summary="complete", symbol="=", code=Colors.GREEN)
+
+    MISMATCHED = ResultOutcomeHolder(
+        summary="mismatched", symbol="✗", code=Colors.BRIGHT_RED
+    )
+
+    NOT_FOUND = ResultOutcomeHolder(
+        summary="not_found", symbol="✗", code=Colors.BRIGHT_RED
+    )
+
+    NO_CHANGE = ResultOutcomeHolder(summary="no_change", symbol="x", code=Colors.DIM)
+
+    JSON_VALIDATED = ResultOutcomeHolder(
+        summary="json_validated", symbol="✓", code=Colors.CYAN
+    )
+
+    ERROR = ResultOutcomeHolder(summary="error", symbol="✗", code=Colors.BRIGHT_RED)
+
+    TRANSFORMATION_OK = ResultOutcomeHolder(
+        summary="transformation_ok", symbol="✓", code=Colors.GREEN
+    )
+
+    TRANSFORMATION_FAIL = ResultOutcomeHolder(
+        summary="transformation_fail", symbol="✗", code=Colors.BRIGHT_RED
+    )
+
+    @property
+    def summary(self) -> str:
+        return self.value.summary
+
+    @property
+    def symbol(self) -> str:
+        return self.value.symbol
+
+    @property
+    def code(self) -> str:
+        return self.value.code
+
+
 @dataclass(kw_only=True)
 class JsonEntries:
     """Validated top-level data from one JSON entries file.
@@ -549,7 +600,7 @@ class Result:
     @property
     def label(self) -> str:
         """Short human label for this result."""
-        return self.outcome
+        return self.outcome.summary
 
 
 @dataclass(kw_only=True)
@@ -663,9 +714,9 @@ class Counts:
             self.failed += 1
             return
 
-        # r.outcome.value is the string name of the counter to bump, e.g.
-        # "added" if r.outcome = "added"
-        name = r.outcome.value
+        # r.outcome.summary is the string name of the counter to bump, e.g.
+        # "added" if r.outcome == ResultOutcome.ADDED
+        name = r.outcome.summary
 
         # Counts has one field per outcome (added, updated, ...).
         # Read the counter by that name and increment it.
@@ -2410,20 +2461,6 @@ def get_tree_table(tree: list[NounRow]) -> str:
 # =============================================================================
 
 
-RESULT_SYMBOLS = {
-    ResultOutcome.ADDED: ("+", Colors.GREEN),
-    ResultOutcome.UPDATED: ("~", Colors.YELLOW),
-    ResultOutcome.DELETED: ("-", Colors.RED),
-    ResultOutcome.SKIPPED: ("x", Colors.DIM),
-    ResultOutcome.MATCHED: ("✓", Colors.CYAN),
-    ResultOutcome.MISMATCHED: ("✗", Colors.BRIGHT_RED),
-    ResultOutcome.NOT_FOUND: ("✗", Colors.BRIGHT_RED),
-    ResultOutcome.NO_CHANGE: ("x", Colors.DIM),
-    ResultOutcome.JSON_VALIDATED: ("✓", Colors.CYAN),
-    ResultOutcome.COMPLETE: ("=", Colors.GREEN),
-}
-
-
 def print_result(logger: Logger, r: EntryResult) -> None:
     """Print one entry's result.
 
@@ -2438,8 +2475,9 @@ def print_result(logger: Logger, r: EntryResult) -> None:
     elif r.warning:
         logger.info(f"  ? {r.word}: {r.message}", Colors.BRIGHT_YELLOW)
     else:
-        symbol, code = RESULT_SYMBOLS.get(r.outcome, ("?", Colors.DIM))
-        logger.info(f"  {symbol} {r.word}: {r.outcome}", code)
+        symbol = r.outcome.symbol
+        code = r.outcome.code
+        logger.info(f"  {symbol} {r.word}: {r.outcome.summary}", code)
 
 
 # Delimiters for the four summary levels. Run is heaviest, file is
@@ -2466,13 +2504,13 @@ def build_entry_lines(results: list[EntryResult], indent: str = "    ") -> str:
     for r in results:
         if r.error:
             symbol = "!"
-            detail = r.message or r.outcome
+            detail = r.message or r.outcome.summary
         elif r.warning:
             symbol = "?"
-            detail = r.message or r.outcome
+            detail = r.message or r.outcome.summary
         else:
-            symbol, _ = RESULT_SYMBOLS.get(r.outcome, ("?", Colors.DIM))
-            detail = r.outcome
+            symbol = r.outcome.symbol
+            detail = r.outcome.summary
         lines.append(f"{indent}{symbol} {r.word}: {detail}")
     return "\n".join(lines)
 
@@ -2617,7 +2655,7 @@ def build_problems_block(title: str, problems: list) -> str:
     rule = "═" * 60
     lines = [rule, f" {title}", rule]
     for r in problems:
-        lines.append(f"   {r.label}: {r.message or r.outcome}")
+        lines.append(f"   {r.label}: {r.message or r.outcome.summary}")
     lines.append(rule)
     return "\n".join(lines)
 
