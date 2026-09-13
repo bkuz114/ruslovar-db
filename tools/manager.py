@@ -85,7 +85,7 @@ import argparse
 import configparser
 import json
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
@@ -585,34 +585,20 @@ class Counts:
 
     def add_counts(self, other: "Counts") -> None:
         """Add another Counts into this one."""
-        for name in (
-            "added",
-            "updated",
-            "deleted",
-            "skipped",
-            "matched",
-            "mismatched",
-            "not_found",
-            "failed",
-        ):
-            setattr(self, name, getattr(self, name) + getattr(other, name))
+        # Go through each counter this class declares, and add other's
+        # value for that same counter into ours.
+        for f in fields(self):
+            setattr(self, f.name, getattr(self, f.name) + getattr(other, f.name))
 
     def summary(self) -> str:
         """Return a one-line summary of the nonzero counts."""
         parts = []
-        for name in (
-            "added",
-            "updated",
-            "deleted",
-            "skipped",
-            "matched",
-            "mismatched",
-            "not_found",
-            "failed",
-        ):
-            n = getattr(self, name)
+        # Go through each counter this class declares, and if it's nonzero,
+        # add a "<n> <name>" fragment to the output list that gets returned.
+        for f in fields(self):
+            n = getattr(self, f.name)
             if n:
-                parts.append(f"{n} {name.replace('_', ' ')}")
+                parts.append(f"{n} {f.name.replace('_', ' ')}")
         return ", ".join(parts) if parts else "no entries processed"
 
 
