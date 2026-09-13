@@ -320,6 +320,9 @@ class Logger:
     def info(self, text: str, code: str = None, end="\n") -> None:
         self._write(text, level="info", code=code, end=end, stream=sys.stdout)
 
+    def operation(self, text: str, code: str = None, end="\n") -> None:
+        self._write(text, level="operation", code=code, end=end, stream=sys.stdout)
+
     def warning(self, text: str, code: str = None, end="\n") -> None:
         color = code if code is not None else Colors.BRIGHT_YELLOW
         self._write(text, level="warn", code=color, end=end, stream=sys.stderr)
