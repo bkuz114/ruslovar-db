@@ -85,7 +85,7 @@ import argparse
 import configparser
 import json
 import sys
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field, fields
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
@@ -196,9 +196,11 @@ class ResultOutcome(str, Enum):
     DELETED = "deleted"
     SKIPPED = "skipped"
     MATCHED = "matched"
+    COMPLETE = "complete"
     MISMATCHED = "mismatched"
     NOT_FOUND = "not_found"
     NO_CHANGE = "no_change"
+    JSON_VALIDATED = "json_validated"
     ERROR = "error"
     TRANSFORMATION_OK = "transformation_ok"
     TRANSFORMATION_FAIL = "transformation_fail"
@@ -427,6 +429,27 @@ class Logger:
 # =============================================================================
 
 
+@dataclass(kw_only=True)
+class JsonEntries:
+    """Validated top-level data from one JSON entries file.
+
+    Produced by validate_file after the file has been read and its
+    top-level shape checked. Downstream code can trust that file,
+    category, and entries are present and correctly typed, and does not
+    need to re-validate them.
+
+    Attributes:
+        file (Path): Path to the source file. Kept for error messages.
+        category (str): The file-level category, applied to every entry.
+        entries (dict): The raw entry dicts from the "entries" key. Each
+            is converted to a NounEntry by parse_entries.
+    """
+
+    file: Path
+    category: str
+    entries: dict
+
+
 @dataclass(frozen=True)
 class Declension:
     """The case forms of a noun within one number.
@@ -530,6 +553,52 @@ class Result:
 
 
 @dataclass(kw_only=True)
+class FileResult(Result):
+    """The outcome of one operation across one file.
+
+    Attributes:
+        file (Path): Path to the file that was processed.
+        category (str): The file-level category, or "" if the file could
+            not be read or parsed.
+        entries (list[EntryResult]): One EntryResult per noun entry in
+            the file. Empty if the file failed before any entry was
+            processed.
+        counts (Counts): A Counts computed from entries in
+            __post_init__. Not an init argument; derived from entries.
+    """
+
+    file: Path
+    # entries is optional - for example, error case where entries
+    # can't be parsed but still need to store a FileResult for summary
+    # For the default value, use default_factory, not = []: Python
+    # evaluates a default value once, at class definition, so = [] would
+    # give every FileResult the same list object and appending to one would
+    # append to all. The factory runs per instance instead, so each FileResult gets its own list.
+    entries: list[EntryResult] = field(default_factory=list)
+    category: str = "NULL"
+    kind: str = "file"
+
+    @property
+    def label(self) -> Path:
+        return self.file
+
+    # store a Counts object for this FileResult.
+    # once populated with self.entries, counts
+    # about the file will be available to callers e.g.,
+    #    fileResult.counts.summary
+    #    fileResult.counts.count
+    counts: Counts = field(init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        """
+        Populates the Counts object after __init__ with the
+        entries for this file.
+        """
+        self.counts = Counts()
+        self.counts.add_results(self.entries)
+
+
+@dataclass(kw_only=True)
 class EntryResult(Result):
     """The outcome of one operation on one entry."""
 
@@ -573,6 +642,20 @@ class Counts:
     def total(self) -> int:
         """Total number of results counted, across all outcomes."""
         return sum(getattr(self, f.name) for f in fields(self))
+
+    def add_file_results(self, results: list[FileResult]) -> None:
+        """Batch increment the counter for all results in multiple files."""
+        for r in results:
+            self.add_file_result(r)
+
+    def add_file_result(self, r: FileResult) -> None:
+        """Batch increment the counter for all results in a file."""
+        self.add_results(r.entries)
+
+    def add_results(self, results: list[EntryResult]) -> None:
+        """Batch increment the counter for multiple results."""
+        for r in results:
+            self.add_result(r)
 
     def add_result(self, r: EntryResult) -> None:
         """Increment the counter for a result's outcome."""
@@ -737,6 +820,86 @@ def row_from_dict(d: dict) -> NounRow:
 # =============================================================================
 
 
+def _json_fail(error: str, **extra: object) -> None:
+    """Raise a standardized RumorphError for JSON processing failures.
+
+    Args:
+        error (str): The primary error message.
+        **extra (object): Additional key/value pairs, rendered as
+            "-key: value" lines beneath the main message.
+
+    Raises:
+        RumorphError: Always.
+    """
+
+    # create dict of key/values to format in the error string
+    # - extra is arbitrary extra key/vals caller passed
+    # - | merges dicts; extra wins on key collision
+    fields = {"error": error} | extra
+    # Create line of formatted error details:
+    # one "-key: value" line for file
+    details = "\n".join(f"-{k}: {v}" for k, v in fields.items())
+    raise RumorphError(f" ! Error processing JSON.\n{details}")
+
+
+def get_json(path: Path) -> JsonEntries:
+    """Read a JSON file and validate its top-level shape.
+
+    Args:
+        path (Path): Path to the JSON file.
+
+    Returns:
+        JsonEntries: The file's path, category, and raw entries.
+
+    Raises:
+        RumorphError: If the file cannot be read, is not valid JSON, or
+            does not have the expected top-level shape.
+    """
+    # Read and validate file structure.
+    try:
+        doc = json.loads(path.read_text(encoding="utf-8"))
+        return validate_file(path, doc)
+    except (OSError, json.JSONDecodeError, ParseError) as exc:
+        _json_fail(str(exc), file=path)
+
+
+def parse_entries(
+    raw_entries: list[dict], category: str, path: Path
+) -> list[NounEntry]:
+    """
+    Takes raw entries at "entries" key in JSON and parses
+    them into validated NounEntry objects (which are what
+    get fed to _op_* functions)
+
+    Args:
+        raw_entries (list[dict]): The raw entry dicts from a
+            JsonEntries object.
+        category (str): The file-level category, applied to each entry.
+        path (Path): Source file path, used only for error messages.
+
+    Returns:
+        list[NounEntry]: One NounEntry per raw entry, in the same order.
+
+    Raises:
+        RumorphError: If any entry fails to parse. The error message
+            names the offending word.
+    """
+
+    # raw_entries - raw dict from the JSON doc
+    # from top level "entries" key, which stores
+    # list of noun entries. Convert each entry
+    # in this list to a validated NounEntry object
+    entries = []
+    for raw in raw_entries:
+        try:
+            entries.append(parse_entry(raw, category))
+        except ParseError as exc:
+            word = raw.get("word", "?")
+            _json_fail(str(exc), file=path, word=word)
+
+    return entries
+
+
 def parse_entry(raw: dict, category: str) -> NounEntry:
     """Parse and validate one JSON entry.
 
@@ -862,14 +1025,16 @@ def _parse_declension(block: dict) -> Declension:
     return Declension(**kwargs)
 
 
-def validate_file(doc: object) -> tuple[str, list[dict]]:
+def validate_file(path: Path, doc: Any) -> JsonEntries:
     """Validate the top-level shape of a parsed JSON document.
 
     Args:
-        doc: The loaded JSON.
+        path (Path): Path to the source file, stored on the result.
+        doc (Any): The loaded JSON. Must be a dict with a non-empty
+            "category" string and a non-empty "entries" list.
 
     Returns:
-        A two-tuple: the category, and the raw entries.
+        JsonEntries: The validated data.
 
     Raises:
         ParseError: If category or entries is missing, or an extra key
@@ -885,7 +1050,7 @@ def validate_file(doc: object) -> tuple[str, list[dict]]:
     extra = set(doc) - {"category", "entries"}
     if extra:
         raise ParseError(f"unexpected top-level keys: {sorted(extra)}")
-    return doc["category"], entries
+    return JsonEntries(file=path, category=doc["category"], entries=entries)
 
 
 # =============================================================================
@@ -2254,6 +2419,8 @@ RESULT_SYMBOLS = {
     ResultOutcome.MISMATCHED: ("✗", Colors.BRIGHT_RED),
     ResultOutcome.NOT_FOUND: ("✗", Colors.BRIGHT_RED),
     ResultOutcome.NO_CHANGE: ("x", Colors.DIM),
+    ResultOutcome.JSON_VALIDATED: ("✓", Colors.CYAN),
+    ResultOutcome.COMPLETE: ("=", Colors.GREEN),
 }
 
 
@@ -2311,73 +2478,90 @@ def build_entry_lines(results: list[EntryResult], indent: str = "    ") -> str:
 
 
 def build_file_summary(
-    path,
-    category: str,
     operation: str,
-    results: list[EntryResult],
+    file_result: FileResult,
     index: int,
     build_full: bool,
 ) -> str:
     """Render the summary block for one file.
 
     Args:
-        path: The file's path.
-        category: The file-level category, or "" if unknown.
-        operation: The operation name.
-        results: The EntryResult objects for this file.
-        index: 1-based index of the file within the run.
-        build_full (bool): if True, prints individual entry results in summary
+        operation (str): The operation name.
+        file_result (FileResult): The FileResult for this file. Provides
+            the path, category, entries, and the counts derived from
+            them.
+        index (int): 1-based index of the file within the run.
+        build_full (bool): If True, include the individual entry result
+            lines below the file header.
 
     Returns:
-        The file summary as a string.
+        str: The file summary.
     """
     counts = Counts()
-    for r in results:
-        counts.add_result(r)
+    counts.add_file_result(file_result)
 
     lines = [
         _FILE_RULE,
         f" FILE #{index}",
         _FILE_RULE,
-        f"   Path:      {path}",
+        f"   Path:      {file_result.file}",
         f"   Operation: {operation}",
-        f"   Category:  {category or 'NULL'}",
-        f"   Result:    {counts.summary()}",
-        _FILE_RULE,
+        f"   Category:  {file_result.category}",
     ]
+    if file_result.error:
+        lines.append(f"   Error:     {file_result.message}")
+    elif file_result.message:
+        # non-error message for user such as --validate-json
+        # indicating that no files were actually processed.
+        # (.message is a catch all)
+        lines.append(f"   Message:   {file_result.message}")
+    else:
+        lines.append(f"   Result:    {counts.summary()}")
+    lines.append(_FILE_RULE)
     if build_full:
-        entries = build_entry_lines(results)
+        entries = build_entry_lines(file_result.entries)
         if entries:
             lines.append(entries)
     return "\n".join(lines)
 
 
 def build_operation_summary(
-    operation: str, file_summaries: list[str], file_paths: list, totals: Counts
+    operation: str, file_results: list[FileResult], build_full: bool
 ) -> str:
     """Render the summary block for one operation.
 
+    Computes the operation's totals from the file results, lists the
+    files processed, and includes a file summary for each file.
+
     Args:
-        operation: The operation name.
-        file_summaries: The already-built file summary strings.
-        file_paths: The file paths, in order, for the file list.
-        totals: Aggregated counts across all files in this operation.
+        operation (str): The operation name.
+        file_results (list[FileResult]): The FileResult objects for this
+            operation.
+        build_full (bool): If True, each file summary includes its
+            individual entry result lines.
 
     Returns:
         The operation summary as a string.
     """
+
+    # Get summary counts for entire operation
+    totals = Counts()
+    totals.add_file_results(file_results)
+
     lines = [
         _OP_RULE,
         f" OPERATION: {operation}",
         _OP_RULE,
         "   Files:",
     ]
-    for p in file_paths:
+    for r in file_results:
+        p = r.file
         lines.append(f"     - {p}")
     lines.append(f"   Result: {totals.summary()}")
     lines.append(_OP_RULE)
 
-    for i, summary in enumerate(file_summaries, start=1):
+    for i, r in enumerate(file_results, start=1):
+        summary = build_file_summary(operation, r, i, build_full)
         lines.append("")
         lines.append(summary)
     return "\n".join(lines)
@@ -2385,34 +2569,44 @@ def build_operation_summary(
 
 def build_run_summary(
     operation: str,
-    file_summaries: list[str],
-    file_paths: list,
-    totals: Counts,
-    entry_count: int,
+    file_results: list[FileResult],
+    build_full: bool,
 ) -> str:
     """Render the top-level run summary, including all nested sections.
 
+    Computes the run totals from the file results and includes an
+    operation summary, which in turn includes a file summary per file.
+
     Args:
-        operation: The operation name.
-        file_summaries: The already-built file summary strings.
-        file_paths: The file paths, in order.
-        totals: Aggregated counts across the whole run.
-        entry_count: Total entries processed.
+        operation (str): The operation name.
+        file_results (list[FileResult]): The FileResult objects for the
+            run.
+        build_full (bool): If True, each file summary includes its
+            individual entry result lines.
 
     Returns:
-        The run summary as a string.
+        str: The run summary.
     """
+
+    # operation summary string
+    operation_summary = build_operation_summary(operation, file_results, build_full)
+
+    # Get summary counts for entire run
+    totals = Counts()
+    totals.add_file_results(file_results)
+
     lines = [
         _RUN_RULE,
         " RUN SUMMARY",
         _RUN_RULE,
         f"   Operation:       {operation}",
-        f"   Files processed: {len(file_paths)}",
-        f"   Entries:         {entry_count}",
+        f"   Files processed: {len(file_results)}",
+        f"   Entries:         {totals.total}",
         f"   Result:          {totals.summary()}",
         _RUN_RULE,
         "",
-        build_operation_summary(operation, file_summaries, file_paths, totals),
+        operation_summary,
+        f"TOTAL: {totals.summary()}",
     ]
     return "\n".join(lines)
 
@@ -2677,6 +2871,10 @@ def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Resu
 def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
     """Handle entries subcommand: run one operation over one or more JSON files.
 
+    Reads and validates each file, converts its entries, applies the
+    requested operation, and collects one FileResult per file. The
+    end-of-run summary is built and printed once, after every file has
+    been processed.
     verify-all is a whole-database check, so it runs after the file
     loop, in addition to processing the files. Everything else processes
     files only.
@@ -2688,9 +2886,12 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
         logger: The logger.
 
     Returns:
-        The list of Result objects produced by the operation.
+        list[Result]: The FileResult objects for each file processed,
+            plus the TransformResult objects if verify-all ran. Both
+            subclass Result; callers filter on .error and .warning.
     """
-    results = []
+
+    all_results = []
 
     # Step 1: find files.
     files = _discover(args.path, recursive=not args.no_recursive)
@@ -2705,116 +2906,115 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
 
     # Step 2: run the operation over every file, collecting what the
     # end-of-run summary needs: the results per file, and the totals.
-    totals = Counts()
-    file_summaries = []
-
+    file_results = []
     for path in files:
         logger.info(f"\n─── {path} ───")
-        counts, entry_results, category = _process_file(
-            args, config, conn, path, logger
-        )
-        results.extend(entry_results)
-        totals.add_counts(counts)
-        logger.info(f"\n  {counts.summary()}")
-        file_summaries.append(
-            build_file_summary(
-                path,
-                category,
-                args.operation,
-                results,
-                len(file_summaries) + 1,
-                args.full_summary,
+
+        # parse JSON and get list of entries
+        try:
+            # 2-1: read and validate JSON  (returns JsonEntries object
+            #      with validated top level keys: category, entries)
+            json_data = get_json(path)
+            raw_entries = json_data.entries
+            category = json_data.category
+
+            # 2-2: convert raw 'entries' dict into validated NounEntry objects
+            entries = parse_entries(raw_entries, category, path)
+
+            # --validate-json only validates entries can be parsed.
+            # continue so remaining files will be validated.
+            if args.operation == "validate-json":
+                for entry in entries:
+                    logger.info(f"  ✓ {entry.word}: valid", Colors.CYAN)
+                # create a FileResult object so the validated file details will
+                # appear in end of run summary. Don't add any entries as none processed.
+                file_result = FileResult(
+                    outcome=ResultOutcome.JSON_VALIDATED,
+                    file=path,
+                    message="JSON entries validated only; nothing processed.",
+                    category=category,
+                )
+                file_results.append(file_result)
+                continue
+
+            # 2-3: apply entries from the file against the current operation
+            #      (e.g. add all entries)
+            entry_results = _apply_entries(args, config, conn, entries, logger)
+
+            # create FileResult for end of run summary
+            file_result = FileResult(
+                outcome=ResultOutcome.COMPLETE,
+                file=path,
+                category=category,
+                entries=entry_results,
             )
-        )
+            # creating FileResult automatically creates a Counts
+            # on it which includes count summaries for each entry.
+            # print summary live (re-printed at end-of-run summary)
+            logger.info(f"\n  {file_result.counts.summary()}")
+            file_results.append(file_result)
+        except RumorphError as exc:
+            # log error and continue to next file
+            logger.error(f"  ! {path}: {exc}")
+            file_results.append(
+                FileResult(
+                    outcome=ResultOutcome.ERROR, file=path, error=True, message=str(exc)
+                )
+            )
 
-    # Step 3: If verify-all supplied, runs final sanity/transformation check
+    # Step: If verify-all supplied, runs final sanity/transformation check
     if args.operation == "verify-all":
-        results.extend(check_transformations(conn, config["table"], logger))
+        # returns TransformResult
+        all_results.extend(check_transformations(conn, config["table"], logger))
 
-    # Step 4: build the run summary from what was collected, and print it
+    # Step: build the run summary from what was collected, and print it
     # once.
     logger.info(
         build_run_summary(
             operation=args.operation,
-            file_summaries=file_summaries,
-            file_paths=files,
-            totals=totals,
-            entry_count=len(results),
+            file_results=file_results,
+            build_full=args.full_summary,
         )
     )
-    logger.info(f"TOTAL: {totals.summary()}")
 
-    return results
+    all_results.extend(file_results)
+    return all_results
 
 
-def _process_file(
-    args, config: dict, conn: Connection, path: Path, logger: Logger
-) -> tuple[Counts, list, str]:
-    """Run the requested operation on one file.
-
-    Returns a three-tuple: counts for the file, the list of EntryResult
-    for the file, and the file's category.
+def _apply_entries(
+    args, config: dict, conn: Connection, entries: list[NounEntry], logger: Logger
+) -> list[EntryResult]:
+    """Run the requested operation against a set of entries.
 
     Args:
         args: Parsed arguments.
         config: The [mysql] dict.
         conn: The database connection.
-        path: The file to process.
+        entries (list[NounEntry]): The validated NounEntry objects to
+            operate on.
         logger: The logger.
 
     Returns:
-        A three-tuple of (Counts, list[EntryResult], category).
+        list[EntryResult]: One EntryResult per entry, in input order.
+
+    Raises:
+        ValueError: If args.operation is not a known entries operation.
     """
-    counts = Counts()
-
-    # Step 1: read and validate file structure.
-    try:
-        doc = json.loads(path.read_text(encoding="utf-8"))
-        category, raw_entries = validate_file(doc)
-    except (OSError, json.JSONDecodeError, ParseError) as exc:
-        logger.error(f"  ! {path}: {exc}")
-        return counts, [], ""
-
-    # Step 2: parse entries. Parse failures are reported and excluded.
-    entries = []
-    for raw in raw_entries:
-        try:
-            entries.append(parse_entry(raw, category))
-        except ParseError as exc:
-            word = raw.get("word", "?")
-            logger.error(f"  ! {word}: {exc}")
-            counts.failed += 1
-
-    # Step 3: validate-json does not touch the database.
-    if args.operation == "validate-json":
-        results = []
-        for entry in entries:
-            counts.matched += 1
-            logger.info(f"  ✓ {entry.word}: valid", Colors.CYAN)
-        return counts, results, category
-
     # Run the operation
     ci = args.case_insensitive
     table = config["table"]
     if args.operation == "add":
-        results = op_add(conn, table, entries, logger, ci)
+        return op_add(conn, table, entries, logger, ci)
     elif args.operation == "update":
-        results = op_update(
+        return op_update(
             conn, table, entries, logger, args.force_update, args.force_upstream, ci
         )
     elif args.operation == "delete":
-        results = op_delete(conn, table, entries, logger, args.force_delete, ci)
+        return op_delete(conn, table, entries, logger, args.force_delete, ci)
     elif args.operation in ["verify", "verify-all"]:
-        results = op_verify(conn, table, entries, logger, ci)
+        return op_verify(conn, table, entries, logger, ci)
     else:
-        results = []
-
-    # Step 5: print results and tally.
-    for r in results:
-        # print_result(logger, r)
-        counts.add_result(r)
-
-    return counts, results, category
+        raise ValueError(f'Unknown entries operation "{args.operation}"')
 
 
 def _discover(path: Path, recursive: bool) -> list[Path]:
