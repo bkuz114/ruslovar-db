@@ -569,6 +569,11 @@ class Counts:
     not_found: int = 0
     failed: int = 0
 
+    @property
+    def total(self) -> int:
+        """Total number of results counted, across all outcomes."""
+        return sum(getattr(self, f.name) for f in fields(self))
+
     def add_result(self, r: EntryResult) -> None:
         """Increment the counter for a result's outcome."""
         if r.error:
