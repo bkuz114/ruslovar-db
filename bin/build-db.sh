@@ -109,7 +109,7 @@ JSON_ENTRIES="${JSON_ENTRIES:-$REPO_ROOT/custom-entries}"
 # it splits on whitespace. and paths get mangled.
 MANAGER_BASE_INVOCATION=(
     "$MANAGER"
-    apply
+    entries
     "$JSON_ENTRIES"
 )
 

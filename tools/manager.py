@@ -7,11 +7,11 @@ word lookup and a database sanity check.
 
 USAGE
 
-    python manager.py apply <path> <operation> [flags]
+    python manager.py entries <path> <operation> [flags]
     python manager.py util --word <word> [flags]
     python manager.py util --sanity [flags]
 
-    Operations for apply: add, update, delete, verify, verify-all,
+    Operations for entries: add, update, delete, verify, verify-all,
     validate-json.
 
     Exit codes: 0 = success, 1 = error, 2 = warnings only.
@@ -2445,7 +2445,7 @@ def print_problems(errors: list, warnings: list, logger: Logger) -> None:
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     """Build the parser and parse argv.
 
-    Two subcommands: apply and util. Common flags are attached to both
+    Two subcommands: entries and util. Common flags are attached to both
     via a parent parser.
 
     Args:
@@ -2494,7 +2494,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(prog="rumorph", parents=[common])
     sub = parser.add_subparsers(dest="command", required=True)
 
-    ap = sub.add_parser("apply", parents=[common], help="Operations on JSON files.")
+    ap = sub.add_parser("entries", parents=[common], help="Operations on JSON files.")
     ap.add_argument("path", type=Path, help="JSON file or directory.")
     ap.add_argument(
         "operation",
@@ -2630,8 +2630,8 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "util":
             results = _run_util(args, config, conn, logger)
-        elif args.command == "apply":
-            results = _run_apply(args, config, conn, logger)
+        elif args.command == "entries":
+            results = _run_entries(args, config, conn, logger)
         else:
             raise RumorphError(f"unknown subcommand: {args.command!r}")
     finally:
@@ -2674,8 +2674,8 @@ def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Resu
     return results
 
 
-def _run_apply(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
-    """Handle apply: run one operation over one or more JSON files.
+def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
+    """Handle entries subcommand: run one operation over one or more JSON files.
 
     verify-all is a whole-database check, so it runs after the file
     loop, in addition to processing the files. Everything else processes
