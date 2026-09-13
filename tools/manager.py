@@ -2488,6 +2488,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         help="Shortcut for --log-level ERROR.",
     )
     common.add_argument(
+        "--case-insensitive",
+        action="store_true",
+        help="Ignore case in word matches (slower).",
+    )
+    common.add_argument(
         "--version", action="store_true", help="Print version and exit."
     )
 
@@ -2525,11 +2530,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Delete all matches when delete is ambiguous.",
     )
-    ap.add_argument(
-        "--case-insensitive",
-        action="store_true",
-        help="Ignore case in word matches (slower).",
-    )
 
     ut = sub.add_parser("util", parents=[common], help="Standalone operations.")
     ut.add_argument("--word", help="Look up a word and print its rows.")
@@ -2538,11 +2538,6 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--sanity-transformations",
         action="store_true",
         help="Run only the transformation checks.",
-    )
-    ut.add_argument(
-        "--case-insensitive",
-        action="store_true",
-        help="Ignore case in word matches (slower).",
     )
 
     return parser.parse_args(argv)
