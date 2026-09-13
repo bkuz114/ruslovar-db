@@ -177,6 +177,33 @@ names, but they are separate concepts and could diverge."""
 JSON_TO_CASE = {v: k for k, v in CASE_TO_JSON.items()}
 
 
+class ResultOutcome(str, Enum):
+    """Identifiers for the result state of a single operation or check.
+
+    These are not semantic values. They are identifiers whose only jobs
+    are to be compared against each other and looked up in the symbol
+    map used by the end-of-run summary printing. They are consumed by
+    Result objects (as the outcome field), by RESULT_SYMBOLS (as lookup
+    keys), and by the summary printers (which count them and print them
+    directly). Nothing outside those uses depends on their values.
+
+    str subclass so that comparisons, dict lookups, and f-string
+    formatting against the underlying strings keep working unchanged.
+    """
+
+    ADDED = "added"
+    UPDATED = "updated"
+    DELETED = "deleted"
+    SKIPPED = "skipped"
+    MATCHED = "matched"
+    MISMATCHED = "mismatched"
+    NOT_FOUND = "not_found"
+    NO_CHANGE = "no_change"
+    ERROR = "error"
+    TRANSFORMATION_OK = "transformation_ok"
+    TRANSFORMATION_FAIL = "transformation_fail"
+
+
 # =============================================================================
 # Errors
 # =============================================================================
@@ -478,6 +505,11 @@ class Result:
     mismatched, not_found, no_change, or error. message describes the
     problem, if any. error and warning are flags.
 
+    The outcomes themselves carry no syntactic meaning. They are
+    identifiers used to key the symbol map and count results in the
+    end-of-run summary. New ones can be added to ResultOutcome as
+    needed; see its docstring for details.
+
     kind identifies what produced the result: "entry" for one noun
     entry, "check" for one sanity check, "file" for a file-level
     result, and so on. It exists so that code can filter results by
@@ -485,7 +517,7 @@ class Result:
     subclasses set it; the base default is "result".
     """
 
-    outcome: str
+    outcome: ResultOutcome
     message: str | None = None
     error: bool = False
     warning: bool = False
@@ -542,7 +574,7 @@ class Counts:
         if r.error:
             self.failed += 1
             return
-        setattr(self, r.outcome, getattr(self, r.outcome) + 1)
+        setattr(self, r.outcome.value, getattr(self, r.outcome.value) + 1)
 
     def add_counts(self, other: "Counts") -> None:
         """Add another Counts into this one."""
@@ -1525,7 +1557,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
 
             # Step 3: identical content exists. Skip.
             if already:
-                result = EntryResult(word=entry.word, outcome="skipped")
+                result = EntryResult(word=entry.word, outcome=ResultOutcome.SKIPPED)
                 results.append(result)
                 logger.entry_skipped(f"{entry.word}: already present")
                 continue
@@ -1533,13 +1565,16 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             # Step 4: insert.
             insert_tree(conn, table, entry)
             conn.commit()
-            result = EntryResult(word=entry.word, outcome="added")
+            result = EntryResult(word=entry.word, outcome=ResultOutcome.ADDED)
             results.append(result)
             logger.entry_added(f"{entry.word}: added")
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
-                word=entry.word, outcome="error", error=True, message=str(exc)
+                word=entry.word,
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=str(exc),
             )
             results.append(result)
             logger.entry_failed(f"{entry.word}: {exc}")
@@ -1547,7 +1582,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             conn.rollback()
             result = EntryResult(
                 word=entry.word,
-                outcome="error",
+                outcome=ResultOutcome.ERROR,
                 error=True,
                 message=f"{type(exc).__name__}: {exc}",
             )
@@ -1609,7 +1644,7 @@ def op_update(
                 )
                 result = EntryResult(
                     word=entry.word,
-                    outcome="error",
+                    outcome=ResultOutcome.ERROR,
                     error=True,
                     message="upstream entry",
                 )
@@ -1629,7 +1664,7 @@ def op_update(
                 )
                 result = EntryResult(
                     word=entry.word,
-                    outcome="error",
+                    outcome=ResultOutcome.ERROR,
                     error=True,
                     message=f"{len(roots)} roots match",
                 )
@@ -1642,7 +1677,7 @@ def op_update(
             if roots and all(
                 normalize_tree(load_tree(conn, table, r.code)) == entry for r in roots
             ):
-                result = EntryResult(word=entry.word, outcome="no_change")
+                result = EntryResult(word=entry.word, outcome=ResultOutcome.NO_CHANGE)
                 results.append(result)
                 logger.entry_skipped(f"{entry.word}: no change")
                 continue
@@ -1650,12 +1685,12 @@ def op_update(
             # Step: replace any existing, then update.
 
             # store what action is being done (update or fresh add), for logging
-            action = "added"
+            action = ResultOutcome.ADDED
             # delete the matches
             if roots:
                 for r in roots:
                     delete_tree(conn, table, r.code)
-                action = "updated"
+                action = ResultOutcome.UPDATED
             # insert the entry
             insert_tree(conn, table, entry)
             conn.commit()
@@ -1666,7 +1701,10 @@ def op_update(
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
-                word=entry.word, outcome="error", error=True, message=str(exc)
+                word=entry.word,
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=str(exc),
             )
             results.append(result)
             logger.entry_failed(f"{entry.word}: {exc}")
@@ -1674,7 +1712,7 @@ def op_update(
             conn.rollback()
             result = EntryResult(
                 word=entry.word,
-                outcome="error",
+                outcome=ResultOutcome.ERROR,
                 error=True,
                 message=f"{type(exc).__name__}: {exc}",
             )
@@ -1718,7 +1756,7 @@ def op_delete(
             if not matches:
                 result = EntryResult(
                     word=entry.word,
-                    outcome="not_found",
+                    outcome=ResultOutcome.NOT_FOUND,
                     error=True,
                     message="no matching entry",
                 )
@@ -1737,7 +1775,7 @@ def op_delete(
                 )
                 result = EntryResult(
                     word=entry.word,
-                    outcome="error",
+                    outcome=ResultOutcome.ERROR,
                     error=True,
                     message=f"{len(matches)} matches",
                 )
@@ -1748,13 +1786,16 @@ def op_delete(
             for r in matches:
                 delete_tree(conn, table, r.code)
             conn.commit()
-            result = EntryResult(word=entry.word, outcome="deleted")
+            result = EntryResult(word=entry.word, outcome=ResultOutcome.DELETED)
             results.append(result)
             logger.entry_deleted(f"{entry.word}: deleted")
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
-                word=entry.word, outcome="error", error=True, message=str(exc)
+                word=entry.word,
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=str(exc),
             )
             results.append(result)
             logger.entry_failed(f"{entry.word}: {exc}")
@@ -1762,7 +1803,7 @@ def op_delete(
             conn.rollback()
             result = EntryResult(
                 word=entry.word,
-                outcome="error",
+                outcome=ResultOutcome.ERROR,
                 error=True,
                 message=f"{type(exc).__name__}: {exc}",
             )
@@ -1799,7 +1840,7 @@ def op_verify(
             if not roots:
                 result = EntryResult(
                     word=entry.word,
-                    outcome="not_found",
+                    outcome=ResultOutcome.NOT_FOUND,
                     error=True,
                     message="not in database",
                 )
@@ -1815,7 +1856,7 @@ def op_verify(
                 multiple = len(roots) > 1
                 result = EntryResult(
                     word=entry.word,
-                    outcome="matched",
+                    outcome=ResultOutcome.MATCHED,
                     warning=multiple,
                     message=(f"{len(roots)} roots for this word" if multiple else None),
                 )
@@ -1826,7 +1867,7 @@ def op_verify(
             else:
                 result = EntryResult(
                     word=entry.word,
-                    outcome="mismatched",
+                    outcome=ResultOutcome.MISMATCHED,
                     error=True,
                     message="database content differs",
                 )
@@ -1834,14 +1875,17 @@ def op_verify(
                 logger.entry_mismatched(f"{entry.word}: content differs")
         except RumorphError as exc:
             result = EntryResult(
-                word=entry.word, outcome="error", error=True, message=str(exc)
+                word=entry.word,
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=str(exc),
             )
             results.append(result)
             logger.entry_failed(f"{entry.word}: {exc}")
         except Exception as exc:
             result = EntryResult(
                 word=entry.word,
-                outcome="error",
+                outcome=ResultOutcome.ERROR,
                 error=True,
                 message=f"{type(exc).__name__}: {exc}",
             )
@@ -1880,14 +1924,6 @@ def get_delete_queries(conn, table, roots) -> str:
 # =============================================================================
 # Sanity checks
 # =============================================================================
-
-
-# Outcome strings to add to TransformResult objects
-# which hold a summary of the result of running a single check
-# these are arbitrary and just get collected
-# at run end in a summary
-TRANSFORM_OUTCOME_OK = "transformation_ok"
-TRANSFORM_OUTCOME_FAIL = "transformation_fail"
 
 
 def print_transform_summary(results: list[TransformResult], logger: Logger) -> None:
@@ -1934,10 +1970,10 @@ def check_indexes(conn: Connection, table: str):
         # (gets printed in per-run summary)
         result_check = f"Check exists index '{name}'"
         if (name, sub) in present:
-            result_outcome = TRANSFORM_OUTCOME_OK
+            result_outcome = ResultOutcome.TRANSFORMATION_OK
             error = False
         else:
-            result_outcome = TRANSFORM_OUTCOME_FAIL
+            result_outcome = ResultOutcome.TRANSFORMATION_FAIL
             error = True
         results.append(
             TransformResult(check=result_check, outcome=result_outcome, error=error)
@@ -1961,7 +1997,7 @@ def check_deti_fix(conn: Connection, table: str):
         # ребенок itself not returning any root which is a separate failure
         return TransformResult(
             check=result_check,
-            outcome=TRANSFORM_OUTCOME_FAIL,
+            outcome=ResultOutcome.TRANSFORMATION_FAIL,
             error=True,
             message=f"{result_check}: (no root found for ребенок; so it can not be parent)",
         )
@@ -1974,11 +2010,13 @@ def check_deti_fix(conn: Connection, table: str):
         f"AND code_parent = %s AND plural = 1 AND wcase = 'им' LIMIT 1"
     )
     if _query(conn, sql, ["дети", rebenok_code]):
-        return TransformResult(check=result_check, outcome=TRANSFORM_OUTCOME_OK)
+        return TransformResult(
+            check=result_check, outcome=ResultOutcome.TRANSFORMATION_OK
+        )
     else:
         return TransformResult(
             check=result_check,
-            outcome=TRANSFORM_OUTCOME_FAIL,
+            outcome=ResultOutcome.TRANSFORMATION_FAIL,
             error=True,
             message=f"{result_check}: дети not им plural of ребенок",
         )
@@ -2020,7 +2058,7 @@ def check_columns(conn: Connection, table: str):
                 results.append(
                     TransformResult(
                         check=check,
-                        outcome=TRANSFORM_OUTCOME_OK,
+                        outcome=ResultOutcome.TRANSFORMATION_OK,
                         error=False,
                         message=None,
                     )
@@ -2034,7 +2072,7 @@ def check_columns(conn: Connection, table: str):
                 results.append(
                     TransformResult(
                         check=check,
-                        outcome=TRANSFORM_OUTCOME_FAIL,
+                        outcome=ResultOutcome.TRANSFORMATION_FAIL,
                         error=True,
                         message=message,
                     )
@@ -2044,7 +2082,7 @@ def check_columns(conn: Connection, table: str):
             results.append(
                 TransformResult(
                     check=check,
-                    outcome=TRANSFORM_OUTCOME_FAIL,
+                    outcome=ResultOutcome.TRANSFORMATION_FAIL,
                     error=True,
                     message=f"column {required_col} is missing from {table}",
                 )
@@ -2210,14 +2248,14 @@ def get_tree_table(tree: list[NounRow]) -> str:
 
 
 RESULT_SYMBOLS = {
-    "added": ("+", Colors.GREEN),
-    "updated": ("~", Colors.YELLOW),
-    "deleted": ("-", Colors.RED),
-    "skipped": ("x", Colors.DIM),
-    "matched": ("✓", Colors.CYAN),
-    "mismatched": ("✗", Colors.BRIGHT_RED),
-    "not_found": ("✗", Colors.BRIGHT_RED),
-    "no_change": ("x", Colors.DIM),
+    ResultOutcome.ADDED: ("+", Colors.GREEN),
+    ResultOutcome.UPDATED: ("~", Colors.YELLOW),
+    ResultOutcome.DELETED: ("-", Colors.RED),
+    ResultOutcome.SKIPPED: ("x", Colors.DIM),
+    ResultOutcome.MATCHED: ("✓", Colors.CYAN),
+    ResultOutcome.MISMATCHED: ("✗", Colors.BRIGHT_RED),
+    ResultOutcome.NOT_FOUND: ("✗", Colors.BRIGHT_RED),
+    ResultOutcome.NO_CHANGE: ("x", Colors.DIM),
 }
 
 
@@ -2658,7 +2696,11 @@ def _run_apply(args, config: dict, conn: Connection, logger: Logger) -> list[Res
     files = _discover(args.path, recursive=not args.no_recursive)
     if not files:
         results.append(
-            Result(outcome="error", error=True, message=f"no JSON files at {args.path}")
+            Result(
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=f"no JSON files at {args.path}",
+            )
         )
 
     # Step 2: run the operation over every file, collecting what the
