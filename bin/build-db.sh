@@ -118,12 +118,14 @@ PYTHON_TRANSFORM=(
     "${MANAGER_BASE_INVOCATION[@]}"
     add
     --config "$CONFIG_FILE"
+    --full-summary
 )
 
 PYTHON_VERIFY=(
     "${MANAGER_BASE_INVOCATION[@]}"
     verify-all
     --config "$CONFIG_FILE"
+    --full-summary
 )
 
 # -----------------------------------------------------------------------------

@@ -2311,7 +2311,12 @@ def build_entry_lines(results: list[EntryResult], indent: str = "    ") -> str:
 
 
 def build_file_summary(
-    path, category: str, operation: str, results: list[EntryResult], index: int
+    path,
+    category: str,
+    operation: str,
+    results: list[EntryResult],
+    index: int,
+    build_full: bool,
 ) -> str:
     """Render the summary block for one file.
 
@@ -2321,6 +2326,7 @@ def build_file_summary(
         operation: The operation name.
         results: The EntryResult objects for this file.
         index: 1-based index of the file within the run.
+        build_full (bool): if True, prints individual entry results in summary
 
     Returns:
         The file summary as a string.
@@ -2339,9 +2345,10 @@ def build_file_summary(
         f"   Result:    {counts.summary()}",
         _FILE_RULE,
     ]
-    entries = build_entry_lines(results)
-    if entries:
-        lines.append(entries)
+    if build_full:
+        entries = build_entry_lines(results)
+        if entries:
+            lines.append(entries)
     return "\n".join(lines)
 
 
@@ -2528,6 +2535,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="Delete all matches when delete is ambiguous.",
     )
+    ap.add_argument(
+        "--full-summary",
+        action="store_true",
+        help="Post-run summary re-prints entry results (useful for final CI logs).",
+    )
 
     ut = sub.add_parser("util", parents=[common], help="Standalone operations.")
     ut.add_argument("--word", help="Look up a word and print its rows.")
@@ -2706,7 +2718,12 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
         logger.info(f"\n  {counts.summary()}")
         file_summaries.append(
             build_file_summary(
-                path, category, args.operation, results, len(file_summaries) + 1
+                path,
+                category,
+                args.operation,
+                results,
+                len(file_summaries) + 1,
+                args.full_summary,
             )
         )
 
