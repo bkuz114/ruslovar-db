@@ -574,7 +574,14 @@ class Counts:
         if r.error:
             self.failed += 1
             return
-        setattr(self, r.outcome.value, getattr(self, r.outcome.value) + 1)
+
+        # r.outcome.value is the string name of the counter to bump, e.g.
+        # "added" if r.outcome = "added"
+        name = r.outcome.value
+
+        # Counts has one field per outcome (added, updated, ...).
+        # Read the counter by that name and increment it.
+        setattr(self, name, getattr(self, name) + 1)
 
     def add_counts(self, other: "Counts") -> None:
         """Add another Counts into this one."""
