@@ -692,7 +692,7 @@ class Counts:
     This is essentially a general aggregator of outcome results that
     tallies up results for you, instead of making callers do it.
 
-    It has one attribute: counters. A dict of counters keyed by outcome
+    The main attribute is counters. A dict of counters keyed by outcome
     summary name (e.g. "added", "deleted", "matched", etc. -- .summary
     attributes from ResultOutcome enums).
 
@@ -707,20 +707,17 @@ class Counts:
     you could aggregate all EntryResults from an entire run; you can add
     a random mismatch if you want. All it does is aggregate counters.
 
-    There is one counter that is not a ResultOutcome member: "failed".
-    It counts results whose error flag is set, regardless of which
-    outcome they carry, since an error can occur with any outcome.
-
-    Example after counting 3 added, 1 skipped, and 1 failed result:
+    Example after counting 3 added, 1 skipped, and 1 no_change result:
 
         {
             "added": 3,
-            "failed": 1,
+            "no_change": 1,
             "skipped": 1,
         }
     """
 
     counters: dict[str, int] = field(default_factory=dict)
+    failed: int = 0
 
     @property
     def total(self) -> int:
@@ -743,9 +740,17 @@ class Counts:
 
     def add_result(self, r: EntryResult) -> None:
         """Increment the counter for a result's outcome."""
+
+        # general error count (separate from named counters - provides a
+        # central way to tally the number of errors encountered, as they can
+        # be split among different result types e.g. "error", "mismatched", etc)
         if r.error:
-            self.counters["failed"] = self.counters.get("failed", 0) + 1
-            return
+            self.failed += 1
+
+        # update named counters that specify the operation type e.g. "added",
+        # "removed". NOTE: you can have clear error types in here also (e.g.
+        # "error"). That's ok. These named counters are tallied in summary
+        # independent of the attributes that are updated above.
 
         # r.outcome.summary -> the 'summary' attr on an ResultOutcome object
         # e.g. "added", "deleted", "matched", etc.
@@ -758,6 +763,7 @@ class Counts:
         # value for that same counter into ours.
         for counter_name, count in other.counters.items():
             self.counters[counter_name] = self.counters.get(counter_name, 0) + count
+        self.failed += other.failed
 
     def summary(self) -> str:
         """Return a one-line summary of the nonzero counts, alphabetical."""
