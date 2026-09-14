@@ -2176,13 +2176,13 @@ def print_transform_summary(results: list[TransformResult], logger: Logger) -> N
     logger.info(" SANITY CHECK RESULTS")
     logger.info(rule)
     for r in results:
+        line = f"  {r.outcome.symbol} {r.check}"
+        if r.message:
+            line += f"\n      {r.message}"
         if r.error:
-            line = f"  ✗ {r.check}"
-            if r.message:
-                line += f"\n      {r.message}"
             logger.error(line)
         else:
-            logger.info(f"  ✓ {r.check}")
+            logger.info(line, code=r.outcome.code)
     logger.info(rule)
 
 
