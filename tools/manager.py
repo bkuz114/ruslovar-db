@@ -718,6 +718,8 @@ class Counts:
 
     counters: dict[str, int] = field(default_factory=dict)
     failed: int = 0
+    warned: int = 0
+    succeeded: int = 0
 
     @property
     def total(self) -> int:
@@ -741,11 +743,16 @@ class Counts:
     def add_result(self, r: EntryResult) -> None:
         """Increment the counter for a result's outcome."""
 
-        # general error count (separate from named counters - provides a
-        # central way to tally the number of errors encountered, as they can
-        # be split among different result types e.g. "error", "mismatched", etc)
+        # general error/warn/success counts (separate from named counters -
+        # provides way to tally total error/warn/success encountered, as they can
+        # be split among different result types e.g. "error", "mismatched" are
+        # both error types.)
         if r.error:
             self.failed += 1
+        elif r.warning:
+            self.warned += 1
+        else:
+            self.succeeded += 1
 
         # update named counters that specify the operation type e.g. "added",
         # "removed". NOTE: you can have clear error types in here also (e.g.
@@ -764,6 +771,8 @@ class Counts:
         for counter_name, count in other.counters.items():
             self.counters[counter_name] = self.counters.get(counter_name, 0) + count
         self.failed += other.failed
+        self.warned += other.warned
+        self.succeeded += other.succeeded
 
     def summary(self) -> str:
         """Return a one-line summary of the nonzero counts, alphabetical."""
