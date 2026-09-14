@@ -1758,6 +1758,34 @@ def delete_tree(conn: Connection, table: str, root_code: int) -> list[NounRow]:
 # =============================================================================
 
 
+def op_validate_json(entries: list[NounEntry], logger: Logger) -> list[EntryResult]:
+    """Report each entry as valid.
+
+    This operation performs no checks and touches no database. Its
+    input is a list of NounEntry objects, which can only exist if
+    parse_entries already validated every entry in it. Reaching this
+    function means the entries are valid by construction; all it does
+    is convert that fact into EntryResult objects for the summary.
+
+    Args:
+        entries (list[NounEntry]): The validated entries.
+        logger (Logger): The logger.
+
+    Returns:
+        list[EntryResult]: One JSON_VALIDATED result per entry.
+    """
+    results = []
+    for entry in entries:
+        result = EntryResult(
+            word=entry.word,
+            outcome=ResultOutcome.JSON_VALIDATED,
+            message="JSON entry is valid",
+        )
+        results.append(result)
+        result.print_entry_summary(logger)
+    return results
+
+
 def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryResult]:
     """Insert each entry unless an identical one already exists.
 
@@ -2983,32 +3011,22 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
             # 2-2: convert raw 'entries' dict into validated NounEntry objects
             entries = parse_entries(raw_entries, category, path)
 
-            # --validate-json only validates entries can be parsed.
-            # continue so remaining files will be validated.
-            if args.operation == "validate-json":
-                for entry in entries:
-                    logger.info(f"  ✓ {entry.word}: valid", Colors.CYAN)
-                # create a FileResult object so the validated file details will
-                # appear in end of run summary. Don't add any entries as none processed.
-                file_result = FileResult(
-                    outcome=ResultOutcome.JSON_VALIDATED,
-                    file=path,
-                    message="JSON entries validated only; nothing processed.",
-                    category=category,
-                )
-                file_results.append(file_result)
-                continue
-
             # 2-3: apply entries from the file against the current operation
             #      (e.g. add all entries)
             entry_results = _apply_entries(args, config, conn, entries, logger)
 
             # create FileResult for end of run summary
+
+            # check for no-op operations
+            message = ""
+            if args.operation == "validate-json":
+                message = "JSON entries validated only; nothing processed."
             file_result = FileResult(
                 outcome=ResultOutcome.COMPLETE,
                 file=path,
                 category=category,
                 entries=entry_results,
+                message=message,
             )
             # creating FileResult automatically creates a Counts
             # on it which includes count summaries for each entry.
@@ -3065,6 +3083,8 @@ def _apply_entries(
     # Run the operation
     ci = args.case_insensitive
     table = config["table"]
+    if args.operation == "validate-json":
+        return op_validate_json(entries, logger)
     if args.operation == "add":
         return op_add(conn, table, entries, logger, ci)
     elif args.operation == "update":
