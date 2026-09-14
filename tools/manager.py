@@ -744,7 +744,8 @@ class Counts:
         for f in fields(self):
             n = getattr(self, f.name)
             if n:
-                parts.append(f"{n} {f.name.replace('_', ' ')}")
+                # normalize counter name for human readable summary
+                parts.append(f"{n} {f.name.replace('_', ' ').replace('-', ' ')}")
         return ", ".join(parts) if parts else "no entries processed"
 
 
