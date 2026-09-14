@@ -684,22 +684,48 @@ class TransformResult(Result):
 
 @dataclass
 class Counts:
-    """Tally of outcomes, for summaries."""
+    """Tally of outcomes results ("added", "deleted", etc.), for
+    the end-of-run summary.
 
-    added: int = 0
-    updated: int = 0
-    deleted: int = 0
-    skipped: int = 0
-    matched: int = 0
-    matched_ambiguous: int = 0
-    mismatched: int = 0
-    not_found: int = 0
-    failed: int = 0
+    (Future self: Counts seems weird, but don't nuke it. It's useful. читай.)
+
+    This is essentially a general aggregator of outcome results that
+    tallies up results for you, instead of making callers do it.
+
+    It has one attribute: counters. A dict of counters keyed by outcome
+    summary name (e.g. "added", "deleted", "matched", etc. -- .summary
+    attributes from ResultOutcome enums).
+
+    Outcomes are added via bottom level add_result. Each time an outcome
+    is added there, the counter for that outcome's type (e.g. "added")
+    is incremented by 1. If that key doesn't exist yet in the dict it is
+    added. Multiple Counts can also be merged together.
+
+    Counts does not care what the results are or where they came from.
+    You can add results for all EntryResult objects generated from
+    a single JSON file to get its added/failed/skipped, etc. counters;
+    you could aggregate all EntryResults from an entire run; you can add
+    a random mismatch if you want. All it does is aggregate counters.
+
+    There is one counter that is not a ResultOutcome member: "failed".
+    It counts results whose error flag is set, regardless of which
+    outcome they carry, since an error can occur with any outcome.
+
+    Example after counting 3 added, 1 skipped, and 1 failed result:
+
+        {
+            "added": 3,
+            "failed": 1,
+            "skipped": 1,
+        }
+    """
+
+    counters: dict[str, int] = field(default_factory=dict)
 
     @property
     def total(self) -> int:
         """Total number of results counted, across all outcomes."""
-        return sum(getattr(self, f.name) for f in fields(self))
+        return sum(self.counters.values())
 
     def add_file_results(self, results: list[FileResult]) -> None:
         """Batch increment the counter for all results in multiple files."""
@@ -718,34 +744,27 @@ class Counts:
     def add_result(self, r: EntryResult) -> None:
         """Increment the counter for a result's outcome."""
         if r.error:
-            self.failed += 1
+            self.counters["failed"] = self.counters.get("failed", 0) + 1
             return
 
-        # r.outcome.summary is the string name of the counter to bump, e.g.
-        # "added" if r.outcome == ResultOutcome.ADDED
-        name = r.outcome.summary
-
-        # Counts has one field per outcome (added, updated, ...).
-        # Read the counter by that name and increment it.
-        setattr(self, name, getattr(self, name) + 1)
+        # r.outcome.summary -> the 'summary' attr on an ResultOutcome object
+        # e.g. "added", "deleted", "matched", etc.
+        counter_name = r.outcome.summary
+        self.counters[counter_name] = self.counters.get(counter_name, 0) + 1
 
     def add_counts(self, other: "Counts") -> None:
         """Add another Counts into this one."""
         # Go through each counter this class declares, and add other's
         # value for that same counter into ours.
-        for f in fields(self):
-            setattr(self, f.name, getattr(self, f.name) + getattr(other, f.name))
+        for counter_name, count in other.counters.items():
+            self.counters[counter_name] = self.counters.get(counter_name, 0) + count
 
     def summary(self) -> str:
-        """Return a one-line summary of the nonzero counts."""
+        """Return a one-line summary of the nonzero counts, alphabetical."""
         parts = []
-        # Go through each counter this class declares, and if it's nonzero,
-        # add a "<n> <name>" fragment to the output list that gets returned.
-        for f in fields(self):
-            n = getattr(self, f.name)
-            if n:
-                # normalize counter name for human readable summary
-                parts.append(f"{n} {f.name.replace('_', ' ').replace('-', ' ')}")
+        for name, count in sorted(self.counters.items()):
+            if count:
+                parts.append(f"{count} {name.replace('_', ' ').replace('-', ' ')}")
         return ", ".join(parts) if parts else "no entries processed"
 
 
