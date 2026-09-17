@@ -3277,9 +3277,9 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     if args.command == "util":
-        results = _run_util(args, config, logger)
+        results = _handle_util_command(args, config, logger)
     elif args.command == "entries" or args.command == "json":
-        results = _run_json_dependent_options(args, config, logger)
+        results = _handle_json_dependent_commands(args, config, logger)
     else:
         raise RumorphError(f"unknown subcommand: {args.command!r}")
 
@@ -3296,7 +3296,7 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def _run_util(args, config: dict, logger: Logger) -> list[Result]:
+def _handle_util_command(args, config: dict, logger: Logger) -> list[Result]:
     """Handle util: --word, --sanity
 
     Runs each requested operation against the provided connection,
@@ -3324,7 +3324,7 @@ def _run_util(args, config: dict, logger: Logger) -> list[Result]:
     return results
 
 
-def _run_json_dependent_options(args, config: dict, logger: Logger) -> list[Result]:
+def _handle_json_dependent_commands(args, config: dict, logger: Logger) -> list[Result]:
     """Shared entrypoint for both "json" and "entries" subcmmands,
     as they share an identical opening: discovery, validation, and
     parsing of JSON files.
@@ -3368,9 +3368,9 @@ def _run_json_dependent_options(args, config: dict, logger: Logger) -> list[Resu
         validated_files = [r.file for r in validated_results]
 
         # call operation subrunner, sending only JsonFile objects that passed validation
-        # (do the filtering here rather than in _run_entries because else it will
+        # (do the filtering here rather than in _handle_entries_command because else it will
         # keep skipping the same malformed files during each database operation)
-        results = _run_entries(args, config, validated_files, logger)
+        results = _handle_entries_command(args, config, validated_files, logger)
 
         # add JsonValidationResult objects from the failed files so it has all
         results.extend(malformed_results)
@@ -3383,7 +3383,7 @@ def _run_json_dependent_options(args, config: dict, logger: Logger) -> list[Resu
         raise ValueError(f"Unknown subparser: {args.command}")
 
 
-def _run_entries(
+def _handle_entries_command(
     args, config: dict, parsed_json_files: list[JsonFiles], logger: Logger
 ) -> list[Result]:
     """Handle entries subcommand: run one operation over one or more JSON files.
@@ -3412,7 +3412,7 @@ def _run_entries(
 
             # Apply entries from the parsed JSON file against the current
             # operation (e.g. add all entries)
-            entry_results = _apply_entries(args, config, conn, entries, logger)
+            entry_results = _dispatch_operation(args, config, conn, entries, logger)
 
             # create FileResult for end of run summary
             file_result = FileResult(
@@ -3454,7 +3454,7 @@ def _run_entries(
     return all_results
 
 
-def _apply_entries(
+def _dispatch_operation(
     args, config: dict, conn: Connection, entries: list[NounEntry], logger: Logger
 ) -> list[EntryResult]:
     """Run the requested operation against a set of entries.
