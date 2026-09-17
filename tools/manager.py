@@ -8,11 +8,11 @@ word lookup and a database sanity check.
 USAGE
 
     python manager.py entries <path> <operation> [flags]
+    python manager.py json validate [flags]
     python manager.py util --word <word> [flags]
     python manager.py util --sanity [flags]
 
-    Operations for entries: add, update, delete, verify, verify-all,
-    validate-json.
+    Operations for entries: add, update, delete, verify, verify-all
 
     Exit codes: 0 = success, 1 = error, 2 = warnings only.
 
@@ -69,7 +69,8 @@ delete   Delete trees matching the entry's content. N>1 refuses unless
 verify   Read-only. Check the database against each entry.
 verify-all
          Run the transformation checks once. Does not process files.
-validate-json
+
+validate json
          Check the JSON against the schema. Does not touch the database.
 
 CASE SENSITIVITY
@@ -516,29 +517,67 @@ class Logger:
 # =============================================================================
 
 
-@dataclass(kw_only=True)
-class JsonEntries:
-    """Validated top-level data from one JSON entries file.
+@dataclass
+class JsonFile:
+    """One JSON file after loading, validating, and parsing.
 
-    Produced by validate_file after the file has been read and its
-    top-level shape checked. Downstream code can trust that file,
-    category, and entries are present and correctly typed, and does not
-    need to re-validate them.
+    Holds whatever could be read from the file. When errors is empty,
+    entries contains every entry in the file and all are valid. When
+    errors is non-empty, entries may be empty or partial and the
+    messages in errors describe what went wrong, at either the
+    file level or the entry level.
 
     Attributes:
-        file (Path): Path to the source file. Kept for error messages.
-        category (str): The file-level category, applied to every entry.
-        entries (dict): The raw entry dicts from the "entries" key. Each
-            is converted to a NounEntry by parse_entries.
+        path (Path): The source file.
+        category (str): The file-level category, or "NULL" if missing.
+        entries (list[NounEntry]): The entries that parsed.
+        errors (list[str]): One formatted message per problem found.
+            Falsy when the file is clean, so `if json_file.errors:`
+            reads as a check for malformed files.
     """
 
-    file: Path
-    category: str
-    entries: dict
+    path: Path
+    category: str = "NULL"
+    entries: list[NounEntry] = field(default_factory=list)
+
+    # a list of errors encountered.
+    # For general file errors, one string each.
+    # Errors within entry validation are one per entry.
+    errors: list[str] = field(default_factory=list)
 
 
-@dataclass(frozen=True)
-class NounEntry:
+@dataclass(kw_only=True)
+class JsonEntry:
+    """Base class for a parsed JSON entry, valid or malformed.
+
+    Exists only to give parse_entries a single return type. It carries
+    no data of its own; the shared data between the two subclasses is
+    nothing, and their fields are entirely different. What it provides
+    is the malformed check, so a caller holding a bare JsonEntry can
+    tell which subclass it has without importing both, and a no-op
+    summary so either subclass can define its own rendering without a
+    base implementation to call.
+    """
+
+    @property
+    def malformed(self) -> bool:
+        """Return True if this is a MalformedEntry"""
+        return isinstance(self, MalformedEntry)
+
+    @property
+    def summary(self) -> str:
+        """Render this entry for display. Subclasses must override."""
+
+        # intentionally raise if this is not implemented on a subclass.
+        # JsonEntry is a general base only intended so that parse_entries and callers
+        # can operate on a single class instead of having to do isinstance checks.
+        # if one of the subclasses did not implement and the base class is hit,
+        # this is an issue with the tool and fail fast so I can fix it.
+        raise NotImplementedError(f"{type(self).__name__} must define summary")
+
+
+@dataclass(kw_only=True)
+class NounEntry(JsonEntry):
     """A noun in canonical form, built from JSON or from database rows.
 
     Because both sources produce this same type, an entry from a JSON file
@@ -559,6 +598,61 @@ class NounEntry:
     indeclinable: bool
     singular: Declension | None
     plural: tuple[Declension, ...] | None
+
+    @property
+    def summary(self) -> str:
+        """Render this entry as a multi-line string for display.
+
+        Shows the parsed fields, then the base rendering (source file
+        and raw JSON).
+
+        Returns:
+            str: The rendered entry, without a trailing newline.
+        """
+        fields = "\n".join(
+            [
+                f"  • word: {self.word}",
+                f"  • gender: {self.gender.value}",
+                f"  • animate: {self.animate}",
+                f"  • category: {self.category}",
+                f"  • indeclinable: {self.indeclinable}",
+            ]
+        )
+        return f"parsed:\n{fields}"
+
+
+@dataclass(kw_only=True)
+class MalformedEntry(JsonEntry):
+    """An entry that failed to parse, with the problems found.
+
+    Produced by parse_entry when any check failed. Holds every problem
+    found (parsing does not stop at the first) and the word when it
+    could be read, so the rendered summary identifies which entry in the
+    file the problems belong to.
+
+    Attributes:
+        word (str): The entry's word, or a placeholder when the word
+            could not be parsed. Used to identify the entry in output.
+        errors (list[str]): One message per problem found. Never empty;
+            an entry with no problems is a NounEntry instead.
+    """
+
+    word: str = "Unknown (could not be parsed)"
+    errors: list[str]
+
+    @property
+    def summary(self) -> str:
+        """Render this entry as a multi-line string for display.
+
+        Leads with the problems, then shows the base rendering (source
+        file and raw JSON).
+
+        Returns:
+            str: The rendered entry, without a trailing newline.
+        """
+        lines = [f"Entry '{self.word}' errors:"]
+        lines.extend([f"  • {e}" for e in self.errors])
+        return "\n".join(lines)
 
 
 @dataclass(frozen=True)
@@ -647,6 +741,14 @@ class ResultOutcome(Enum):
     code properties expose their fields. Nothing outside the summary
     printing and counting code depends on these values.
     """
+
+    # A JSON file had errors
+    JSON_MALFORMED = ResultOutcomeHolder(summary="errored", symbol="x", code=Colors.RED)
+
+    # A JSON file passed validation and could be successfully parsed.
+    JSON_PASSED = ResultOutcomeHolder(
+        summary="validated", symbol="✓", code=Colors.GREEN
+    )
 
     ADDED = ResultOutcomeHolder(summary="added", symbol="+", code=Colors.GREEN)
 
@@ -834,6 +936,33 @@ class FileResult(Result):
         """
         self.counts = Counts()
         self.counts.add_results(self.entries)
+
+
+@dataclass(kw_only=True)
+class JsonValidationResult(Result):
+    """JSON validation on a JSON file."""
+
+    # human readable summary of the check
+    path: Path
+
+    # JsonFile the result is based on.
+    # includes list of parsed NounEntry objects,
+    # error strings encountered, etc.
+    file: JsonFile
+
+    kind: str = "json-validation"
+
+    @property
+    def label(self) -> str:
+        return self.path
+
+    @property
+    def summary_line(self) -> str:
+        """Summary of this JSON validation result, for display."""
+        base = f"{self.outcome.symbol} {self.path.name}: {self.outcome.summary}"
+        if self.message:
+            base += f"\n{self.message}"
+        return base
 
 
 @dataclass(kw_only=True)
@@ -1085,246 +1214,322 @@ def row_from_dict(d: dict) -> NounRow:
 # =============================================================================
 
 
-def _json_fail(error: str, **extra: object) -> None:
-    """Raise a standardized RumorphError for JSON processing failures.
+def _handle_json(path: Path, recursive: bool, logger: Logger) -> list[Result]:
+    """Discover and load every JSON file under a path.
 
     Args:
-        error (str): The primary error message.
-        **extra (object): Additional key/value pairs, rendered as
-            "-key: value" lines beneath the main message.
+        path (Path): A JSON file or a directory.
+        recursive (bool): Descend into subdirectories when True.
 
-    Raises:
-        RumorphError: Always.
+    Returns:
+        list[JsonFile]: One loaded file per discovered path, in sorted
+            order. A path that produced no files yields an empty list.
     """
 
-    # create dict of key/values to format in the error string
-    # - extra is arbitrary extra key/vals caller passed
-    # - | merges dicts; extra wins on key collision
-    fields = {"error": error} | extra
-    # Create line of formatted error details:
-    # one "-key: value" line for file
-    details = "\n".join(f"-{k}: {v}" for k, v in fields.items())
-    raise RumorphError(f" ! Error processing JSON.\n{details}")
+    results = []
+
+    # find all .json files in the path (returns Path objects)
+    logger.info(f"\n─── Scan JSON files at {path}... ───")
+    files = _discover_json(path, recursive=recursive)
+    if not files:
+        results.append(
+            Result(
+                outcome=ResultOutcome.ERROR,
+                error=True,
+                message=f"no JSON files at {path}",
+            )
+        )
+
+    # validate each discovered file and parse into JsonFile object
+    # (_parse_json validates JSON schema, parses entries
+    # and returns everyhing as a JsonFile object)
+    parsed_files = [_parse_json(p) for p in files]
+
+    # Create a JsonValidationResult object for each JsonFile,
+    # indicating success or not
+    logger.info(f"\n─── Validate and parse JSON ───")
+    for parsed_file in parsed_files:
+        outcome = ResultOutcome.JSON_PASSED
+        had_error = False
+        message = None
+        # .errors is a list of strings, one for each error encountered
+        if parsed_file.errors:
+            outcome = ResultOutcome.JSON_MALFORMED
+            # If JsonEntry.errors exists and is populated, then it is
+            # a MalformedEntry object - an object for parsed json data
+            # that could not be successfully parsed into a NounEntry.
+            # .errors contains a list of strings, grouped as follows:
+            # - a string for each file-level error
+            # - a string PER failed entry, with all those errors bulleted
+            message = "\n" + "\n".join(parsed_file.errors)
+            had_error = True
+
+        result = JsonValidationResult(
+            path=parsed_file.path,
+            outcome=outcome,
+            # attach the JsonFile object
+            # which contains successfully parsed entries,
+            # errors, etc.
+            file=parsed_file,
+            error=had_error,
+            message=message,
+        )
+        result.print_result_summary(logger)
+        results.append(result)
+    return results
 
 
-def get_json(path: Path) -> JsonEntries:
-    """Read a JSON file and validate its top-level shape.
+def _parse_json(path: Path) -> JsonFile:
+    """Read, validate, and parse one JSON file. Never raises.
+
+    Checks the file's top-level keys and each entry. Every problem found
+    is recorded, and parsing continues past individual failures so a
+    file with several bad entries reports all of them.
 
     Args:
         path (Path): Path to the JSON file.
 
     Returns:
-        JsonEntries: The file's path, category, and raw entries.
-
-    Raises:
-        RumorphError: If the file cannot be read, is not valid JSON, or
-            does not have the expected top-level shape.
+        JsonFile: The loaded file. errors is empty when the file is
+            clean; otherwise it holds one formatted message per problem.
     """
-    # Read and validate file structure.
+    json_file = JsonFile(path=path)
+    errors = []
+
     try:
-        doc = json.loads(path.read_text(encoding="utf-8"))
-        return validate_file(path, doc)
-    except (OSError, json.JSONDecodeError, ParseError) as exc:
-        _json_fail(str(exc), file=path)
+        text = path.read_text(encoding="utf-8")
+        doc = json.loads(text)
+        if not isinstance(doc, dict):
+            errors.append(f"top level must be an object, got {type(doc).__name__}")
+
+        # Validate top-level shape of JSON file
+        errors.extend(
+            check_fields(
+                doc,
+                required=REQUIRED_FILE_FIELDS,
+                no_extra=True,
+            )
+        )
+
+        # get categry and entries entry in the JSON file
+        category = doc.get("category", "unknown")
+        entries = doc.get("entries")
+
+        # parse individual entries:
+        # parse_entries returns list of JsonEntry objects which can
+        # be either NounEntry or MalformedEntry (for malformed case)
+        parsed = parse_entries(entries, category)
+
+        successful = []
+        for entry in parsed:
+            if entry.malformed:
+                # separate the errors per entry
+                # so that a batch of errors can
+                # be printed for each malformed entry
+                errors.append(entry.summary)
+            else:
+                successful.append(entry)
+        json_file.entries = successful
+        json_file.category = category
+    except OSError as exc:
+        errors.append(f"cannot read file: {exc}")
+    except json.JSONDecodeError as exc:
+        errors.append(
+            f"invalid JSON: {exc.msg} (line {exc.lineno}, column {exc.colno})"
+        )
+
+    # format any discovered erros and set into JsonFile to return.
+    json_file.errors = errors
+
+    return json_file
 
 
-def parse_entries(
-    raw_entries: list[dict], category: str, path: Path
-) -> list[NounEntry]:
+def parse_entries(raw_entries: list[dict], category: str) -> list[JsonEntry]:
     """
     Takes raw entries at "entries" key in JSON and parses
     them into validated NounEntry objects (which are what
     get fed to _op_* functions)
 
+    Parses every entry and collects the failures rather than stopping
+    at the first one, so a file with several bad entries reports all of
+    them in one pass.
+
     Args:
         raw_entries (list[dict]): The raw entry dicts from a
             JsonEntries object.
         category (str): The file-level category, applied to each entry.
-        path (Path): Source file path, used only for error messages.
 
     Returns:
-        list[NounEntry]: One NounEntry per raw entry, in the same order.
-
-    Raises:
-        RumorphError: If any entry fails to parse. The error message
-            names the offending word.
+        list[JsonEntry]: Eache element is either NounEntry (The entries
+            that parsed successfully) or MalformedEntry (the ones that
+            failed). A file can produce both. Both classes inherit
+            from JsonEntry class.
     """
-
-    # raw_entries - raw dict from the JSON doc
-    # from top level "entries" key, which stores
-    # list of noun entries. Convert each entry
-    # in this list to a validated NounEntry object
-    entries = []
-    for raw in raw_entries:
-        try:
-            entries.append(parse_entry(raw, category))
-        except ParseError as exc:
-            word = raw.get("word", "?")
-            _json_fail(str(exc), file=path, word=word)
-
-    return entries
+    return [parse_entry(raw, category) for raw in raw_entries]
 
 
-def parse_entry(raw: dict, category: str) -> NounEntry:
-    """Parse and validate one JSON entry.
+def parse_entry(raw: dict, category: str) -> JsonEntry:
+    """Parse and validate one JSON entry into a NounEntry or MalformedEntry.
 
     The shape is inferred from the blocks present: indeclinable means no
     blocks, only singular means singular-only, only plural means
     plural-only, both means a normal noun.
 
+    Collects every problem found rather than stopping at the first, so
+    an entry with several bad fields reports all of them. Returns a
+    NounEntry when every check passes, or a MalformedEntry carrying the
+    errors when any fail.
+
     Args:
-        raw: The entry dict.
-        category: The file-level category.
+        raw (dict): The raw entry dict from the file's "entries" list.
+        category (str): The file-level category, applied to this entry.
+        path (Path): Path to the source file. Stored on the returned
+            entry (both variants carry it) and used in error messages.
 
     Returns:
-        The parsed NounEntry.
-
-    Raises:
-        ParseError: On any missing or invalid field.
+        JsonEntry: A NounEntry if the entry is valid, otherwise a
+        MalformedEntry with one message per problem found.
     """
-    # Step 1: validate the entry's fields against the shared specs.
-    # REQUIRED_ENTRY_FIELDS covers word/gender/animate; OPTIONAL_ENTRY_FIELDS
-    # covers indeclinable/singular/plural.
-    errors = check_fields(
-        raw,
-        required=REQUIRED_ENTRY_FIELDS,
-        optional=OPTIONAL_ENTRY_FIELDS,
+
+    errors = []
+
+    if not isinstance(raw, dict):
+        return MalformedEntry(errors=["entry must be an object"])
+
+    def check_indeclinable():
+        indeclinable = raw.get("indeclinable")
+        # Indeclinable nouns have no declension blocks.
+        if indeclinable and ("singular" in raw or "plural" in raw):
+            return indeclinable, [
+                "indeclinable entries must not have singular or plural"
+            ]
+        return indeclinable, []
+
+    def check_singular():
+        singular = raw.get("singular")
+        if not singular:
+            return singular, []
+        singular, decl_errors = _parse_declension(singular)
+        return singular, [f"(Singular block): {e}" for e in decl_errors]
+
+    def check_plural():
+        plural = raw.get("plural")
+        if not plural:
+            return plural, []
+        errs = []
+        forms = [plural] if isinstance(plural, dict) else plural
+        if not forms:
+            errs.append("plural must be a non-empty list")
+        else:
+            # there can be multiple plural forms for a single noun
+            plural_forms = []
+            for i, form in enumerate(forms, start=1):
+                decl, decl_errors = _parse_declension(form)
+                prefix = "(Plural block"
+                if len(forms) > 1:
+                    prefix += f"{prefix} {i}"
+                prefix += "): "
+                errs.extend(f"{prefix}{e}" for e in decl_errors)
+                if decl is not None:
+                    plural_forms.append(decl)
+            plural = tuple(plural_forms) if plural_forms else None
+        return plural, errs
+
+    def check_word(word, singular, plural):
+        # word must equal the nominative of the first block.
+        # Only checkable when the blocks parsed and at least one exists.
+        expected = None
+        if singular:
+            expected = singular.nominative
+        elif plural:
+            expected = plural[0].nominative
+        if expected and word != expected:
+            return [f"word {word!r} does not match the nominative form {expected!r}"]
+        return []
+
+    # Validate required and optional keys, checked through the shared helper.
+    errors.extend(
+        check_fields(
+            raw,
+            required=REQUIRED_ENTRY_FIELDS,
+            optional=OPTIONAL_ENTRY_FIELDS,
+            no_extra=False,  # dont fail if extra keys encountered
+        )
     )
-    if errors:
-        raise ParseError("; ".join(errors))
 
-    # Step 2: Get basic data from the entry
+    # Get basic data from the entry
 
-    # word, the dictionary form. Presence and non-emptiness are already
-    # enforced by REQUIRED_ENTRY_FIELDS; bind it for the checks below.
-    word = raw["word"]
-
-    # gender. The value check against Gender's members is done by
-    # FieldSpec.enum in check_fields above; convert here.
-    gender = Gender(raw["gender"])
-
-    # animate. Type (bool) is enforced by REQUIRED_ENTRY_FIELDS.
-    animate = raw["animate"]
+    word = raw.get("word")  # dictionary form of word
+    gender_str = raw.get("gender")
+    animate = raw.get("animate")  # JSON uses True/False, not 0/1 like db
 
     # indeclinable, optional boolean.
-    indeclinable = raw.get("indeclinable", False)
+    indeclinable, errs = check_indeclinable()
+    errors.extend(errs)
 
-    # Step 3: indeclinable nouns have no declension blocks.
-    if indeclinable:
-        if "singular" in raw or "plural" in raw:
-            raise ParseError("indeclinable entries must not have singular or plural")
-        return NounEntry(
-            word=word,
-            gender=gender,
-            animate=animate,
-            category=category,
-            indeclinable=True,
-            singular=None,
-            plural=None,
-        )
+    # Parse singular and plural blocks.
+    singular, errs = check_singular()
+    errors.extend(errs)
+    plural, errs = check_plural()
+    errors.extend(errs)
+    if not singular and not plural and not indeclinable:
+        errors.append("entry must have singular or plural, or be indeclinable")
 
-    # Step 4: at least one of singular or plural must be present.
-    has_singular = "singular" in raw
-    has_plural = "plural" in raw
-    if not has_singular and not has_plural:
-        raise ParseError("entry must have singular or plural, or be indeclinable")
+    # ensure word is in dictionary form
+    errors.extend(check_word(word, singular, plural))
 
-    # Step 5: parse the blocks.
-    singular = _parse_declension(raw["singular"]) if has_singular else None
-    plural = None
-    if has_plural:
-        block = raw["plural"]
-        forms = [block] if isinstance(block, dict) else block
-        if not isinstance(forms, list) or not forms:
-            raise ParseError("plural must be an object or non-empty list")
-        plural = tuple(_parse_declension(f) for f in forms)
-
-    # Step 6: word must equal the nominative of the first block.
-    expected = singular.nominative if singular is not None else plural[0].nominative
-    if word != expected:
-        raise ParseError(
-            f"word {word!r} does not match the nominative form {expected!r}"
-        )
+    if errors:
+        # prefix word data if found, to make error messages helpful
+        entry_word = word if word else "Unknown (could not be parsed)"
+        return MalformedEntry(word=entry_word, errors=errors)
 
     return NounEntry(
         word=word,
-        gender=gender,
+        gender=Gender(gender_str),
         animate=animate,
         category=category,
-        indeclinable=False,
+        indeclinable=indeclinable,
         singular=singular,
         plural=plural,
     )
 
 
-def _parse_declension(block: dict) -> Declension:
-    """Parse one declension block.
+def _parse_declension(block: dict) -> tuple[Declension | None, list[str]]:
+    """Parse one declension block, collecting errors instead of raising.
 
     Every key must be a known case name; every value a non-empty string;
-    the six standard cases must all be present.
+    the six standard cases must all be present. Returns the Declension
+    when it can be built, or None with a list of messages when it
+    cannot.
 
     Args:
         block: The dict of case keys to surface forms.
 
     Returns:
-        The Declension.
-
-    Raises:
-        ParseError: On unknown keys, bad values, or missing standard cases.
+        tuple[Declension | None, list[str]]: The declension, or None if
+            it could not be built, plus one message per problem found.
     """
     if not isinstance(block, dict):
-        raise ParseError("declension block must be an object")
+        return None, ["declension block must be an object"]
 
-    # Step 1: validate keys and values against the shared specs.
-    # no_extra=True rejects unknown case keys
+    # Validate the block through the shared helper: the six standard
+    # cases are required, the four rare cases are optional, and any key
+    # that is not a case name is rejected.
     errors = check_fields(
         block,
         required=REQUIRED_DECLENSION_FIELDS,
         optional=OPTIONAL_DECLENSION_FIELDS,
-        no_extra=True,
+        no_extra=True,  # fail if extra keys are found
     )
     if errors:
-        raise ParseError("; ".join(errors))
+        return None, errors
 
-    # Step 2: collect the values, now known to be valid, keyed by the
-    # Declension field name.
+    # Build the Declension from the validated block. The keys have been
+    # checked to be known case names, so JSON_TO_CASE[key] is safe.
+    # .name.lower() turns the Case member into its Declension field name
+    # (NOMINATIVE -> "nominative").
     kwargs = {JSON_TO_CASE[key].name.lower(): value for key, value in block.items()}
-
-    return Declension(**kwargs)
-
-
-def validate_file(path: Path, doc: Any) -> JsonEntries:
-    """Validate the top-level shape of a parsed JSON document.
-
-    Args:
-        path (Path): Path to the source file, stored on the result.
-        doc (Any): The loaded JSON. Must be a dict with a non-empty
-            "category" string and a non-empty "entries" list.
-
-    Returns:
-        JsonEntries: The validated data.
-
-    Raises:
-        ParseError: If category or entries is missing, or an extra key
-            appears.
-    """
-    if not isinstance(doc, dict):
-        raise ParseError("file must be a JSON object")
-
-    # Validate top-level shape of JSON file
-    errors = check_fields(
-        doc,
-        required=REQUIRED_FILE_FIELDS,
-        no_extra=True,
-    )
-    if errors:
-        raise ParseError("; ".join(errors))
-
-    entries = doc["entries"]
-    if not isinstance(entries, list) or not entries:
-        raise ParseError("file is missing a non-empty 'entries' list")
-
-    return JsonEntries(file=path, category=doc["category"], entries=entries)
+    return Declension(**kwargs), []
 
 
 # =============================================================================
@@ -1937,34 +2142,6 @@ def delete_tree(conn: Connection, table: str, root_code: int) -> list[NounRow]:
 # =============================================================================
 # Operations
 # =============================================================================
-
-
-def op_validate_json(entries: list[NounEntry], logger: Logger) -> list[EntryResult]:
-    """Report each entry as valid.
-
-    This operation performs no checks and touches no database. Its
-    input is a list of NounEntry objects, which can only exist if
-    parse_entries already validated every entry in it. Reaching this
-    function means the entries are valid by construction; all it does
-    is convert that fact into EntryResult objects for the summary.
-
-    Args:
-        entries (list[NounEntry]): The validated entries.
-        logger (Logger): The logger.
-
-    Returns:
-        list[EntryResult]: One JSON_VALIDATED result per entry.
-    """
-    results = []
-    for entry in entries:
-        result = EntryResult(
-            word=entry.word,
-            outcome=ResultOutcome.JSON_VALIDATED,
-            message="JSON entry is valid",
-        )
-        results.append(result)
-        result.print_result_summary(logger)
-    return results
 
 
 def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryResult]:
@@ -2782,7 +2959,7 @@ def build_file_summary(
     if file_result.error:
         lines.append(f"   Error:     {file_result.message}")
     elif file_result.message:
-        # non-error message for user such as --validate-json
+        # non-error message for user such as json validate
         # indicating that no files were actually processed.
         # (.message is a catch all)
         lines.append(f"   Message:   {file_result.message}")
@@ -2968,10 +3145,26 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     common.add_argument(
         "--version", action="store_true", help="Print version and exit."
     )
+    common.add_argument(
+        "--no-recursive",
+        action="store_true",
+        help="Do not descend into subdirectories.",
+    )
 
     parser = argparse.ArgumentParser(prog="rumorph", parents=[common])
     sub = parser.add_subparsers(dest="command", required=True)
 
+    # JSON only operations (no db connection)
+    json = sub.add_parser("json", parents=[common], help="Operations on JSON files.")
+    json.add_argument("path", type=Path, help="JSON file or directory.")
+    json.add_argument(
+        "operation",
+        choices=[
+            "validate",
+        ],
+    )
+
+    # Operations directly on the database
     ap = sub.add_parser("entries", parents=[common], help="Operations on JSON files.")
     ap.add_argument("path", type=Path, help="JSON file or directory.")
     ap.add_argument(
@@ -2982,13 +3175,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
             "delete",
             "verify",
             "verify-all",
-            "validate-json",
         ],
-    )
-    ap.add_argument(
-        "--no-recursive",
-        action="store_true",
-        help="Do not descend into subdirectories.",
     )
     ap.add_argument(
         "--force-update",
@@ -3082,28 +3269,19 @@ def main(argv: list[str] | None = None) -> int:
         logger.always(f"rumorph {VERSION}")
         return 0
 
+    # load the config file which has database configuration
     try:
         config = load_config(args.config)
     except ConfigError as exc:
         logger.error(f"{exc}")
         return 1
 
-    # open the database connection
-    try:
-        conn = connect(config)
-    except DbError as exc:
-        logger.error(f"Database error during run:\n{exc}\n{traceback.format_exc()}")
-        return 1
-
-    try:
-        if args.command == "util":
-            results = _run_util(args, config, conn, logger)
-        elif args.command == "entries":
-            results = _run_entries(args, config, conn, logger)
-        else:
-            raise RumorphError(f"unknown subcommand: {args.command!r}")
-    finally:
-        conn.close()
+    if args.command == "util":
+        results = _run_util(args, config, logger)
+    elif args.command == "entries" or args.command == "json":
+        results = _run_json_dependent_options(args, config, logger)
+    else:
+        raise RumorphError(f"unknown subcommand: {args.command!r}")
 
     errors = [r for r in results if r.error]
     warnings = [r for r in results if r.warning]
@@ -3118,7 +3296,7 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
-def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
+def _run_util(args, config: dict, logger: Logger) -> list[Result]:
     """Handle util: --word, --sanity
 
     Runs each requested operation against the provided connection,
@@ -3133,6 +3311,10 @@ def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Resu
     Returns:
         The list of Result objects produced by the requested operations.
     """
+
+    # open the database connection
+    conn = connect(config)
+
     results = []
     if args.sanity:
         results.extend(check_transformations(conn, config["table"], logger))
@@ -3142,22 +3324,69 @@ def _run_util(args, config: dict, conn: Connection, logger: Logger) -> list[Resu
     return results
 
 
-def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[Result]:
-    """Handle entries subcommand: run one operation over one or more JSON files.
+def _run_json_dependent_options(args, config: dict, logger: Logger) -> list[Result]:
+    """Shared entrypoint for both "json" and "entries" subcmmands,
+    as they share an identical opening: discovery, validation, and
+    parsing of JSON files.
 
-    Reads and validates each file, converts its entries, applies the
-    requested operation, and collects one FileResult per file. The
-    end-of-run summary is built and printed once, after every file has
-    been processed.
-    verify-all is a whole-database check, so it runs after the file
-    loop, in addition to processing the files. Everything else processes
-    files only.
+    After this:
+    - json subpaser: return validation results and stop. No db connectin.
+    - entries subparser: open db connection and run the operation over the files
+      that loaded cleanly.
 
     Args:
-        args: Parsed arguments.
-        config: The [mysql] dict.
-        conn: The database connection.
-        logger: The logger.
+        args (argparse.Namespace): Parsed arguments.
+        config (dict): The [mysql] dict.
+        logger (Logger): The logger.
+
+    Returns:
+        list[Result]: Load errors, FileResults, and TransformResults.
+    """
+
+    # Step: discover, validate, and parse all JSON files
+    # ** common to the 'json' and 'entries' subparsers **
+    # Note: _handle_json returns a list of JsonValidationResult object
+    validation_results = _handle_json(
+        args.path, recursive=not args.no_recursive, logger=logger
+    )
+
+    # Step: branch based on subparser.
+
+    # Step: If the "entries" subparser was enabled,
+    # run database operation (add, delete, etc.) against error-free JSON
+    if args.command == "entries":
+        # filter JsonValidationResults based on success state
+        validated_results = []
+        malformed_results = []
+        for result in validation_results:
+            if result.error:
+                malformed_results.append(result)
+            else:
+                validated_results.append(result)
+
+        # get JsonFile objects from the validated results
+        validated_files = [r.file for r in validated_results]
+
+        # call operation subrunner, sending only JsonFile objects that passed validation
+        # (do the filtering here rather than in _run_entries because else it will
+        # keep skipping the same malformed files during each database operation)
+        results = _run_entries(args, config, validated_files, logger)
+
+        # add JsonValidationResult objects from the failed files so it has all
+        results.extend(malformed_results)
+
+        return results
+    elif args.command == "json":
+        # only JSON validation
+        return validation_results
+    else:
+        raise ValueError(f"Unknown subparser: {args.command}")
+
+
+def _run_entries(
+    args, config: dict, parsed_json_files: list[JsonFiles], logger: Logger
+) -> list[Result]:
+    """Handle entries subcommand: run one operation over one or more JSON files.
 
     Returns:
         list[Result]: The FileResult objects for each file processed,
@@ -3165,52 +3394,32 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
             subclass Result; callers filter on .error and .warning.
     """
 
-    all_results = []
+    # open the database connection
+    conn = connect(config)
 
-    # Step 1: find files.
-    files = _discover_json(args.path, recursive=not args.no_recursive)
-    if not files:
-        results.append(
-            Result(
-                outcome=ResultOutcome.ERROR,
-                error=True,
-                message=f"no JSON files at {args.path}",
-            )
-        )
+    all_results = []
 
     # Step 2: run the operation over every file, collecting what the
     # end-of-run summary needs: the results per file, and the totals.
     file_results = []
-    for path in files:
+    for parsed_json_file in parsed_json_files:
+        path = parsed_json_file.path
         logger.info(f"\n─── {path} ───")
 
-        # parse JSON and get list of entries
         try:
-            # 2-1: read and validate JSON  (returns JsonEntries object
-            #      with validated top level keys: category, entries)
-            json_data = get_json(path)
-            raw_entries = json_data.entries
-            category = json_data.category
+            entries = parsed_json_file.entries
+            category = parsed_json_file.category
 
-            # 2-2: convert raw 'entries' dict into validated NounEntry objects
-            entries = parse_entries(raw_entries, category, path)
-
-            # 2-3: apply entries from the file against the current operation
-            #      (e.g. add all entries)
+            # Apply entries from the parsed JSON file against the current
+            # operation (e.g. add all entries)
             entry_results = _apply_entries(args, config, conn, entries, logger)
 
             # create FileResult for end of run summary
-
-            # check for no-op operations
-            message = ""
-            if args.operation == "validate-json":
-                message = "JSON entries validated only; nothing processed."
             file_result = FileResult(
                 outcome=ResultOutcome.COMPLETE,
                 file=path,
                 category=category,
                 entries=entry_results,
-                message=message,
             )
             # creating FileResult automatically creates a Counts
             # on it which includes count summaries for each entry.
@@ -3267,8 +3476,6 @@ def _apply_entries(
     # Run the operation
     ci = args.case_insensitive
     table = config["table"]
-    if args.operation == "validate-json":
-        return op_validate_json(entries, logger)
     if args.operation == "add":
         return op_add(conn, table, entries, logger, ci)
     elif args.operation == "update":
