@@ -593,28 +593,12 @@ class Result:
         """Short human label for this result."""
         return self.outcome.summary
 
-
-@dataclass(kw_only=True)
-class EntryResult(Result):
-    """The outcome of one operation on one entry."""
-
-    word: str
-    root_code: int = 0
-    rows_affected: int = 0
-    kind: str = "entry"
-
-    @property
-    def label(self) -> str:
-        return self.word
-
     @property
     def summary_line(self) -> str:
-        """One-line summary of this entry result, for display."""
-        return (
-            f"{self.outcome.symbol} {self.word}: {self.message or self.outcome.summary}"
-        )
+        """One-line summary of this result, for display."""
+        return f"{self.outcome.symbol}: {self.message or self.outcome.summary}"
 
-    def print_entry_summary(self, logger: Logger, indent: str = "    ") -> None:
+    def print_result_summary(self, logger: Logger, indent: str = "    ") -> None:
         """Write this result's summary_line through the Logger.
 
         Routes to logger.error, logger.warning, or logger.operation based on
@@ -636,6 +620,27 @@ class EntryResult(Result):
             logger.warning(summary)
         else:
             logger.operation(summary, self.outcome.code)
+
+
+@dataclass(kw_only=True)
+class EntryResult(Result):
+    """The outcome of one operation on one entry."""
+
+    word: str
+    root_code: int = 0
+    rows_affected: int = 0
+    kind: str = "entry"
+
+    @property
+    def label(self) -> str:
+        return self.word
+
+    @property
+    def summary_line(self) -> str:
+        """One-line summary of this entry result, for display."""
+        return (
+            f"{self.outcome.symbol} {self.word}: {self.message or self.outcome.summary}"
+        )
 
 
 @dataclass(kw_only=True)
@@ -1802,7 +1807,7 @@ def op_validate_json(entries: list[NounEntry], logger: Logger) -> list[EntryResu
             message="JSON entry is valid",
         )
         results.append(result)
-        result.print_entry_summary(logger)
+        result.print_result_summary(logger)
     return results
 
 
@@ -1863,7 +1868,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             if already:
                 result = EntryResult(word=entry.word, outcome=ResultOutcome.SKIPPED)
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step 4: insert.
@@ -1871,7 +1876,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
             conn.commit()
             result = EntryResult(word=entry.word, outcome=ResultOutcome.ADDED)
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -1881,7 +1886,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
                 message=str(exc),
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -1891,7 +1896,7 @@ def op_add(conn, table, entries, logger, case_insensitive=False) -> list[EntryRe
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
 
     return results
 
@@ -1954,7 +1959,7 @@ def op_update(
                     message="upstream entry",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step: Multiple roots detected. Refuse unless forced, and show the SQL that
@@ -1975,7 +1980,7 @@ def op_update(
                     message=f"{len(roots)} roots match",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # If every match already has this content, there is nothing to change.
@@ -1986,7 +1991,7 @@ def op_update(
             ):
                 result = EntryResult(word=entry.word, outcome=ResultOutcome.NO_CHANGE)
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step: replace any existing, then update.
@@ -2004,7 +2009,7 @@ def op_update(
 
             result = EntryResult(word=entry.word, outcome=action)
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -2014,7 +2019,7 @@ def op_update(
                 message=str(exc),
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -2024,7 +2029,7 @@ def op_update(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
 
     return results
 
@@ -2069,7 +2074,7 @@ def op_delete(
                     message="no matching entry",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step 3: N>1. Refuse unless forced, and show the SQL.
@@ -2088,7 +2093,7 @@ def op_delete(
                     message=f"{len(matches)} matches",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step 4: delete every match.
@@ -2097,7 +2102,7 @@ def op_delete(
             conn.commit()
             result = EntryResult(word=entry.word, outcome=ResultOutcome.DELETED)
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except RumorphError as exc:
             conn.rollback()
             result = EntryResult(
@@ -2107,7 +2112,7 @@ def op_delete(
                 message=str(exc),
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except Exception as exc:
             conn.rollback()
             result = EntryResult(
@@ -2117,7 +2122,7 @@ def op_delete(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
 
     return results
 
@@ -2155,7 +2160,7 @@ def op_verify(
                     message="not in database",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
                 continue
 
             # Step 3: compare each root's content against the entry.
@@ -2179,7 +2184,7 @@ def op_verify(
                     word=entry.word, outcome=outcome, warning=multiple, message=message
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
             else:
                 result = EntryResult(
                     word=entry.word,
@@ -2188,7 +2193,7 @@ def op_verify(
                     message="database content differs",
                 )
                 results.append(result)
-                result.print_entry_summary(logger)
+                result.print_result_summary(logger)
         except RumorphError as exc:
             result = EntryResult(
                 word=entry.word,
@@ -2197,7 +2202,7 @@ def op_verify(
                 message=str(exc),
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
         except Exception as exc:
             result = EntryResult(
                 word=entry.word,
@@ -2206,7 +2211,7 @@ def op_verify(
                 message=f"{type(exc).__name__}: {exc}",
             )
             results.append(result)
-            result.print_entry_summary(logger)
+            result.print_result_summary(logger)
 
     return results
 
