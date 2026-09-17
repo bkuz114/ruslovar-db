@@ -200,6 +200,153 @@ class ParseError(RumorphError):
 
 
 # =============================================================================
+# Basic JSON validation setup (dependency free)
+# =============================================================================
+
+
+@dataclass(frozen=True)
+class FieldSpec:
+    """Expected type and optional constraints for one JSON key."""
+
+    type: type
+    enum: type[Enum] | None = None
+    allow_empty: bool = True
+
+
+# Top-level keys of a JSON file.
+REQUIRED_FILE_FIELDS = (
+    ("category", FieldSpec(type=str, allow_empty=False)),
+    ("entries", FieldSpec(type=list)),
+)
+
+# Required top-level keys for individual entries
+# in the "entries" list
+REQUIRED_ENTRY_FIELDS = (
+    ("word", FieldSpec(type=str, allow_empty=False)),
+    ("gender", FieldSpec(type=str, enum=Gender)),
+    ("animate", FieldSpec(type=bool)),
+)
+
+# Optional top-level keys for individual entries
+# in the "entries" list.
+OPTIONAL_ENTRY_FIELDS = (
+    ("indeclinable", FieldSpec(type=bool)),
+    ("singular", FieldSpec(type=dict)),
+    ("plural", FieldSpec(type=(dict, list))),
+)
+
+# Specs for declensions (dics in "singular"
+# and "plural" blocks)
+
+# Every case name, as JSON keys with string values.
+DECLENSION_FIELDS = {
+    CASE_TO_JSON[case]: FieldSpec(type=str, allow_empty=False) for case in Case
+}
+REQUIRED_DECLENSION_FIELDS = tuple(
+    (CASE_TO_JSON[case], DECLENSION_FIELDS[CASE_TO_JSON[case]])
+    for case in STANDARD_CASES
+)
+OPTIONAL_DECLENSION_FIELDS = tuple(
+    (CASE_TO_JSON[case], DECLENSION_FIELDS[CASE_TO_JSON[case]])
+    for case in Case
+    if case not in STANDARD_CASES
+)
+
+
+def check_fields(
+    raw: dict,
+    required: tuple | None = None,
+    optional: tuple | None = None,
+    no_extra: bool = False,
+) -> list[str]:
+    """Validate a dict against field specs.
+
+    Checks required keys (present and correctly typed), optional keys
+    (correctly typed when present), and optionally rejects any key not
+    named in either list. Returns one message per problem found; does
+    not stop at the first.
+
+    Args:
+        raw (dict): The dict to check.
+        required (tuple | None): An iterable of (key, FieldSpec) pairs
+            that must be present.
+        optional (tuple | None): An iterable of (key, FieldSpec) pairs
+            that may be present.
+        no_extra (bool): If True, any key in raw that is not in required
+            or optional is an error.
+
+    Returns:
+        list[str]: One message per problem found. Empty when clean.
+    """
+    errors = []
+    required = required or ()
+    optional = optional or ()
+
+    for key, spec in required:
+        if key not in raw:
+            errors.append(f"missing required key '{key}'")
+            continue
+        errors.extend(_check_value(key, raw[key], spec))
+
+    for key, spec in optional:
+        if key not in raw:
+            continue
+        errors.extend(_check_value(key, raw[key], spec))
+
+    if no_extra:
+        allowed = {key for key, _ in required} | {key for key, _ in optional}
+        extra = set(raw) - allowed
+        if extra:
+            sorted_display = ", ".join([f"'{e}'" for e in sorted(extra)])
+            errors.append(f"unexpected keys: {sorted_display}")
+
+    return errors
+
+
+def _check_value(key: str, value, spec: FieldSpec) -> list[str]:
+    """Check one value against a FieldSpec.
+
+    Runs three checks, in order, and stops early if the type is wrong:
+    the value must be the expected type, must be in the spec's enum when
+    one is set, and must be non-empty when the spec forbids empty
+    strings. Returns one message per problem found.
+
+    Args:
+        key (str): The key, used in error messages.
+        value: The value to check.
+        spec (FieldSpec): The expected type and constraints.
+
+    Returns:
+        list[str]: One message per problem found. Empty when clean.
+    """
+    errors = []
+
+    # Check 1: the value must be the expected type. If it isn't, the
+    # checks below don't apply, since they assume the value is the right
+    # kind of thing.
+    if not isinstance(value, spec.type):
+        expected = (
+            spec.type.__name__
+            if isinstance(spec.type, type)
+            else " or ".join(t.__name__ for t in spec.type)
+        )
+        errors.append(f"'{key}' must be {expected}, got {type(value).__name__}")
+        return errors
+
+    # Check 2: when the spec names an enum, the value must be one of its
+    # members' values.
+    if spec.enum is not None and value not in (m.value for m in spec.enum):
+        valid = [m.value for m in spec.enum]
+        errors.append(f"'{key}' must be one of {valid}, got {value!r}")
+
+    # Check 3: an empty string is only an error when the spec forbids it.
+    if isinstance(value, str) and not spec.allow_empty and not value:
+        errors.append(f"'{key}' must be a non-empty string")
+
+    return errors
+
+
+# =============================================================================
 # Logging
 # =============================================================================
 
@@ -1035,32 +1182,34 @@ def parse_entry(raw: dict, category: str) -> NounEntry:
     Raises:
         ParseError: On any missing or invalid field.
     """
-    # Step 1: word, the dictionary form.
-    word = raw.get("word")
-    if not isinstance(word, str) or not word:
-        raise ParseError("entry is missing a non-empty 'word'")
+    # Step 1: validate the entry's fields against the shared specs.
+    # REQUIRED_ENTRY_FIELDS covers word/gender/animate; OPTIONAL_ENTRY_FIELDS
+    # covers indeclinable/singular/plural.
+    errors = check_fields(
+        raw,
+        required=REQUIRED_ENTRY_FIELDS,
+        optional=OPTIONAL_ENTRY_FIELDS,
+    )
+    if errors:
+        raise ParseError("; ".join(errors))
 
-    # Step 2: gender.
-    gender_str = raw.get("gender")
-    if gender_str not in (g.value for g in Gender):
-        raise ParseError(
-            f"gender must be one of {[g.value for g in Gender]}, " f"got {gender_str!r}"
-        )
-    gender = Gender(gender_str)
+    # Step 2: Get basic data from the entry
 
-    # Step 3: animate, a boolean. The JSON uses true/false, not 0/1.
-    if "animate" not in raw:
-        raise ParseError("entry is missing 'animate'")
+    # word, the dictionary form. Presence and non-emptiness are already
+    # enforced by REQUIRED_ENTRY_FIELDS; bind it for the checks below.
+    word = raw["word"]
+
+    # gender. The value check against Gender's members is done by
+    # FieldSpec.enum in check_fields above; convert here.
+    gender = Gender(raw["gender"])
+
+    # animate. Type (bool) is enforced by REQUIRED_ENTRY_FIELDS.
     animate = raw["animate"]
-    if not isinstance(animate, bool):
-        raise ParseError(f"animate must be true or false, got {animate!r}")
 
-    # Step 4: indeclinable, optional boolean.
+    # indeclinable, optional boolean.
     indeclinable = raw.get("indeclinable", False)
-    if not isinstance(indeclinable, bool):
-        raise ParseError("indeclinable must be true or false")
 
-    # Step 5: indeclinable nouns have no declension blocks.
+    # Step 3: indeclinable nouns have no declension blocks.
     if indeclinable:
         if "singular" in raw or "plural" in raw:
             raise ParseError("indeclinable entries must not have singular or plural")
@@ -1074,13 +1223,13 @@ def parse_entry(raw: dict, category: str) -> NounEntry:
             plural=None,
         )
 
-    # Step 6: at least one of singular or plural must be present.
+    # Step 4: at least one of singular or plural must be present.
     has_singular = "singular" in raw
     has_plural = "plural" in raw
     if not has_singular and not has_plural:
         raise ParseError("entry must have singular or plural, or be indeclinable")
 
-    # Step 7: parse the blocks.
+    # Step 5: parse the blocks.
     singular = _parse_declension(raw["singular"]) if has_singular else None
     plural = None
     if has_plural:
@@ -1090,7 +1239,7 @@ def parse_entry(raw: dict, category: str) -> NounEntry:
             raise ParseError("plural must be an object or non-empty list")
         plural = tuple(_parse_declension(f) for f in forms)
 
-    # Step 8: word must equal the nominative of the first block.
+    # Step 6: word must equal the nominative of the first block.
     expected = singular.nominative if singular is not None else plural[0].nominative
     if word != expected:
         raise ParseError(
@@ -1126,19 +1275,20 @@ def _parse_declension(block: dict) -> Declension:
     if not isinstance(block, dict):
         raise ParseError("declension block must be an object")
 
-    # Step 1: collect values, rejecting unknown keys.
-    kwargs = {}
-    for key, value in block.items():
-        if key not in JSON_TO_CASE:
-            raise ParseError(f"unknown case key: {key!r}")
-        if not isinstance(value, str) or not value:
-            raise ParseError(f"{key} must be a non-empty string")
-        kwargs[JSON_TO_CASE[key].name.lower()] = value
+    # Step 1: validate keys and values against the shared specs.
+    # no_extra=True rejects unknown case keys
+    errors = check_fields(
+        block,
+        required=REQUIRED_DECLENSION_FIELDS,
+        optional=OPTIONAL_DECLENSION_FIELDS,
+        no_extra=True,
+    )
+    if errors:
+        raise ParseError("; ".join(errors))
 
-    # Step 2: require the six standard cases.
-    for case in STANDARD_CASES:
-        if CASE_TO_JSON[case] not in block:
-            raise ParseError(f"missing required case: {CASE_TO_JSON[case]}")
+    # Step 2: collect the values, now known to be valid, keyed by the
+    # Declension field name.
+    kwargs = {JSON_TO_CASE[key].name.lower(): value for key, value in block.items()}
 
     return Declension(**kwargs)
 
@@ -1160,14 +1310,20 @@ def validate_file(path: Path, doc: Any) -> JsonEntries:
     """
     if not isinstance(doc, dict):
         raise ParseError("file must be a JSON object")
-    if not isinstance(doc.get("category"), str) or not doc["category"]:
-        raise ParseError("file is missing a non-empty 'category'")
-    entries = doc.get("entries")
+
+    # Validate top-level shape of JSON file
+    errors = check_fields(
+        doc,
+        required=REQUIRED_FILE_FIELDS,
+        no_extra=True,
+    )
+    if errors:
+        raise ParseError("; ".join(errors))
+
+    entries = doc["entries"]
     if not isinstance(entries, list) or not entries:
         raise ParseError("file is missing a non-empty 'entries' list")
-    extra = set(doc) - {"category", "entries"}
-    if extra:
-        raise ParseError(f"unexpected top-level keys: {sorted(extra)}")
+
     return JsonEntries(file=path, category=doc["category"], entries=entries)
 
 
