@@ -3012,7 +3012,7 @@ def _run_entries(args, config: dict, conn: Connection, logger: Logger) -> list[R
     all_results = []
 
     # Step 1: find files.
-    files = _discover(args.path, recursive=not args.no_recursive)
+    files = _discover_json(args.path, recursive=not args.no_recursive)
     if not files:
         results.append(
             Result(
@@ -3127,7 +3127,7 @@ def _apply_entries(
         raise ValueError(f'Unknown entries operation "{args.operation}"')
 
 
-def _discover(path: Path, recursive: bool) -> list[Path]:
+def _discover_json(path: Path, recursive: bool) -> list[Path]:
     """Find JSON files under a path.
 
     Args:
