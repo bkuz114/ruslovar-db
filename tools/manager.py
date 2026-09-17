@@ -3399,6 +3399,9 @@ def _handle_entries_command(
 
     all_results = []
 
+    # operation supplied to entries subparser ("add", "delete", etc.)
+    operation = args.operation
+
     # Step 2: run the operation over every file, collecting what the
     # end-of-run summary needs: the results per file, and the totals.
     file_results = []
@@ -3412,7 +3415,17 @@ def _handle_entries_command(
 
             # Apply entries from the parsed JSON file against the current
             # operation (e.g. add all entries)
-            entry_results = _dispatch_operation(args, config, conn, entries, logger)
+            entry_results = _dispatch_operation(
+                operation=operation,
+                case_insensitive=args.case_insensitive,
+                force_update=args.force_update,
+                force_upstream=args.force_upstream,
+                force_delete=args.force_delete,
+                config=config,
+                conn=conn,
+                entries=entries,
+                logger=logger,
+            )
 
             # create FileResult for end of run summary
             file_result = FileResult(
@@ -3436,7 +3449,7 @@ def _handle_entries_command(
             )
 
     # Step: If verify-all supplied, runs final sanity/transformation check
-    if args.operation == "verify-all":
+    if operation == "verify-all":
         # returns TransformResult
         all_results.extend(check_transformations(conn, config["table"], logger))
 
@@ -3444,7 +3457,7 @@ def _handle_entries_command(
     # once.
     logger.info(
         build_run_summary(
-            operation=args.operation,
+            operation=operation,
             file_results=file_results,
             build_full=args.full_summary,
         )
@@ -3455,39 +3468,57 @@ def _handle_entries_command(
 
 
 def _dispatch_operation(
-    args, config: dict, conn: Connection, entries: list[NounEntry], logger: Logger
+    operation: str,
+    case_insensitive: bool,
+    force_update: bool,
+    force_upstream: bool,
+    force_delete: bool,
+    config: dict,
+    conn: Connection,
+    entries: list[NounEntry],
+    logger: Logger,
 ) -> list[EntryResult]:
-    """Run the requested operation against a set of entries.
+    """Run one operation against a set of entries.
+
+    Takes the operation and the flags it needs as explicit parameters
+    rather than reading them off the parsed arguments, so the caller can
+    invoke it once per operation when a run supplies more than one.
 
     Args:
-        args: Parsed arguments.
-        config: The [mysql] dict.
-        conn: The database connection.
+        operation (str): name of operation supplied to 'entries' subparser
+            (e.g. "add", "delete", verify", "verify-all")
+        case_insensitive (bool): Whether word matching ignores case.
+        force_update (bool): Allow replacing all matches when update is
+            ambiguous.
+        force_upstream (bool): Allow replacing upstream entries.
+        force_delete (bool): Allow deleting all matches when delete is
+            ambiguous.
+        config (dict): The [mysql] dict.
+        conn (Connection): The database connection.
         entries (list[NounEntry]): The validated NounEntry objects to
             operate on.
-        logger: The logger.
+        logger (Logger): The logger.
 
     Returns:
         list[EntryResult]: One EntryResult per entry, in input order.
 
     Raises:
-        ValueError: If args.operation is not a known entries operation.
+        ValueError: If operation is not a known entries operation.
     """
     # Run the operation
-    ci = args.case_insensitive
     table = config["table"]
-    if args.operation == "add":
-        return op_add(conn, table, entries, logger, ci)
-    elif args.operation == "update":
+    if operation == "add":
+        return op_add(conn, table, entries, logger, case_insensitive)
+    elif operation == "update":
         return op_update(
-            conn, table, entries, logger, args.force_update, args.force_upstream, ci
+            conn, table, entries, logger, force_update, force_upstream, case_insensitive
         )
-    elif args.operation == "delete":
-        return op_delete(conn, table, entries, logger, args.force_delete, ci)
-    elif args.operation in ["verify", "verify-all"]:
-        return op_verify(conn, table, entries, logger, ci)
+    elif operation == "delete":
+        return op_delete(conn, table, entries, logger, force_delete, case_insensitive)
+    elif operation in ["verify", "verify-all"]:
+        return op_verify(conn, table, entries, logger, case_insensitive)
     else:
-        raise ValueError(f'Unknown entries operation "{args.operation}"')
+        raise ValueError(f'Unknown entries operation "{operation}"')
 
 
 def _discover_json(path: Path, recursive: bool) -> list[Path]:
