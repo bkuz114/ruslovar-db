@@ -365,7 +365,108 @@ class Logger:
 
 
 # =============================================================================
-# Data types
+# Data types - JSON parsing
+# =============================================================================
+
+
+@dataclass(kw_only=True)
+class JsonEntries:
+    """Validated top-level data from one JSON entries file.
+
+    Produced by validate_file after the file has been read and its
+    top-level shape checked. Downstream code can trust that file,
+    category, and entries are present and correctly typed, and does not
+    need to re-validate them.
+
+    Attributes:
+        file (Path): Path to the source file. Kept for error messages.
+        category (str): The file-level category, applied to every entry.
+        entries (dict): The raw entry dicts from the "entries" key. Each
+            is converted to a NounEntry by parse_entries.
+    """
+
+    file: Path
+    category: str
+    entries: dict
+
+
+@dataclass(frozen=True)
+class NounEntry:
+    """A noun in canonical form, built from JSON or from database rows.
+
+    Because both sources produce this same type, an entry from a JSON file
+    can be compared with == against one reconstructed from the database.
+    That is what add, update, delete, and verify rely on.
+
+    Shape:
+        indeclinable:  singular and plural are both None.
+        singular-only: plural is None.
+        plural-only:   singular is None.
+        normal:        both set.
+    """
+
+    word: str
+    gender: Gender | None
+    animate: bool | None
+    category: str | None
+    indeclinable: bool
+    singular: Declension | None
+    plural: tuple[Declension, ...] | None
+
+
+@dataclass(frozen=True)
+class Declension:
+    """The case forms of a noun within one number.
+
+    Ten fields, one per case, each the surface form or None. The six
+    standard cases are always populated for declinable nouns (enforced by
+    parse_entry); the four rare cases are optional.
+    """
+
+    nominative: str | None = None
+    genitive: str | None = None
+    dative: str | None = None
+    accusative: str | None = None
+    instrumental: str | None = None
+    prepositional: str | None = None
+    vocative: str | None = None
+    partitive: str | None = None
+    locative: str | None = None
+    counting: str | None = None
+
+    def get(self, case: Case) -> str | None:
+        """Return the form for a case, or None."""
+        return getattr(self, case.name.lower())
+
+
+# =============================================================================
+# Data types - Database
+# =============================================================================
+
+
+@dataclass(frozen=True)
+class NounRow:
+    """One row from nouns_morf, with columns translated to domain names.
+
+    wcase becomes case; soul becomes animate. Nullable tinyint columns
+    become bool or None. The translation happens in row_from_dict.
+    """
+
+    IID: int
+    word: str
+    code: int
+    code_parent: int
+    plural: bool | None
+    gender: Gender | None
+    case: Case | None
+    animate: bool | None
+    is_custom: bool
+    created_at: object
+    category: str | None
+
+
+# =============================================================================
+# Data types - Run Result Outcomes
 # =============================================================================
 
 
@@ -456,95 +557,9 @@ class ResultOutcome(Enum):
         return self.value.code
 
 
-@dataclass(kw_only=True)
-class JsonEntries:
-    """Validated top-level data from one JSON entries file.
-
-    Produced by validate_file after the file has been read and its
-    top-level shape checked. Downstream code can trust that file,
-    category, and entries are present and correctly typed, and does not
-    need to re-validate them.
-
-    Attributes:
-        file (Path): Path to the source file. Kept for error messages.
-        category (str): The file-level category, applied to every entry.
-        entries (dict): The raw entry dicts from the "entries" key. Each
-            is converted to a NounEntry by parse_entries.
-    """
-
-    file: Path
-    category: str
-    entries: dict
-
-
-@dataclass(frozen=True)
-class Declension:
-    """The case forms of a noun within one number.
-
-    Ten fields, one per case, each the surface form or None. The six
-    standard cases are always populated for declinable nouns (enforced by
-    parse_entry); the four rare cases are optional.
-    """
-
-    nominative: str | None = None
-    genitive: str | None = None
-    dative: str | None = None
-    accusative: str | None = None
-    instrumental: str | None = None
-    prepositional: str | None = None
-    vocative: str | None = None
-    partitive: str | None = None
-    locative: str | None = None
-    counting: str | None = None
-
-    def get(self, case: Case) -> str | None:
-        """Return the form for a case, or None."""
-        return getattr(self, case.name.lower())
-
-
-@dataclass(frozen=True)
-class NounEntry:
-    """A noun in canonical form, built from JSON or from database rows.
-
-    Because both sources produce this same type, an entry from a JSON file
-    can be compared with == against one reconstructed from the database.
-    That is what add, update, delete, and verify rely on.
-
-    Shape:
-        indeclinable:  singular and plural are both None.
-        singular-only: plural is None.
-        plural-only:   singular is None.
-        normal:        both set.
-    """
-
-    word: str
-    gender: Gender | None
-    animate: bool | None
-    category: str | None
-    indeclinable: bool
-    singular: Declension | None
-    plural: tuple[Declension, ...] | None
-
-
-@dataclass(frozen=True)
-class NounRow:
-    """One row from nouns_morf, with columns translated to domain names.
-
-    wcase becomes case; soul becomes animate. Nullable tinyint columns
-    become bool or None. The translation happens in row_from_dict.
-    """
-
-    IID: int
-    word: str
-    code: int
-    code_parent: int
-    plural: bool | None
-    gender: Gender | None
-    case: Case | None
-    animate: bool | None
-    is_custom: bool
-    created_at: object
-    category: str | None
+# =============================================================================
+# Data types - Run Results
+# =============================================================================
 
 
 @dataclass(kw_only=True)
@@ -680,6 +695,11 @@ class TransformResult(Result):
     @property
     def label(self) -> str:
         return self.check
+
+
+# =============================================================================
+# Data types - Helpers
+# =============================================================================
 
 
 @dataclass
