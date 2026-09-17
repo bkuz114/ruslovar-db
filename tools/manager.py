@@ -3402,51 +3402,19 @@ def _handle_entries_command(
     # operation supplied to entries subparser ("add", "delete", etc.)
     operation = args.operation
 
-    # Step 2: run the operation over every file, collecting what the
-    # end-of-run summary needs: the results per file, and the totals.
-    file_results = []
-    for parsed_json_file in parsed_json_files:
-        path = parsed_json_file.path
-        logger.info(f"\n─── {path} ───")
-
-        try:
-            entries = parsed_json_file.entries
-            category = parsed_json_file.category
-
-            # Apply entries from the parsed JSON file against the current
-            # operation (e.g. add all entries)
-            entry_results = _dispatch_operation(
-                operation=operation,
-                case_insensitive=args.case_insensitive,
-                force_update=args.force_update,
-                force_upstream=args.force_upstream,
-                force_delete=args.force_delete,
-                config=config,
-                conn=conn,
-                entries=entries,
-                logger=logger,
-            )
-
-            # create FileResult for end of run summary
-            file_result = FileResult(
-                outcome=ResultOutcome.COMPLETE,
-                file=path,
-                category=category,
-                entries=entry_results,
-            )
-            # creating FileResult automatically creates a Counts
-            # on it which includes count summaries for each entry.
-            # print summary live (re-printed at end-of-run summary)
-            logger.info(f"\n  {file_result.counts.summary()}")
-            file_results.append(file_result)
-        except RumorphError as exc:
-            # log error and continue to next file
-            logger.error(f"  ! {path}: {exc}")
-            file_results.append(
-                FileResult(
-                    outcome=ResultOutcome.ERROR, file=path, error=True, message=str(exc)
-                )
-            )
+    # Step: Run the operation over every file, collecting resulting
+    # FileResult objects for end-of-run summary.
+    file_results = _run_operation_over_files(
+        operation=operation,
+        parsed_json_files=parsed_json_files,
+        case_insensitive=args.case_insensitive,
+        force_update=args.force_update,
+        force_upstream=args.force_upstream,
+        force_delete=args.force_delete,
+        config=config,
+        conn=conn,
+        logger=logger,
+    )
 
     # Step: If verify-all supplied, runs final sanity/transformation check
     if operation == "verify-all":
@@ -3467,15 +3435,151 @@ def _handle_entries_command(
     return all_results
 
 
-def _dispatch_operation(
+def _run_operation_over_files(
     operation: str,
+    parsed_json_files: list[JsonFile],
     case_insensitive: bool,
     force_update: bool,
     force_upstream: bool,
     force_delete: bool,
     config: dict,
     conn: Connection,
+    logger: Logger,
+) -> list[FileResult]:
+    """Run one operation over every parsed file.
+
+    Calls _run_operation_over_file for each file and collects the
+    results. The per-file function handles its own errors and returns a
+    FileResult either way, so this loop never raises for a single bad
+    file.
+
+    Args:
+        operation (str): name of operation supplied to 'entries'
+            subparser ("add", "update", "delete", "verify", "verify-all")
+        parsed_json_files (list[JsonFile]): The files to operate on,
+            already loaded and validated.
+        case_insensitive (bool): Whether word matching ignores case.
+        force_update (bool): Allow replacing all matches when update is
+            ambiguous.
+        force_upstream (bool): Allow replacing upstream entries.
+        force_delete (bool): Allow deleting all matches when delete is
+            ambiguous.
+        config (dict): The [mysql] dict.
+        conn (Connection): The database connection.
+        logger (Logger): The logger.
+
+    Returns:
+        list[FileResult]: One FileResult per file, in input order. A file
+            that raised during the operation produces a FileResult with
+            error set.
+    """
+
+    # run the operation over all files
+    file_results = [
+        _run_operation_over_file(
+            operation=operation,
+            parsed_json_file=f,
+            case_insensitive=case_insensitive,
+            force_update=force_update,
+            force_upstream=force_upstream,
+            force_delete=force_delete,
+            config=config,
+            conn=conn,
+            logger=logger,
+        )
+        for f in parsed_json_files
+    ]
+
+    return file_results
+
+
+def _run_operation_over_file(
+    operation: str,
+    parsed_json_file: JsonFile,
+    case_insensitive: bool,
+    force_update: bool,
+    force_upstream: bool,
+    force_delete: bool,
+    config: dict,
+    conn: Connection,
+    logger: Logger,
+) -> FileResult:
+    """Run one operation over one parsed file's entries.
+
+    Logs the file header, dispatches to the operation, and builds a
+    FileResult from the entry results. A RumorphError raised during the
+    operation is logged and returned as a FileResult with error set, so
+    the caller can continue to the next file.
+
+    Args:
+        operation (str): name of operation supplied to 'entries'
+            subparser ("add", "update", "delete", "verify", "verify-all")
+        parsed_json_file (JsonFile): The file to operate on, already
+            loaded and validated.
+        case_insensitive (bool): Whether word matching ignores case.
+        force_update (bool): Allow replacing all matches when update is
+            ambiguous.
+        force_upstream (bool): Allow replacing upstream entries.
+        force_delete (bool): Allow deleting all matches when delete is
+            ambiguous.
+        config (dict): The [mysql] dict.
+        conn (Connection): The database connection.
+        logger (Logger): The logger.
+
+    Returns:
+        FileResult: The result of the operation over this file's
+            entries, or an error FileResult if the operation raised.
+    """
+    path = parsed_json_file.path
+    logger.info(f"\n─── {path} ───")
+
+    try:
+        entries = parsed_json_file.entries
+        category = parsed_json_file.category
+
+        # Apply entries from the parsed JSON file against the current
+        # operation (e.g. add all entries)
+        entry_results = _dispatch_operation(
+            operation=operation,
+            entries=entries,
+            case_insensitive=case_insensitive,
+            force_update=force_update,
+            force_upstream=force_upstream,
+            force_delete=force_delete,
+            config=config,
+            conn=conn,
+            logger=logger,
+        )
+
+        # create FileResult for end of run summary
+        file_result = FileResult(
+            outcome=ResultOutcome.COMPLETE,
+            file=path,
+            category=category,
+            entries=entry_results,
+        )
+        # creating FileResult automatically creates a Counts
+        # on it which includes count summaries for each entry.
+        # print summary live (re-printed at end-of-run summary)
+        logger.info(f"\n  {file_result.counts.summary()}")
+        return file_result
+    except RumorphError as exc:
+        # log error and continue to next file
+        logger.error(f"  ! {path}: {exc}")
+        return FileResult(
+            outcome=ResultOutcome.ERROR, file=path, error=True, message=str(exc)
+        )
+
+
+def _dispatch_operation(
+    operation: str,
     entries: list[NounEntry],
+    case_insensitive: bool,
+    force_update: bool,
+    force_upstream: bool,
+    force_delete: bool,
+    config: dict,
+    conn: Connection,
     logger: Logger,
 ) -> list[EntryResult]:
     """Run one operation against a set of entries.
