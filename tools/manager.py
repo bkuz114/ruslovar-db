@@ -2701,13 +2701,16 @@ def build_run_summary(
     return "\n".join(lines)
 
 
-def build_problems_block(title: str, problems: list) -> str:
+def build_problems_block(title: str, problems: list, prefix: str = "Issue") -> str:
     if not problems:
         return ""
     rule = "═" * 60
+    inner_rule = "─" * 60
     lines = [rule, f" {title}", rule]
-    for r in problems:
-        lines.append(f"   {r.label}: {r.message or r.outcome.summary}")
+    for i, r in enumerate(problems, start=1):
+        lines.append(
+            f"{inner_rule}\n{prefix} #{i}:\n{r.label}:\n{r.message or r.outcome.summary}\n{inner_rule}"
+        )
     lines.append(rule)
     return "\n".join(lines)
 
@@ -2721,9 +2724,9 @@ def print_problems(errors: list, warnings: list, logger: Logger) -> None:
         logger: The logger.
     """
     if errors:
-        logger.error(build_problems_block("ERRORS", errors))
+        logger.error(build_problems_block("ERRORS", errors, prefix="Error"))
     if warnings:
-        logger.warning(build_problems_block("WARNINGS", warnings))
+        logger.warning(build_problems_block("WARNINGS", warnings, prefix="Warning"))
 
 
 # =============================================================================
